@@ -1,3 +1,9 @@
+import { json, LoaderFunction } from "@remix-run/node";
+
+export const loader: LoaderFunction = () => {
+  return json({ hello: "world" });
+};
+
 export default function Index() {
   return (
     <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }}>

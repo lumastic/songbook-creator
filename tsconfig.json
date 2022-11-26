@@ -1,22 +1,25 @@
 {
-  "include": ["remix.env.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": ["./cypress", "./test/e2e"],
+  "include": ["remix.env.d.ts", "**/*.ts", "**/*.tsx", "server.js"],
   "compilerOptions": {
     "lib": ["DOM", "DOM.Iterable", "ES2019"],
+    "types": ["vitest/globals"],
     "isolatedModules": true,
     "esModuleInterop": true,
     "jsx": "react-jsx",
+    "module": "ES2020",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "target": "ES2019",
     "strict": true,
-    "allowJs": true,
-    "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
     "paths": {
-      "~/*": ["./app/*"]
+      "~/*": ["./app/*"],
+      "@/*": ["./*"]
     },
-
-    // Remix takes care of building everything in `remix build`.
-    "noEmit": true
+    "skipLibCheck": true,
+    "noEmit": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowJs": true
   }
 }
