@@ -21,8 +21,8 @@ const defaultSong: ISong = {
         {
           lyrics: "I was somehow unique",
           markings: [
-            createMockBreakMark({ indent: 6 }),
-            createMockChordMark({ primary_mark: "A", indent: 7 }),
+            createMockBreakMark({ indent: 7 }),
+            createMockChordMark({ primary_mark: "A", indent: 8 }),
             createMockBreakMark({ indent: 18 }),
             createMockRepeatMark({ indent: 20 }),
           ],
@@ -42,7 +42,7 @@ const defaultSong: ISong = {
           lyrics: "Unique in each way you can see",
           markings: [
             createMockBreakMark({ indent: 0 }),
-            createMockChordMark({ primary_mark: "A", indent: 3 }),
+            createMockChordMark({ primary_mark: "A", indent: 1 }),
             createMockBreakMark({ indent: 22 }),
             createMockChordMark({ primary_mark: "E", indent: 23 }),
           ],
