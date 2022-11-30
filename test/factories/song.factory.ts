@@ -1,13 +1,16 @@
 import type { IMarking, ISong } from "@/types/song";
 
 const defaultSong: ISong = {
+  id: "1",
   title: "Helplessness Blue",
   attribution: "Feet Foxes",
   stanzas: [
     {
+      id: "1",
       type: "verse",
       lines: [
         {
+          id: "0",
           lyrics: "I was raised up believing",
           markings: [
             createMockChordMark({ primary_mark: "E", indent: 0 }),
@@ -19,6 +22,7 @@ const defaultSong: ISong = {
           notes: "",
         },
         {
+          id: "1",
           lyrics: "I was somehow unique",
           markings: [
             createMockBreakMark({ indent: 7 }),
@@ -29,6 +33,7 @@ const defaultSong: ISong = {
           notes: "",
         },
         {
+          id: "2",
           lyrics: "Like a snowflake distinct among snowflakes",
           markings: [
             createMockBreakMark({ indent: 7 }),
@@ -39,6 +44,7 @@ const defaultSong: ISong = {
           notes: "",
         },
         {
+          id: "3",
           lyrics: "Unique in each way you can see",
           markings: [
             createMockBreakMark({ indent: 0 }),
@@ -59,7 +65,7 @@ export function createMockSong(p?: Partial<ISong>): ISong {
 }
 
 export function createMockMarking(p: Partial<IMarking>): IMarking {
-  return { indent: 0, type: "repeat", ...p };
+  return { id: "1", indent: 0, type: "repeat", ...p };
 }
 
 export function createMockChordMark(p: Partial<IMarking>): IMarking {

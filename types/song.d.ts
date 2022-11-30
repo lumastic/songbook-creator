@@ -22,6 +22,7 @@ export type INote =
   | "B♭";
 
 export interface IMarking {
+  id: string;
   type: "chord" | "measure_break" | "repeat";
   indent: number;
   primary_mark?: INote | "/" | "-";
@@ -29,17 +30,20 @@ export interface IMarking {
 }
 
 export interface ILine {
+  id: string;
   lyrics: string;
   markings: IMarking[];
   notes: string;
 }
 
 export interface IStanza {
+  id: string;
   type?: "chorus" | "verse" | "bridge" | "intro";
   lines: ILine[];
 }
 
 export interface ISong {
+  id: string;
   title: string;
   attribution: string;
   stanzas: IStanza[];

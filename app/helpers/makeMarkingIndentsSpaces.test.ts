@@ -2,7 +2,7 @@ import {
   createMockBreakMark,
   createMockChordMark,
   createMockRepeatMark,
-} from "@/test/factories/song";
+} from "@/test/factories/song.factory";
 import { IMarking } from "@/types/song";
 import { makeMarkingsIndentsSpaces } from "./makeMarkingIndentsSpaces";
 

@@ -3,8 +3,7 @@ import { json, LoaderArgs } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { makeMarkingsIndentsSpaces } from "~/helpers/makeMarkingIndentsSpaces";
 
-export function loader({ context }: LoaderArgs) {
-  console.log(context);
+export function loader({ request }: LoaderArgs) {
   return json({ song: createMockSong() });
 }
 
