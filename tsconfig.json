@@ -16,7 +16,7 @@
     "paths": {
       "~/*": ["./app/*"],
       "@/*": ["./*"],
-      "lib/*": ["./lib/*"]
+      "lib/*": ["app/lib/*"]
     },
     "skipLibCheck": true,
     "noEmit": true,

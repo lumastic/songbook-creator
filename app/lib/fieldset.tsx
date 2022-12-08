@@ -1,15 +1,13 @@
 /* eslint-disable react/display-name */
-import React, {
+import type {
   ButtonHTMLAttributes,
-  createContext,
   FieldsetHTMLAttributes,
-  Fragment,
   InputHTMLAttributes,
   PropsWithChildren,
   SelectHTMLAttributes,
   TextareaHTMLAttributes,
-  useContext,
 } from "react";
+import React, { createContext, Fragment, useContext } from "react";
 import qs from "qs";
 
 const NamespaceContext = createContext("");
