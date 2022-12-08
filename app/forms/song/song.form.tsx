@@ -1,11 +1,12 @@
 import { createMockSong } from "@/test/factories/song.factory";
-import { Fieldset, Input, Select } from "lib/fieldset";
-import { available_marks } from "~/db/song.db";
+import { Form } from "@remix-run/react";
+import { MarkingsFieldArray } from "~/components/MarkingsFieldArray";
+import { Fieldset, Input } from "~/lib/fieldset";
 
 export const SongForm: React.FC = () => {
   const song = createMockSong();
   return (
-    <form method="post">
+    <Form>
       <input
         name="title"
         placeholder="Title"
@@ -22,30 +23,17 @@ export const SongForm: React.FC = () => {
         <Fieldset.Headless namespace={`stanzas[${index}]`} key={stanza.id}>
           {stanza.lines.map((line, index) => (
             <Fieldset.Headless namespace={`lines[${index}]`} key={line.id}>
-              {line.markings.map((marking, index) => (
-                <Fieldset.Headless
-                  namespace={`markings[${index}]`}
-                  key={marking.id}
-                >
-                  <Select name="primary_mark">
-                    {available_marks.map((mark) => (
-                      <option value={mark} key={mark}>
-                        {mark}
-                      </option>
-                    ))}
-                  </Select>
-                </Fieldset.Headless>
-              ))}
+              <MarkingsFieldArray line={line} />
               <Input
                 name="lyrics"
                 placeholder="Lyrics"
-                className="block"
+                className="block w-full font-mono"
                 defaultValue={line.lyrics}
               />
               <Input
                 name="notes"
                 placeholder="Notes"
-                className="block"
+                className="block w-full"
                 defaultValue={line.notes}
               />
             </Fieldset.Headless>
@@ -53,6 +41,6 @@ export const SongForm: React.FC = () => {
         </Fieldset.Headless>
       ))}
       <button type="submit">Submit</button>
-    </form>
+    </Form>
   );
 };
