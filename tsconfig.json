@@ -1,5 +1,5 @@
 {
-  "exclude": ["./cypress", "./test/e2e"],
+  "exclude": ["./cypress", "./test/e2e", "./scripts/snippets"],
   "include": ["remix.env.d.ts", "**/*.ts", "**/*.tsx", "server.js"],
   "compilerOptions": {
     "lib": ["DOM", "DOM.Iterable", "ES2019"],
