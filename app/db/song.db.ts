@@ -1,8 +1,9 @@
-import type { INote } from "@/types/song";
+import type { INote, ISong } from "@/types/song";
+import uniqid from "uniqid";
 
-type Marks = INote | "/" | "-";
+export type Mark = INote | "/" | "-";
 
-export const available_marks: Marks[] = [
+export const available_marks: Mark[] = [
   "-",
   "/",
   "A",
@@ -27,3 +28,25 @@ export const available_marks: Marks[] = [
   "G♭",
   "G♯",
 ];
+
+export const createSong = (): ISong => {
+  return {
+    id: uniqid(),
+    title: "",
+    attribution: "",
+    stanzas: [
+      {
+        id: uniqid(),
+        type: "verse",
+        lines: [
+          {
+            id: uniqid(),
+            lyrics: "",
+            markings: [],
+            notes: "",
+          },
+        ],
+      },
+    ],
+  };
+};
