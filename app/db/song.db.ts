@@ -1,4 +1,6 @@
-import type { INote, ISong } from "@/types/song";
+import type { INote, IStanza } from "@/types/song";
+import type { Song } from "@prisma/client";
+import { prisma } from "./db.server";
 import uniqid from "uniqid";
 
 export type Mark = INote | "/" | "-";
@@ -29,24 +31,45 @@ export const available_marks: Mark[] = [
   "G♯",
 ];
 
-export const createSong = (): ISong => {
-  return {
+export const defaultStanzas: IStanza[] = [
+  {
     id: uniqid(),
-    title: "",
-    attribution: "",
-    stanzas: [
+    type: "verse",
+    lines: [
       {
         id: uniqid(),
-        type: "verse",
-        lines: [
-          {
-            id: uniqid(),
-            lyrics: "",
-            markings: [],
-            notes: "",
-          },
-        ],
+        lyrics: "",
+        markings: [],
+        notes: "",
       },
     ],
-  };
-};
+  },
+];
+
+export async function getSong({ id }: Pick<Song, "id">) {
+  return prisma.song.findFirst({
+    where: { id },
+  });
+}
+
+export async function createSong(
+  data?: Pick<Song, "title" | "attribution" | "stanzas">
+) {
+  return await prisma.song.create({
+    data: {
+      ...data,
+      title: data?.title || `Untitled ${new Date().toLocaleString()}`,
+      stanzas: data?.stanzas || JSON.stringify(defaultStanzas),
+    },
+  });
+}
+
+export async function updateSong({
+  id,
+  data,
+}: {
+  id: Song["id"];
+  data: Pick<Song, "title" | "attribution" | "stanzas">;
+}) {
+  return await prisma.song.update({ where: { id }, data });
+}

@@ -2,9 +2,9 @@ import type { IMarking } from "@/types/song";
 import { Popover } from "@headlessui/react";
 import React, { useState } from "react";
 import { usePopper } from "react-popper";
+import { Input } from "~/components/Input";
 import type { Mark } from "~/db/song.db";
 import { available_marks } from "~/db/song.db";
-import { Input } from "~/components/Input";
 import { Select } from "../Select";
 
 export const MarkingPopover: React.FC<{
@@ -17,7 +17,6 @@ export const MarkingPopover: React.FC<{
   const [type, setType] = useState(marking.type);
 
   const updatePrimary = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e);
     const value = e.target.value as Mark;
     if (value === "-") {
       setType("repeat");

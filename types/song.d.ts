@@ -1,3 +1,5 @@
+import { Song } from "@prisma/client";
+
 export type INote =
   | "C"
   | "C♯"
@@ -42,9 +44,6 @@ export interface IStanza {
   lines: ILine[];
 }
 
-export interface ISong {
-  id: string;
-  title: string;
-  attribution: string;
+export interface ISong extends Song {
   stanzas: IStanza[];
 }

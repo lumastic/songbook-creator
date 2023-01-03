@@ -1,0 +1,160 @@
+{
+  "title": "Helplessness Blue",
+  "artist": "Feet Foxes",
+  "id": "26bfa1rdqlbr2y0ar",
+  "stanzas": [
+    {
+      "type": "verse",
+      "id": "26bfa1rdqlbr2y0as",
+      "lines": [
+        {
+          "id": "26bfa1rdqlbr2y0at",
+          "markings": [
+            {
+              "type": "chord",
+              "primary_mark": "E",
+              "secondary_mark": "",
+              "id": "26bfa1rdqlbr2y0au",
+              "indent": "0"
+            },
+            {
+              "type": "measure_break",
+              "primary_mark": "/",
+              "secondary_mark": "",
+              "id": "26bfa1rdqlbr2y0av",
+              "indent": "7"
+            },
+            {
+              "type": "repeat",
+              "primary_mark": "-",
+              "secondary_mark": "",
+              "id": "26bfa1rdqlbr2y0aw",
+              "indent": "13"
+            },
+            {
+              "type": "measure_break",
+              "primary_mark": "/",
+              "secondary_mark": "",
+              "id": "26bfa1rdqlbr2y0ax",
+              "indent": "20"
+            },
+            {
+              "type": "repeat",
+              "primary_mark": "-",
+              "secondary_mark": "",
+              "id": "26bfa1rdqlbr2y0ay",
+              "indent": "24"
+            }
+          ],
+          "lyrics": "I was raised up believing",
+          "notes": ""
+        },
+        {
+          "id": "26bfa1rdqlbr2y0az",
+          "markings": [
+            {
+              "type": "measure_break",
+              "primary_mark": "/",
+              "secondary_mark": "",
+              "id": "26bfa1rdqlbr2y0b0",
+              "indent": "7"
+            },
+            {
+              "type": "chord",
+              "primary_mark": "A",
+              "secondary_mark": "",
+              "id": "26bfa1rdqlbr2y0b1",
+              "indent": "8"
+            },
+            {
+              "type": "measure_break",
+              "primary_mark": "/",
+              "secondary_mark": "",
+              "id": "26bfa1rdqlbr2y0b2",
+              "indent": "20"
+            },
+            {
+              "type": "repeat",
+              "primary_mark": "-",
+              "secondary_mark": "",
+              "id": "26bfa1rdqlbr2y0b3",
+              "indent": "22"
+            }
+          ],
+          "lyrics": "I was somehow unique",
+          "notes": ""
+        },
+        {
+          "id": "26bfa1rdqlbr2y0b4",
+          "markings": [
+            {
+              "type": "measure_break",
+              "primary_mark": "/",
+              "secondary_mark": "",
+              "id": "26bfa1rdqlbr2y0b5",
+              "indent": "7"
+            },
+            {
+              "type": "chord",
+              "primary_mark": "B",
+              "secondary_mark": "",
+              "id": "26bfa1rdqlbr2y0b6",
+              "indent": "8"
+            },
+            {
+              "type": "measure_break",
+              "primary_mark": "/",
+              "secondary_mark": "",
+              "id": "26bfa1rdqlbr2y0b7",
+              "indent": "20"
+            },
+            {
+              "type": "repeat",
+              "primary_mark": "-",
+              "secondary_mark": "",
+              "id": "26bfa1rdqlbr2y0b8",
+              "indent": "32"
+            }
+          ],
+          "lyrics": "Like a snowflake distinct among snowflakes",
+          "notes": ""
+        },
+        {
+          "id": "26bfa1rdqlbr2y0b9",
+          "markings": [
+            {
+              "type": "measure_break",
+              "primary_mark": "/",
+              "secondary_mark": "",
+              "id": "26bfa1rdqlbr2y0ba",
+              "indent": "0"
+            },
+            {
+              "type": "chord",
+              "primary_mark": "A",
+              "secondary_mark": "",
+              "id": "26bfa1rdqlbr2y0bb",
+              "indent": "1"
+            },
+            {
+              "type": "measure_break",
+              "primary_mark": "/",
+              "secondary_mark": "",
+              "id": "26bfa1rdqlbr2y0bc",
+              "indent": "22"
+            },
+            {
+              "type": "chord",
+              "primary_mark": "E",
+              "secondary_mark": "",
+              "id": "26bfa1rdqlbr2y0bd",
+              "indent": "23"
+            }
+          ],
+          "lyrics": "Unique in each way you can see",
+          "notes": "Start building..."
+        }
+      ]
+    }
+  ]
+}

@@ -7,7 +7,8 @@ export function lineToMarkFieldArrayItems(
   const arrayItems = new Array(Math.max(lyricCharactersCount + 1, 50)).fill(
     undefined
   );
-  line.markings.forEach((marking) => {
+  const markings = line.markings || [];
+  markings.forEach((marking) => {
     arrayItems[marking.indent] = marking;
   });
   return arrayItems;

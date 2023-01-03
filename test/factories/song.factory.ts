@@ -58,6 +58,8 @@ const defaultSong = (): ISong => ({
       ],
     },
   ],
+  createdAt: new Date(),
+  updatedAt: new Date(),
 });
 
 export function createMockSong(p?: Partial<ISong>): ISong {
