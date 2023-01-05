@@ -1,7 +1,7 @@
 import type { SubmitFunction } from "@remix-run/react";
 import { useEffect, useRef, useState } from "react";
 
-export function useAutoSave(submit: SubmitFunction, delay = 5 * 1000) {
+export function useAutoSave(submit: SubmitFunction, delay = 1000) {
   const formRef = useRef<HTMLFormElement>(null);
   const [lastUpdatedAt, setLastUpdated] = useState<Date>(new Date());
   const [formValues, setFormValues] = useState<FormData | null>(null);
