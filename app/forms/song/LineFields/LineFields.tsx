@@ -177,6 +177,7 @@ export const LineFields: React.FC<Props> = ({
           className="opacity-75 text-sm"
           hidden={!showNotes}
           defaultValue={line.notes}
+          onKeyDown={newLineOnEnterKey}
         />
       </div>
     </div>
