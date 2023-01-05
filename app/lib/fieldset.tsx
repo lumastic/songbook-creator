@@ -104,6 +104,7 @@ const constructFromFormData = (formData: FormData) => {
 };
 
 export {
+  useNamespace,
   Fieldset,
   Button,
   Select,
