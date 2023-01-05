@@ -1,6 +1,6 @@
-import { ISong } from "@/types/song";
-import { ActionArgs, LoaderArgs, redirect } from "@remix-run/node";
-import { useSubmit } from "@remix-run/react";
+import type { ISong } from "@/types/song";
+import type { ActionArgs, LoaderArgs } from "@remix-run/node";
+import { useFetcher } from "@remix-run/react";
 import { typedjson, useTypedLoaderData } from "remix-typedjson";
 import { ClientOnly } from "remix-utils";
 import { getSong, updateSong } from "~/db/song.db";
@@ -20,20 +20,22 @@ export async function loader({ params }: LoaderArgs) {
 
 export default function EditSong() {
   const { song } = useTypedLoaderData<typeof loader>();
-  const submit = useSubmit();
-  const { formRef, lastUpdatedAt } = useAutoSave(submit);
+  const fetcher = useFetcher();
+  const { formRef, lastUpdatedAt } = useAutoSave(fetcher.submit);
   return (
     <main className="bg-stone-300 min-h-screen py-6">
       <div className="bg-stone-50 max-w-xl mx-auto rounded-lg shadow-lg relative">
         <ClientOnly>
           {() => (
             <div className="absolute top-4 right-4 text-xs text-stone-400">
-              Last Saved: {lastUpdatedAt.toLocaleTimeString()}
+              {fetcher.state === "submitting"
+                ? "Saving..."
+                : `Last Saved: ${lastUpdatedAt.toLocaleTimeString()}`}
             </div>
           )}
         </ClientOnly>
         <div className="px-10 py-8">
-          <SongForm song={song} ref={formRef} />
+          <SongForm song={song} ref={formRef} form={fetcher.Form} />
         </div>
       </div>
     </main>
@@ -51,7 +53,7 @@ export async function action({ request }: ActionArgs) {
   console.log({ id, title, attribution, stanzas });
 
   try {
-    await updateSong({
+    const updatedSong = await updateSong({
       id,
       data: {
         title,
@@ -59,9 +61,8 @@ export async function action({ request }: ActionArgs) {
         stanzas,
       },
     });
+    return typedjson({ ...updatedSong });
   } catch (e) {
     throw new Response("Internal error", { status: 500 });
   }
-
-  return redirect(`/song/${id}/edit`);
 }
