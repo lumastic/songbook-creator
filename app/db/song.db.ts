@@ -58,7 +58,6 @@ export async function createSong(
   return await prisma.song.create({
     data: {
       ...data,
-      title: data?.title || `Untitled ${new Date().toLocaleString()}`,
       stanzas: data?.stanzas || JSON.stringify(defaultStanzas),
     },
   });
