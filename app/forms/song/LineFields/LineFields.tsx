@@ -1,5 +1,7 @@
 import { createMockBreakMark } from "@/test/factories/song.factory";
 import type { ILine } from "@/types/song";
+import { Menu } from "@headlessui/react";
+import type { KeyboardEvent } from "react";
 import { useState } from "react";
 import { usePopper } from "react-popper";
 import { Input } from "~/components/Input";
@@ -26,11 +28,14 @@ export const LineFields: React.FC<Props> = ({
     swap,
   } = useArray(lineToMarkFieldArrayItems(line));
 
-  let [referenceElement, setReferenceElement] = useState<HTMLDivElement | null>(
+  const [showNotes, setShowNotes] = useState(line.notes.length > 1);
+
+  const [referenceElement, setReferenceElement] =
+    useState<HTMLDivElement | null>(null);
+  const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(
     null
   );
-  let [popperElement, setPopperElement] = useState<HTMLDivElement | null>(null);
-  let { styles, attributes } = usePopper(referenceElement, popperElement, {
+  const { styles, attributes } = usePopper(referenceElement, popperElement, {
     placement: "left",
   });
 
@@ -53,6 +58,13 @@ export const LineFields: React.FC<Props> = ({
     };
   };
 
+  const newLineOnEnterKey = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      if (insertLine) insertLine();
+    }
+  };
+
   const confirmAndDelete = () => {
     if (
       confirm(
@@ -66,35 +78,63 @@ export const LineFields: React.FC<Props> = ({
   return (
     <div className="w-full whitespace-nowrap" data-testid="line-fields">
       <Input name="id" hidden readOnly defaultValue={line.id} />
+
       <div className="group relative" ref={setReferenceElement}>
-        <div
-          className="opacity-0 h-full transition-opacity group-hover:opacity-100 z-10 flex items-center pr-5"
-          ref={setPopperElement}
-          style={styles.popper}
-          {...attributes.popper}
-        >
-          <button
-            type="button"
-            className="bg-stone-200 h-full rounded-sm text-stone-600 text-sm px-0.5"
-            onClick={confirmAndDelete}
+        <Menu>
+          <div
+            className="opacity-0 h-full transition-opacity group-hover:opacity-100 z-10 flex items-center pr-5"
+            ref={setPopperElement}
+            style={styles.popper}
+            {...attributes.popper}
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              width="1em"
-              height="1em"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
-              />
-            </svg>
-          </button>
-        </div>
+            <Menu.Button className="bg-stone-200 h-full rounded-sm text-stone-600 text-sm px-0.5">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                width={"1em"}
+                height={"1em"}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z"
+                />
+              </svg>
+            </Menu.Button>
+          </div>
+          <Menu.Items className="absolute -translate-x-9 w-28 origin-top-left divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-10 sm:text-sm">
+            <Menu.Item>
+              {({ active }) => (
+                <button
+                  type="button"
+                  className={`${
+                    active ? "bg-stone-200" : "text-stone-900"
+                  } group flex w-full items-center rounded-md px-4 py-3`}
+                  onClick={() => setShowNotes((x) => !x)}
+                >
+                  {!showNotes ? "Add notes" : "Hide notes"}
+                </button>
+              )}
+            </Menu.Item>
+            <Menu.Item>
+              {({ active }) => (
+                <button
+                  type="button"
+                  className={`${
+                    active ? "bg-red-200 text-red-900" : "text-red-900"
+                  } group flex w-full items-center rounded-md px-4 py-3`}
+                  onClick={confirmAndDelete}
+                >
+                  Delete line
+                </button>
+              )}
+            </Menu.Item>
+          </Menu.Items>
+        </Menu>
+
         {markingsFieldArray.map((marking, index) => {
           const formIndex = markingsFieldArray
             .filter(Boolean)
@@ -129,11 +169,13 @@ export const LineFields: React.FC<Props> = ({
           placeholder="Lyrics"
           className="font-mono"
           defaultValue={line.lyrics}
+          onKeyDown={newLineOnEnterKey}
         />
         <Input
           name="notes"
           placeholder="Stylistic notes"
           className="opacity-75 text-sm"
+          hidden={!showNotes}
           defaultValue={line.notes}
         />
       </div>

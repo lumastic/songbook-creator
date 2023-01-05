@@ -1,10 +1,11 @@
 import { createMockStanza } from "@/test/factories/song.factory";
 import type { IStanza } from "@/types/song";
-import { Fieldset } from "~/lib/fieldset";
 import { Input } from "~/components/Input";
-import { useArray } from "~/lib/useArray";
-import { LineFields } from "../LineFields";
 import { Select } from "~/components/Select";
+import { Fieldset, useNamespace } from "~/lib/fieldset";
+import { useArray } from "~/lib/useArray";
+import { useFocus } from "~/lib/useFocus";
+import { LineFields } from "../LineFields";
 
 export const StanzaFields: React.FC<{
   stanza: IStanza;
@@ -13,9 +14,13 @@ export const StanzaFields: React.FC<{
 }> = ({ stanza, insertStanza, deleteStanza }) => {
   const { items: lines, insert, remove } = useArray(stanza.lines);
 
+  const focus = useFocus();
+  const namespace = useNamespace("");
+
   const insertLine = (index: number) => {
     return () => {
       insert(index + 1, createMockStanza({}).lines[0]);
+      focus(`input[name="${namespace}lines[${index + 1}].lyrics"]`);
     };
   };
 
