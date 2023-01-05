@@ -6,6 +6,48 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "sqlite"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id            Int      @id @default(autoincrement())
+  email         String   @unique
+  name          String?
+  // role          Role     @default(USER)
+  songs         Song[]
+  profile       Profile?
+  oAuthProvider String?
+  oAuthId       String?
+}
+
+model Profile {
+  id     Int    @id @default(autoincrement())
+  bio    String
+  user   User   @relation(fields: [userId], references: [id])
+  userId Int    @unique
+}
+
+model Song {
+  id          Int        @id @default(autoincrement())
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  title       String
+  attribution String     @default("")
+  stanzas     String
+  published   Boolean    @default(false)
+  author      User       @relation(fields: [authorId], references: [id])
+  authorId    Int
+  categories  Category[] //# @relation(references: [id])
+}
+
+model Category {
+  id    Int    @id @default(autoincrement())
+  name  String
+  songs Song[] //@relation(references: [id])
+}
+
+// enum Role {
+//   USER
+//   ADMIN
+// }
