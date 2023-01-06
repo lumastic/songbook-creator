@@ -76,14 +76,14 @@ const namespaceAware = <T,>(
  *
  * e.g. `<Input name="age" value="31" />` surrounded by <Fieldset namespace="person"> ... </Fieldset>` renders `<input name="person.age" value="31" />`
  */
-const Input: React.VFC<InputHTMLAttributes<HTMLInputElement>> = namespaceAware(
+const Input: React.FC<InputHTMLAttributes<HTMLInputElement>> = namespaceAware(
   (props) => <input {...props} />
 );
-const Button: React.VFC<ButtonHTMLAttributes<HTMLButtonElement>> =
+const Button: React.FC<ButtonHTMLAttributes<HTMLButtonElement>> =
   namespaceAware((props) => <button {...props} />);
-const Select: React.VFC<SelectHTMLAttributes<HTMLSelectElement>> =
+const Select: React.FC<SelectHTMLAttributes<HTMLSelectElement>> =
   namespaceAware((props) => <select {...props} />);
-const Textarea: React.VFC<TextareaHTMLAttributes<HTMLTextAreaElement>> =
+const Textarea: React.FC<TextareaHTMLAttributes<HTMLTextAreaElement>> =
   namespaceAware((props) => <textarea {...props} />);
 
 /**
@@ -104,8 +104,8 @@ const constructFromFormData = (formData: FormData) => {
 };
 
 export {
+  useNamespace,
   Fieldset,
-  Input,
   Button,
   Select,
   Textarea,

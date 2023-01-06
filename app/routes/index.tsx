@@ -1,47 +1,12 @@
-import { createMockSong } from "@/test/factories/song.factory";
-import { json, LoaderArgs } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
-import { makeMarkingsIndentsSpaces } from "~/helpers/makeMarkingIndentsSpaces";
-
-export function loader({ context }: LoaderArgs) {
-  console.log(context);
-  return json({ song: createMockSong() });
-}
+import { Form } from "@remix-run/react";
 
 export default function Index() {
-  const { song } = useLoaderData<typeof loader>();
   return (
-    <>
-      <div>
-        <h1>{song.title}</h1>
-        <p>{song.attribution}</p>
-      </div>
-      <div className="song">
-        {song.stanzas.map((stanza, key) => (
-          <div className="stanza" key={key}>
-            <p>
-              <b>{stanza.type?.toUpperCase()}</b>
-            </p>
-            {stanza.lines.map((line, key) => {
-              const spacedMarkings = makeMarkingsIndentsSpaces(line.markings);
-              return (
-                <div className="line" key={key}>
-                  <pre className="markings">
-                    {spacedMarkings.map((marking, key) => (
-                      <span className="marking" key={key}>
-                        {new Array(marking.indent).join(" ")}
-                        {marking.primary_mark}
-                      </span>
-                    ))}
-                  </pre>
-                  <pre className="lyrics">{line.lyrics}</pre>
-                  <p className="notes">{line.notes}</p>
-                </div>
-              );
-            })}
-          </div>
-        ))}
-      </div>
-    </>
+    <div>
+      <h1>Hello</h1>
+      <Form method="post" action="/song/new">
+        <button>New Song</button>
+      </Form>
+    </div>
   );
 }

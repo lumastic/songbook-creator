@@ -1,16 +1,12 @@
-import type { ActionArgs } from "@remix-run/node";
-import { SongForm } from "~/forms/song/song.form";
-import { formDataToJson } from "~/helpers/formDataToJson";
+import { redirect } from "@remix-run/node";
+import { createSong } from "~/db/song.db";
 
-export default function NewSong() {
-  return <SongForm />;
+export async function action() {
+  const newSong = await createSong();
+  console.log(newSong);
+  return redirect(`/song/${newSong.id}/edit`);
 }
 
-export async function action({ request }: ActionArgs) {
-  console.log(request.body);
-  const formData = await request.formData();
-  console.log(JSON.stringify(formDataToJson(formData)));
-
-  //   console.log(formData.getAll("stanzas"));
-  return true;
+export default function () {
+  return <div></div>;
 }
