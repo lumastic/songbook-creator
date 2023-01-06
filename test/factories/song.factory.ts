@@ -1,16 +1,17 @@
-import type { IMarking, ISong } from "@/types/song";
+import type { IMarking, ISong, IStanza } from "@/types/song";
+import uniqid from "uniqid";
 
-const defaultSong: ISong = {
-  id: "1",
+const defaultSong = (): ISong => ({
+  id: uniqid(),
   title: "Helplessness Blue",
   attribution: "Feet Foxes",
   stanzas: [
     {
-      id: "1",
+      id: uniqid(),
       type: "verse",
       lines: [
         {
-          id: "0",
+          id: uniqid(),
           lyrics: "I was raised up believing",
           markings: [
             createMockChordMark({ primary_mark: "E", indent: 0 }),
@@ -22,18 +23,18 @@ const defaultSong: ISong = {
           notes: "",
         },
         {
-          id: "1",
+          id: uniqid(),
           lyrics: "I was somehow unique",
           markings: [
             createMockBreakMark({ indent: 7 }),
             createMockChordMark({ primary_mark: "A", indent: 8 }),
-            createMockBreakMark({ indent: 18 }),
-            createMockRepeatMark({ indent: 20 }),
+            createMockBreakMark({ indent: 20 }),
+            createMockRepeatMark({ indent: 22 }),
           ],
           notes: "",
         },
         {
-          id: "2",
+          id: uniqid(),
           lyrics: "Like a snowflake distinct among snowflakes",
           markings: [
             createMockBreakMark({ indent: 7 }),
@@ -44,7 +45,7 @@ const defaultSong: ISong = {
           notes: "",
         },
         {
-          id: "3",
+          id: uniqid(),
           lyrics: "Unique in each way you can see",
           markings: [
             createMockBreakMark({ indent: 0 }),
@@ -57,15 +58,17 @@ const defaultSong: ISong = {
       ],
     },
   ],
-};
+  createdAt: new Date(),
+  updatedAt: new Date(),
+});
 
 export function createMockSong(p?: Partial<ISong>): ISong {
-  if (!p) return defaultSong;
-  return { ...defaultSong, ...p } as ISong;
+  if (!p) return defaultSong();
+  return { ...defaultSong(), ...p } as ISong;
 }
 
 export function createMockMarking(p: Partial<IMarking>): IMarking {
-  return { id: "1", indent: 0, type: "repeat", ...p };
+  return { id: uniqid(), indent: 0, type: "repeat", ...p };
 }
 
 export function createMockChordMark(p: Partial<IMarking>): IMarking {
@@ -88,4 +91,19 @@ export function createMockRepeatMark(p: Partial<IMarking>): IMarking {
     ...p,
     type: "repeat",
   });
+}
+
+export function createMockStanza(p: Partial<IStanza>): IStanza {
+  return {
+    id: uniqid(),
+    type: "verse",
+    lines: [
+      {
+        id: uniqid(),
+        lyrics: "",
+        markings: [],
+        notes: "",
+      },
+    ],
+  };
 }

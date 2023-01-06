@@ -28,16 +28,18 @@ test("can insert items", () => {
 });
 
 test("can swap items", () => {
-  const { result } = renderHook(() => useArray([0, 1]));
-  expect(result.current.items[0]).toBe(0);
-  expect(result.current.items[1]).toBe(1);
+  const object1 = { key: "value1" };
+  const object2 = { key: "value2" };
+  const { result } = renderHook(() => useArray([object1, object2]));
+  expect(result.current.items[0]).toBe(object1);
+  expect(result.current.items[1]).toBe(object2);
 
   act(() => {
     result.current.swap(0, 1);
   });
 
-  expect(result.current.items[0]).toBe(1);
-  expect(result.current.items[1]).toBe(0);
+  expect(result.current.items[0]).toBe(object2);
+  expect(result.current.items[1]).toBe(object1);
 });
 
 test("can delete items", () => {
