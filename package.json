@@ -43,11 +43,14 @@
     "qs": "^6.11.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "remix-auth": "^3.4.0",
+    "remix-auth-auth0": "^1.5.1",
     "react-popper": "^2.3.0",
     "remix-typedjson": "^0.1.6",
     "remix-utils": "^5.1.0",
+    "remix-validated-form": "^4.6.5",
     "uniqid": "^5.4.0"
-  },
+\  },
   "devDependencies": {
     "@babel/core": "^7.20.2",
     "@ladle/react": "^2.4.5",
