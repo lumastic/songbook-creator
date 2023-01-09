@@ -110,7 +110,6 @@ export async function action({ request }: ActionArgs) {
   const title = formDataAsJson.title;
   const attribution = formDataAsJson.attribution;
   const stanzas = JSON.stringify(formDataAsJson.stanzas);
-  console.log({ id, title, attribution, stanzas });
 
   try {
     const updatedSong = await updateSong({

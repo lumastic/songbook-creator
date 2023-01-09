@@ -12,6 +12,7 @@ import globalStyles from "./styles/globals.css";
 import { NavBar } from "./components/NavBar";
 import { ModalRoute, ModalRouter } from "./lib/remix-modals";
 import { NewSetlist } from "./dialogs/NewSetlist/NewSetlist";
+import { EditSetlist } from "./dialogs/EditSetlist/EditSetlist";
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
@@ -36,6 +37,7 @@ export default function App() {
         <LiveReload />
         <ModalRouter>
           <ModalRoute path="new-setlist" component={<NewSetlist />} />
+          <ModalRoute path="edit-setlist" component={<EditSetlist />} />
         </ModalRouter>
       </body>
     </html>

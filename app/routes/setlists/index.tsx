@@ -51,7 +51,7 @@ export default function SetlistsIndex() {
       <div className="space-y-2">
         {results.map((setlist) => (
           <Link
-            to={`/setlist/${setlist.id}`}
+            to={`/setlists/${setlist.id}`}
             key={setlist.id}
             className="bg-stone-100 px-7 py-5 rounded-md shadow-md hover:shadow-xl hover:bg-white transition-all flex items-start"
           >

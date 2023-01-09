@@ -5,6 +5,9 @@ import QRCode from "qrcode";
 export async function getSetlist({ id }: Pick<Setlist, "id">) {
   return await prisma.setlist.findFirst({
     where: { id },
+    include: {
+      songs: true,
+    },
   });
 }
 
@@ -69,7 +72,7 @@ export async function updateSetlist({
 }: {
   id: Setlist["id"];
   data: Pick<Setlist, "name" | "description">;
-  songs: Pick<Song, "id">[];
+  songs?: Pick<Song, "id">[];
 }) {
   return await prisma.setlist.update({
     where: { id },

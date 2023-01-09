@@ -36,6 +36,7 @@ const SetlistForm = forwardRef<
         </label>
         <Textarea
           name="description"
+          defaultValue={setlist?.description}
           placeholder="An all sea shanty show in honor of Lief Erickson Day."
           className="border border-stone-200 px-4 py-3 rounded-md focus:border-stone-400"
         />

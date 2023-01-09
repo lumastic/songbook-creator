@@ -22,7 +22,7 @@ export const Dialog: React.FC<PropsWithChildren<Props>> = ({
       <div className="fixed inset-0 bg-stone-900 bg-opacity-25" />
       <div className="fixed inset-0 overflow-y-auto min-h-screen md:min-h-min">
         <div className="flex h-full justify-center pt-4 md:pb-4 md:px-4 text-center ">
-          <HeadlessDialog.Panel className="w-full h-full md:h-auto md:max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all relative">
+          <HeadlessDialog.Panel className="w-full h-full md:h-auto md:max-w-md transform overflow-hidden rounded-2xl bg-white p-8 text-left align-middle shadow-xl transition-all relative">
             <Button
               className="rounded-full absolute top-2 right-2 w-8 h-8 px-0 py-0"
               variant="secondary"
@@ -52,7 +52,7 @@ export const Dialog: React.FC<PropsWithChildren<Props>> = ({
             </Button>
             <HeadlessDialog.Title
               as="h2"
-              className="text-xl font-medium leading-6 text-stone-900"
+              className="text-3xl font-medium leading-6 text-stone-900"
             >
               {title}
             </HeadlessDialog.Title>
