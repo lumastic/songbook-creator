@@ -33,13 +33,17 @@ export async function setQRCode(
   request: Request
 ) {
   const origin = new URL(request.url).origin;
-  let qrcode = await QRCode.toString(`${origin}/setlist/${setlist.id}/qrcode`, {
-    type: "svg",
-    color: {
-      light: "#FFFFFF",
-      dark: "#000000",
-    },
-  });
+  // Make the link agnostic of other routes so that we can always forward it where we want to go
+  let qrcode = await QRCode.toString(
+    `${origin}/setlists/${setlist.id}/qrcode`,
+    {
+      type: "svg",
+      color: {
+        light: "#FFFFFF",
+        dark: "#000000",
+      },
+    }
+  );
   qrcode = qrcode
     .replace("#000000", "currentColor")
     .replace("#FFFFFF", "none")
