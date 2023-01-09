@@ -7,11 +7,17 @@ import { Textarea } from "~/components/Textarea";
 
 const SetlistForm = forwardRef<
   HTMLFormElement,
-  { setlist?: Setlist; form?: typeof Form; close: () => void }
->(({ setlist, form, close }, ref) => {
+  { setlist?: Setlist; form?: typeof Form; close: () => void; action?: string }
+>(({ setlist, form, close, action }, ref) => {
   const FormComponent = form || Form;
   return (
-    <FormComponent data-testid="setlistform" ref={ref} className="space-y-3">
+    <FormComponent
+      method="post"
+      action={action}
+      data-testid="setlistform"
+      ref={ref}
+      className="space-y-3"
+    >
       <div className="space-y-1">
         <label className="uppercase text-xs font-medium text-stone-400">
           Name
@@ -19,7 +25,8 @@ const SetlistForm = forwardRef<
         <Input
           name="name"
           defaultValue={setlist?.name}
-          placeholder="Name"
+          placeholder="Rapunzels 10/9/23"
+          autoFocus
           className="border border-stone-200 px-4 py-3 rounded-md focus:border-stone-400"
         />
       </div>
@@ -29,7 +36,7 @@ const SetlistForm = forwardRef<
         </label>
         <Textarea
           name="description"
-          placeholder="Description"
+          placeholder="An all sea shanty show in honor of Lief Erickson Day."
           className="border border-stone-200 px-4 py-3 rounded-md focus:border-stone-400"
         />
       </div>
