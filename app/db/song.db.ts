@@ -47,9 +47,13 @@ export const defaultStanzas: IStanza[] = [
 ];
 
 export async function getSong({ id }: Pick<Song, "id">) {
-  return prisma.song.findFirst({
+  return await prisma.song.findFirst({
     where: { id },
   });
+}
+
+export async function getSongs() {
+  return await prisma.song.findMany();
 }
 
 export async function createSong(
