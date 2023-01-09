@@ -1,7 +1,7 @@
 import type { ActionArgs } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { typedjson } from "remix-typedjson";
-import { createSetlist } from "~/db/setlist.db";
+import { createSetlist, setQRCode } from "~/db/setlist.db";
 import { formDataToJson } from "~/helpers/formDataToJson";
 
 export async function action({ request }: ActionArgs) {
@@ -9,10 +9,11 @@ export async function action({ request }: ActionArgs) {
   if (!formData.name) return;
 
   try {
-    await createSetlist({
+    const setlist = await createSetlist({
       name: formData.name as string,
       description: formData?.description as string,
     });
+    await setQRCode(setlist, request);
     return redirect(`/setlists`);
   } catch (e) {
     console.error(e);

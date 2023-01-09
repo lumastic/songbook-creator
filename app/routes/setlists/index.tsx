@@ -1,5 +1,5 @@
 import type { Setlist } from "@prisma/client";
-import { Form, Link } from "@remix-run/react";
+import { Link } from "@remix-run/react";
 import { typedjson, useTypedLoaderData } from "remix-typedjson";
 import { Button } from "~/components/Button";
 import { Search } from "~/components/Search";
@@ -7,12 +7,15 @@ import { getSetlists } from "~/db/setlist.db";
 import { useSearch } from "~/lib/useSearch";
 
 export async function loader() {
-  return typedjson({ setlists: await getSetlists() });
+  const setlists = await getSetlists();
+  return typedjson({
+    setlists,
+  });
 }
 
 export default function SetlistsIndex() {
   const { setlists } = useTypedLoaderData<typeof loader>();
-  const { results, onSearch } = useSearch<Setlist>(setlists, {
+  const { results, onSearch } = useSearch<typeof setlists[0]>(setlists, {
     keys: ["name", "venue"],
   });
   return (
@@ -50,14 +53,26 @@ export default function SetlistsIndex() {
           <Link
             to={`/setlist/${setlist.id}`}
             key={setlist.id}
-            className="block bg-stone-100 px-7 py-5 rounded-md shadow-md hover:shadow-xl hover:bg-white transition-all"
+            className="bg-stone-100 px-7 py-5 rounded-md shadow-md hover:shadow-xl hover:bg-white transition-all flex items-start"
           >
-            <h2 className="text-lg">
-              {setlist.name || `Untitled ${setlist.createdAt.toLocaleString()}`}
-            </h2>
-            <p className="text-xs font-bold text-stone-500 uppercase">
-              {setlist.description}
-            </p>
+            <div className="mr-2">
+              <span
+                className="text-7xl"
+                dangerouslySetInnerHTML={{ __html: setlist.qrcode }}
+              ></span>
+            </div>
+            <div className="flex-1">
+              <h2 className="text-xl">
+                {setlist.name ||
+                  `Untitled ${setlist.createdAt.toLocaleString()}`}
+              </h2>
+              <p className="text-sm text-stone-500 mb-2">
+                {setlist.description}
+              </p>
+              <p className="text-xs text-stone-500">
+                {setlist.songs.length} Songs
+              </p>
+            </div>
           </Link>
         ))}
       </div>

@@ -30,5 +30,7 @@ model Setlist {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
+  qrcode String @default("")
+
   songs Song[]
 }
