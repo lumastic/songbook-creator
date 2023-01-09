@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from "react";
 import { namespaceAware } from "~/lib/fieldset";
 
 export const Textarea: React.FC<InputHTMLAttributes<HTMLTextAreaElement>> =
-  namespaceAware(({ ...props }) => {
+  namespaceAware(({ className, ...props }) => {
     const ref = useRef<HTMLTextAreaElement>(null);
 
     function calcHeight(textarea: HTMLTextAreaElement) {
@@ -28,6 +28,11 @@ export const Textarea: React.FC<InputHTMLAttributes<HTMLTextAreaElement>> =
         data-testid="textarea"
         onChange={onChange}
         wrap={"soft"}
+        className={[
+          !props.hidden && "block",
+          "w-full bg-inherit focus:outline-none resize-none overflow-hidden placeholder-stone-400",
+          className,
+        ].join(" ")}
       />
     );
   });

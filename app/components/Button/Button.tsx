@@ -78,7 +78,7 @@ function classNames({
         "bg-inherit text-stone-800 border-stone-400 border hover:bg-stone-200";
       break;
     case "text":
-      variantStyles = "hover:opacity-75";
+      variantStyles = "hover:opacity-75 text-stone-700";
       break;
   }
   buttonStyles = append(buttonStyles, variantStyles);

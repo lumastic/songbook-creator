@@ -51,14 +51,16 @@ export const Dialog: React.FC<PropsWithChildren<Props>> = ({
               </div>
             </Button>
             <HeadlessDialog.Title
-              as="h3"
-              className="text-lg font-medium leading-6 text-stone-900"
+              as="h2"
+              className="text-xl font-medium leading-6 text-stone-900"
             >
               {title}
             </HeadlessDialog.Title>
-            <div className="mt-2">
-              <p className="text-sm text-stone-500">{description}</p>
-            </div>
+            {description && (
+              <div className="mt-2">
+                <p className="text-sm text-stone-500">{description}</p>
+              </div>
+            )}
 
             <div className="mt-4">{children}</div>
           </HeadlessDialog.Panel>
