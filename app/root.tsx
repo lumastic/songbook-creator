@@ -28,7 +28,7 @@ export default function App() {
       </head>
       <body>
         <NavBar />
-        <main className="bg-stone-300 min-h-screen py-4">
+        <main className="bg-stone-300 min-h-screen py-4 px-2 md:px-0">
           <Outlet />
         </main>
         <ScrollRestoration />
