@@ -36,7 +36,7 @@ export default function ExportHTML() {
                     {spacedMarkings.map((marking, key) => (
                       <span className="marking" key={key}>
                         {new Array(marking.indent).join(" ")}
-                        {marking.primary_mark}
+                        {marking.mark}
                       </span>
                     ))}
                   </pre>

@@ -8,7 +8,7 @@ import {
 import { PlayIcon } from "@heroicons/react/24/solid";
 import { Song } from "@prisma/client";
 import type { LoaderArgs } from "@remix-run/node";
-import { Link, useFetcher, useSubmit } from "@remix-run/react";
+import { Link, useFetcher } from "@remix-run/react";
 import { typedjson, useTypedLoaderData } from "remix-typedjson";
 import { Button } from "~/components/Button";
 import { getSetlist } from "~/db/setlist.db";
@@ -253,7 +253,7 @@ const SetlistSong: React.FC<{
                                 key={mark.id}
                                 className="inline text-center bg-stone-200 text-stone-800 hover:opacity-60 font-mono outline-none rounded-sm"
                               >
-                                {mark.primary_mark}
+                                {mark.mark}
                               </div>
                             </pre>
                           ))}

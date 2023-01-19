@@ -107,7 +107,7 @@ export default function () {
                               key={mark.id}
                               className="inline text-center bg-stone-200 text-stone-800 hover:opacity-60 font-mono outline-none rounded-sm"
                             >
-                              {mark.primary_mark}
+                              {mark.mark}
                             </div>
                           </pre>
                         ))}
