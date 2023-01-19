@@ -78,7 +78,7 @@ export const LineFields: React.FC<Props> = ({
       <div className="group relative" ref={setReferenceElement}>
         <Menu>
           <div
-            className="opacity-0 h-full transition-opacity group-hover:opacity-100 z-10 flex items-center pr-5"
+            className="opacity-0 h-full transition-opacity group-hover:opacity-100 z-20 flex items-center pr-5"
             ref={setPopperElement}
             style={styles.popper}
             {...attributes.popper}

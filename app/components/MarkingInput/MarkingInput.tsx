@@ -43,7 +43,7 @@ export const MarkingInput: React.FC<Props> = ({ marking, deleteMark }) => {
 
   return (
     <div
-      className="absolute z-30 group/marking font-mono"
+      className="absolute z-10 group/marking font-mono"
       style={{
         left: `${indent}ch`,
       }}
