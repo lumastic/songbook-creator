@@ -1,35 +1,7 @@
-import type { INote, IStanza } from "@/types/song";
+import type { IStanza } from "@/types/song";
 import type { Song } from "@prisma/client";
 import { prisma } from "./db.server";
 import uniqid from "uniqid";
-
-export type Mark = INote | "/" | "-";
-
-export const available_marks: Mark[] = [
-  "-",
-  "/",
-  "A",
-  "A♭",
-  "A♯",
-  "B",
-  "B♭",
-  "B♯",
-  "C",
-  "C♭",
-  "C♯",
-  "D",
-  "D♭",
-  "D♯",
-  "E",
-  "E♭",
-  "E♯",
-  "F",
-  "F♭",
-  "F♯",
-  "G",
-  "G♭",
-  "G♯",
-];
 
 export const defaultStanzas: IStanza[] = [
   {

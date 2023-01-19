@@ -1,28 +1,5 @@
 import type { Song } from "@prisma/client";
 
-export type INote =
-  | "C"
-  | "C♯"
-  | "C♭"
-  | "D"
-  | "D♯"
-  | "D♭"
-  | "E"
-  | "E♯"
-  | "E♭"
-  | "F"
-  | "F♯"
-  | "F♭"
-  | "G"
-  | "G♯"
-  | "G♭"
-  | "A"
-  | "A♯"
-  | "A♭"
-  | "B"
-  | "B♯"
-  | "B♭";
-
 export interface IMarking {
   id: string;
   indent: number;
