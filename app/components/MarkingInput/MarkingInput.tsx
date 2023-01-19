@@ -80,6 +80,7 @@ export const MarkingInput: React.FC<Props> = ({ marking, deleteMark }) => {
       </div>
 
       <Input hidden readOnly name="indent" value={indent} />
+      <Input hidden readOnly name="id" value={marking.id} />
     </div>
   );
 };

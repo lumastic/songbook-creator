@@ -11,6 +11,7 @@ import type { LoaderArgs } from "@remix-run/node";
 import { Link, useFetcher } from "@remix-run/react";
 import { typedjson, useTypedLoaderData } from "remix-typedjson";
 import { Button } from "~/components/Button";
+import { Stanza } from "~/components/Stanza";
 import { getSetlist } from "~/db/setlist.db";
 
 export async function loader({ params }: LoaderArgs) {
@@ -234,35 +235,7 @@ const SetlistSong: React.FC<{
           >
             <div className="space-y-7">
               {stanzas.map((stanza) => (
-                <div key={stanza.id} className="space-y-1">
-                  <p className="font-bold uppercase w-auto text-sm">
-                    {stanza.type}
-                  </p>
-                  <div className="space-y-3">
-                    {stanza.lines.map((line) => (
-                      <div key={line.id}>
-                        <div className="font-mono">
-                          {line.markings?.map((mark) => (
-                            <pre key={mark.id} className="inline">
-                              <span>
-                                {new Array(
-                                  parseInt(mark.indent as unknown as string)
-                                ).join(" ")}
-                              </span>
-                              <div
-                                key={mark.id}
-                                className="inline text-center bg-stone-200 text-stone-800 hover:opacity-60 font-mono outline-none rounded-sm"
-                              >
-                                {mark.mark}
-                              </div>
-                            </pre>
-                          ))}
-                        </div>
-                        <p className="font-mono">{line.lyrics}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+                <Stanza stanza={stanza} key={stanza.id} />
               ))}
             </div>
           </Disclosure.Panel>

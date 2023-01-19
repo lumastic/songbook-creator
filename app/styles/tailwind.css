@@ -732,6 +732,14 @@ video {
   height: 1.25rem;
 }
 
+.h-\[1em\] {
+  height: 1em;
+}
+
+.h-\[1\.5em\] {
+  height: 1.5em;
+}
+
 .max-h-60 {
   max-height: 15rem;
 }
@@ -796,6 +804,14 @@ video {
 
 .cursor-default {
   cursor: default;
+}
+
+.cursor-none {
+  cursor: none;
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }
 
 .select-none {
