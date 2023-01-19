@@ -68,18 +68,49 @@ export async function setQRCode(
 export async function updateSetlist({
   id,
   data,
-  songs,
 }: {
   id: Setlist["id"];
   data: Pick<Setlist, "name" | "description">;
-  songs?: Pick<Song, "id">[];
+}) {
+  return await prisma.setlist.update({
+    where: { id },
+    data,
+  });
+}
+
+export async function addSongsToSetlist({
+  id,
+  songs,
+}: {
+  id: Setlist["id"];
+  songs: Song["id"][];
 }) {
   return await prisma.setlist.update({
     where: { id },
     data: {
-      ...data,
       songs: {
-        set: songs,
+        connect: songs.map((songId) => ({
+          id: songId,
+        })),
+      },
+    },
+  });
+}
+
+export async function removeSongsFromSetlist({
+  id,
+  songs,
+}: {
+  id: Setlist["id"];
+  songs: Song["id"][];
+}) {
+  return await prisma.setlist.update({
+    where: { id },
+    data: {
+      songs: {
+        disconnect: songs.map((songId) => ({
+          id: songId,
+        })),
       },
     },
   });

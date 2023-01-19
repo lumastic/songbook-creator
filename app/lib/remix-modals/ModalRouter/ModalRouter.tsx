@@ -10,7 +10,7 @@ type KeyedRoutes = Record<string, JSX.Element>;
 
 export const ModalRouter: React.FC<PropsWithChildren<ModalRouterProps>> = ({
   children,
-  param = "rmodal",
+  param = "modal",
 }) => {
   const childProps =
     React.Children.map(children, (child) => {

@@ -7,6 +7,7 @@ type Props = {
   variant?: Variants;
   size?: Sizes;
   disabled?: boolean;
+  icon?: boolean;
 };
 
 type ButtonProps = Props & ButtonHTMLAttributes<HTMLButtonElement>;
@@ -17,9 +18,10 @@ const ButtonRoot: React.FC<PropsWithChildren<ButtonProps>> = ({
   variant,
   size,
   disabled,
+  icon,
   ...props
 }) => {
-  const className = classNames({ classes, variant, size, disabled });
+  const className = classNames({ classes, variant, size, disabled, icon });
   return (
     <button className={className} data-testid="button" {...props}>
       {children}
@@ -56,14 +58,18 @@ function classNames({
   classes,
   variant = "primary",
   size = "md",
+  icon = false,
 }: {
   classes?: string;
   variant?: Variants;
   size?: Sizes;
   disabled?: boolean;
+  icon?: boolean;
 }): string {
   // Base classes
-  let buttonStyles = "rounded-md transition-all box-border";
+  let buttonStyles = `${
+    icon ? "rounded-full" : "rounded-md"
+  } transition-all box-border`;
   // Set classes for different variants
   let variantStyles = "";
   switch (variant) {
@@ -78,7 +84,7 @@ function classNames({
         "bg-inherit text-stone-800 border-stone-400 border hover:bg-stone-200";
       break;
     case "text":
-      variantStyles = "hover:opacity-75 text-stone-700";
+      variantStyles = "hover:bg-stone-200 text-stone-700";
       break;
   }
   buttonStyles = append(buttonStyles, variantStyles);
@@ -86,16 +92,16 @@ function classNames({
   let sizeStyles = "";
   switch (size) {
     case "sm":
-      sizeStyles = "py-1 px-2 text-sm";
+      sizeStyles = `${icon ? "p-2" : "py-1 px-2"} text-sm`;
       break;
     case "md":
-      sizeStyles = "py-2 px-3 text-sm";
+      sizeStyles = `${icon ? "p-3" : "py-2 px-3"} text-sm`;
       break;
     case "lg":
-      sizeStyles = "py-2 px-4";
+      sizeStyles = `${icon ? "p-4" : "py-2 px-4"}`;
       break;
     case "xl":
-      sizeStyles = "py-3 px-5";
+      sizeStyles = `${icon ? "p-5" : "py-3 px-5"}`;
       break;
   }
   buttonStyles = append(buttonStyles, sizeStyles);

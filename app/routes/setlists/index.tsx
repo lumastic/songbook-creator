@@ -24,7 +24,7 @@ export default function SetlistsIndex() {
         <h1 className="text-3xl flex-1">Setlists</h1>
 
         <Button.Link
-          to={"?rmodal=new-setlist"}
+          to={"?modal=new-setlist"}
           className="inline-flex items-center"
         >
           <span className="mr-2">

@@ -97,10 +97,10 @@ export default function () {
                     <div key={line.id}>
                       <div className="font-mono">
                         {line.markings?.map((mark) => (
-                          <pre key={mark.id}>
+                          <pre key={mark.id} className="inline">
                             <span>
                               {new Array(
-                                parseInt(mark.indent as unknown as string)
+                                parseInt(mark.indent as unknown as string) + 1
                               ).join(" ")}
                             </span>
                             <div

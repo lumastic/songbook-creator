@@ -18,7 +18,7 @@ export const Dialog: React.FC<PropsWithChildren<Props>> = ({
   onClose,
 }) => {
   return (
-    <HeadlessDialog open={isOpen} onClose={onClose} className="relative z-10">
+    <HeadlessDialog open onClose={onClose} className="relative z-10">
       <div className="fixed inset-0 bg-stone-900 bg-opacity-25" />
       <div className="fixed inset-0 overflow-y-auto min-h-screen md:min-h-min">
         <div className="flex h-full justify-center pt-4 md:pb-4 md:px-4 text-center ">

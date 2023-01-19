@@ -13,6 +13,7 @@ import { NavBar } from "./components/NavBar";
 import { ModalRoute, ModalRouter } from "./lib/remix-modals";
 import { NewSetlist } from "./dialogs/NewSetlist/NewSetlist";
 import { EditSetlist } from "./dialogs/EditSetlist/EditSetlist";
+import { AddSongs } from "./dialogs/AddSongs/AddSongs";
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
@@ -38,6 +39,7 @@ export default function App() {
         <ModalRouter>
           <ModalRoute path="new-setlist" component={<NewSetlist />} />
           <ModalRoute path="edit-setlist" component={<EditSetlist />} />
+          <ModalRoute path="add-songs" component={<AddSongs />} />
         </ModalRouter>
       </body>
     </html>

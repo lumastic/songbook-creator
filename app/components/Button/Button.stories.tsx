@@ -1,4 +1,5 @@
 import { Button } from "./Button";
+import { PlusIcon } from "@heroicons/react/24/outline";
 
 export const Primary = () => {
   return (
@@ -71,6 +72,25 @@ export const Outlined = () => {
       </Button>
       <Button size="xl" variant="outlined">
         Button Text
+      </Button>
+    </div>
+  );
+};
+
+export const Icon = () => {
+  return (
+    <div className="flex items-end space-x-4">
+      <Button size="sm" icon>
+        <PlusIcon width={"1em"} height={"1em"} />
+      </Button>
+      <Button size="md" icon>
+        <PlusIcon width={"1em"} height={"1em"} />
+      </Button>
+      <Button size="lg" icon>
+        <PlusIcon width={"1em"} height={"1em"} />
+      </Button>
+      <Button size="xl" icon>
+        <PlusIcon width={"1em"} height={"1em"} />
       </Button>
     </div>
   );

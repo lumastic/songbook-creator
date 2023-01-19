@@ -10,6 +10,7 @@ export function EditSetlist() {
   const data = useRouteData<UseDataFunctionReturn<typeof SetlistLoader>>(
     "routes/setlists/$id/index"
   );
+
   const { isOpen, close } = useModal();
   const { Form, action } = useModalFetcher(
     `/setlists/${data?.setlist.id}/edit`

@@ -5,13 +5,15 @@ import { usePopper } from "react-popper";
 import { Input } from "~/components/Input";
 import type { Mark } from "~/db/song.db";
 import { available_marks } from "~/db/song.db";
+import { Button } from "../Button";
 import { Select } from "../Select";
 
 export const MarkingPopover: React.FC<{
   marking: IMarking;
   moveLeft: () => void;
   moveRight: () => void;
-}> = ({ marking, moveLeft, moveRight }) => {
+  removeMarking: () => void;
+}> = ({ marking, moveLeft, moveRight, removeMarking }) => {
   const [primary, setPrimary] = useState(marking.primary_mark);
   const [secondary, setSecondary] = useState(marking.secondary_mark);
   const [type, setType] = useState(marking.type);
@@ -132,6 +134,11 @@ export const MarkingPopover: React.FC<{
                   onChange={updateSecondary}
                 />
               </div>
+            </div>
+            <div className="flex justify-center">
+              <Button variant="text" size="sm" onClick={removeMarking}>
+                Remove
+              </Button>
             </div>
           </div>
         </div>
