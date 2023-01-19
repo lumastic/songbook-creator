@@ -14,7 +14,7 @@ const defaultSong = (): ISong => ({
           id: uniqid(),
           lyrics: "I was raised up believing",
           markings: [
-            createMockChordMark({ primary_mark: "E", indent: 0 }),
+            createMockChordMark({ mark: "E", indent: 0 }),
             createMockBreakMark({ indent: 7 }),
             createMockRepeatMark({ indent: 13 }),
             createMockBreakMark({ indent: 20 }),
@@ -27,7 +27,7 @@ const defaultSong = (): ISong => ({
           lyrics: "I was somehow unique",
           markings: [
             createMockBreakMark({ indent: 7 }),
-            createMockChordMark({ primary_mark: "A", indent: 8 }),
+            createMockChordMark({ mark: "A", indent: 8 }),
             createMockBreakMark({ indent: 20 }),
             createMockRepeatMark({ indent: 22 }),
           ],
@@ -38,7 +38,7 @@ const defaultSong = (): ISong => ({
           lyrics: "Like a snowflake distinct among snowflakes",
           markings: [
             createMockBreakMark({ indent: 7 }),
-            createMockChordMark({ primary_mark: "B", indent: 8 }),
+            createMockChordMark({ mark: "B", indent: 8 }),
             createMockBreakMark({ indent: 20 }),
             createMockRepeatMark({ indent: 32 }),
           ],
@@ -49,9 +49,9 @@ const defaultSong = (): ISong => ({
           lyrics: "Unique in each way you can see",
           markings: [
             createMockBreakMark({ indent: 0 }),
-            createMockChordMark({ primary_mark: "A", indent: 1 }),
+            createMockChordMark({ mark: "A", indent: 1 }),
             createMockBreakMark({ indent: 22 }),
-            createMockChordMark({ primary_mark: "E", indent: 23 }),
+            createMockChordMark({ mark: "E", indent: 23 }),
           ],
           notes: "Start building...",
         },
@@ -68,28 +68,26 @@ export function createMockSong(p?: Partial<ISong>): ISong {
 }
 
 export function createMockMarking(p: Partial<IMarking>): IMarking {
-  return { id: uniqid(), indent: 0, type: "repeat", ...p };
+  return { id: uniqid(), indent: 0, ...p };
 }
 
 export function createMockChordMark(p: Partial<IMarking>): IMarking {
-  return createMockMarking({ primary_mark: "C", ...p, type: "chord" });
+  return createMockMarking({ mark: "C", ...p });
 }
 
 export function createMockBreakMark(p: Partial<IMarking>): IMarking {
   return createMockMarking({
     indent: 0,
-    primary_mark: "/",
+    mark: "/",
     ...p,
-    type: "measure_break",
   });
 }
 
 export function createMockRepeatMark(p: Partial<IMarking>): IMarking {
   return createMockMarking({
     indent: 0,
-    primary_mark: "-",
+    mark: "-",
     ...p,
-    type: "repeat",
   });
 }
 
@@ -105,5 +103,6 @@ export function createMockStanza(p: Partial<IStanza>): IStanza {
         notes: "",
       },
     ],
+    ...p,
   };
 }

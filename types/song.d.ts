@@ -1,4 +1,4 @@
-import { Song } from "@prisma/client";
+import type { Song } from "@prisma/client";
 
 export type INote =
   | "C"
@@ -25,10 +25,8 @@ export type INote =
 
 export interface IMarking {
   id: string;
-  type: "chord" | "measure_break" | "repeat";
   indent: number;
-  primary_mark?: INote | "/" | "-";
-  secondary_mark?: INote | "/" | "-";
+  mark?: string;
 }
 
 export interface ILine {

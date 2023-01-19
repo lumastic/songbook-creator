@@ -1,14 +1,14 @@
-import { createMockBreakMark } from "@/test/factories/song.factory";
-import type { ILine } from "@/types/song";
+import type { ILine, IMarking } from "@/types/song";
 import { Menu } from "@headlessui/react";
 import type { KeyboardEvent } from "react";
 import { useState } from "react";
 import { usePopper } from "react-popper";
 import { Input } from "~/components/Input";
-import { lineToMarkFieldArrayItems } from "~/helpers/lineToMarkFieldArrayItems";
-import { Fieldset } from "~/lib/fieldset";
+import { MarkingInput } from "~/components/MarkingInput";
+import { Fieldset, useNamespace } from "~/lib/fieldset";
 import { useArray } from "~/lib/useArray";
-import { MarkingPopover } from "../../../components/MarkingPopover/MarkingPopover";
+import { useFocus } from "~/lib/useFocus";
+import uniqid from "uniqid";
 
 type Props = {
   line: ILine;
@@ -21,12 +21,13 @@ export const LineFields: React.FC<Props> = ({
   insertLine,
   deleteLine,
 }) => {
-  const {
-    items: markingsFieldArray,
-    replace,
-    push,
-    swap,
-  } = useArray(lineToMarkFieldArrayItems(line));
+  const { items: markingsFieldArray, push, remove } = useArray(line.markings);
+  const markingButtonArray = new Array(
+    Math.max(line.lyrics.length + 1, 50)
+  ).fill(true);
+
+  const namespace = useNamespace("");
+  const focus = useFocus();
 
   const [showNotes, setShowNotes] = useState(line.notes.length > 1);
 
@@ -39,22 +40,17 @@ export const LineFields: React.FC<Props> = ({
     placement: "left",
   });
 
-  const insertItem = (index: number) => {
+  const insertMark = (index: number) => {
     return () => {
-      replace(index, createMockBreakMark({}));
-      push(undefined);
+      const length = markingsFieldArray.length;
+      push({ indent: index, id: uniqid(), mark: "" } as IMarking);
+      focus(`input[name="${namespace}markings[${length}].mark"]`);
     };
   };
 
-  const moveLeft = (index: number) => {
+  const removeMark = (index: number) => {
     return () => {
-      if (index > 0) swap(index, index - 1);
-    };
-  };
-
-  const moveRight = (index: number) => {
-    return () => {
-      if (index < markingsFieldArray.length - 1) swap(index, index + 1);
+      remove(index);
     };
   };
 
@@ -134,36 +130,32 @@ export const LineFields: React.FC<Props> = ({
             </Menu.Item>
           </Menu.Items>
         </Menu>
-
-        {markingsFieldArray.map((marking, index) => {
-          const formIndex = markingsFieldArray
-            .filter(Boolean)
-            .findIndex((mark) => mark?.id === marking?.id);
-          return (
-            <Fieldset.Headless
-              namespace={`markings[${formIndex}]`}
-              key={marking?.id || index}
-            >
-              {marking ? (
-                <>
-                  <MarkingPopover
-                    marking={marking}
-                    moveLeft={moveLeft(index)}
-                    moveRight={moveRight(index)}
-                  />
-                  <Input name="indent" value={index} hidden readOnly />
-                </>
-              ) : (
-                <button
-                  onClick={insertItem(index)}
-                  className="bg-stone-200 text-stone-500 opacity-0 transition-opacity active:opacity-60 hover:opacity-100 focus:opacity-100 font-mono rounded-sm"
-                >
-                  +
-                </button>
-              )}
-            </Fieldset.Headless>
-          );
-        })}
+        <div className="relative">
+          {markingsFieldArray.map((marking, index) => {
+            return (
+              <Fieldset.Headless
+                namespace={`markings[${index}]`}
+                key={marking?.id || index}
+              >
+                <MarkingInput
+                  marking={marking}
+                  deleteMark={removeMark(index)}
+                />
+              </Fieldset.Headless>
+            );
+          })}
+          <div>
+            {markingButtonArray.map((_, index) => (
+              <button
+                key={index}
+                onClick={insertMark(index)}
+                className="bg-stone-200 text-stone-500 opacity-0 transition-opacity active:opacity-60 hover:opacity-100 focus:opacity-100 font-mono rounded-sm"
+              >
+                +
+              </button>
+            ))}
+          </div>
+        </div>
         <Input
           name="lyrics"
           placeholder="Lyrics"
