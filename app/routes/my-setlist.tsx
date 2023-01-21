@@ -1,12 +1,14 @@
-import { Form } from '@remix-run/react';
+import { LogOut } from '~/forms/logout-button';
+
+const loader()=>{
+  
+}
 
 export default function MySetlist() {
   return (
     <div>
       <button>FeetFoxies</button>
-      <Form action="/logout" method="post">
-        <button>Logout</button>
-      </Form>
+      <LogOut />
     </div>
   );
 }
