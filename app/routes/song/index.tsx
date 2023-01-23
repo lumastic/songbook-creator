@@ -1,3 +1,4 @@
+import { PlusIcon } from "@heroicons/react/24/solid";
 import type { Song } from "@prisma/client";
 import { Form, Link } from "@remix-run/react";
 import { typedjson, useTypedLoaderData } from "remix-typedjson";
@@ -22,21 +23,7 @@ export default function SongsIndex() {
         <Form method="post" action="/song/new">
           <Button type="submit" className="inline-flex items-center">
             <span className="mr-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                width={"1em"}
-                height={"1em"}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M12 4.5v15m7.5-7.5h-15"
-                />
-              </svg>
+              <PlusIcon width={"1em"} />
             </span>
             Add
           </Button>
@@ -44,6 +31,21 @@ export default function SongsIndex() {
       </div>
       <Search onSearch={onSearch} />
       <div className="space-y-2">
+        {!songs.length && (
+          <div className="border border-stone-500 rounded-md p-8">
+            <h2 className="text-2xl font-bold mb-4">
+              Add a song and start jamming!
+            </h2>
+            <Form method="post" action="/song/new">
+              <Button type="submit" className="inline-flex items-center">
+                <span className="mr-2">
+                  <PlusIcon width={"1em"} />
+                </span>
+                Add Song
+              </Button>
+            </Form>
+          </div>
+        )}
         {results.map((song) => (
           <Link
             to={`/song/${song.id}`}
