@@ -21,7 +21,11 @@ export const LineFields: React.FC<Props> = ({
   insertLine,
   deleteLine,
 }) => {
-  const { items: markingsFieldArray, push, remove } = useArray(line.markings);
+  const {
+    items: markingsFieldArray,
+    push,
+    remove,
+  } = useArray(line.markings || []);
   const markingButtonArray = new Array(
     Math.max(line.lyrics.length + 1, 50)
   ).fill(true);

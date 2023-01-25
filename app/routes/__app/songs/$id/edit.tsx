@@ -1,22 +1,24 @@
 import type { ISong } from "@/types/song";
+import { EyeIcon } from "@heroicons/react/24/outline";
 import type { ActionArgs, LoaderArgs } from "@remix-run/node";
 import { useFetcher } from "@remix-run/react";
-import { redirect, typedjson, useTypedLoaderData } from "remix-typedjson";
+import { SongForm } from "forms/song";
+import { typedjson, useTypedLoaderData } from "remix-typedjson";
 import { ClientOnly } from "remix-utils";
 import { Button } from "~/components/Button";
 import { getSong, updateSong } from "~/db/song.db";
-import { SongForm } from "forms/song";
 import { formDataToJson } from "~/helpers/formDataToJson";
 import { useAutoSave } from "~/lib/useAutoSave";
-import { currentAuthedUser } from "~/utils/auth.server";
+import { requireAuthentication } from "~/utils/auth.server";
 
 export async function loader({ params, request }: LoaderArgs) {
   if (!params.id) throw new Response("Not Found", { status: 404 });
 
-  const user = await currentAuthedUser(request);
-  if (!user) return redirect("/");
+  const user = await requireAuthentication(request);
 
   const song = await getSong({ id: +params.id });
+
+  console.log(song);
 
   if (!song) throw new Response("Not Found", { status: 404 });
 
@@ -68,26 +70,7 @@ export default function EditSong() {
             className="inline-flex items-center text-sm"
           >
             <span className="mr-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                width={"1em"}
-                height="1em"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"
-                />
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                />
-              </svg>
+              <EyeIcon width={"1em"} />
             </span>
             <span>View</span>
           </Button.Link>
