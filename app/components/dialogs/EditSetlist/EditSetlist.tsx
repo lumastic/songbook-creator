@@ -8,7 +8,7 @@ import type { loader as SetlistLoader } from "~/routes/__app/setlists/$id/index"
 
 export function EditSetlist() {
   const data = useRouteData<UseDataFunctionReturn<typeof SetlistLoader>>(
-    "routes/setlists/$id/index"
+    "routes/__app/setlists/$id/index"
   );
 
   const { isOpen, close } = useModal();

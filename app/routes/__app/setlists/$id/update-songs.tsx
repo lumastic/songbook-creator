@@ -26,6 +26,7 @@ export async function action({ request, params }: ActionArgs) {
         });
     return typedjson({ setlist });
   } catch (e) {
+    console.error(e);
     throw new Response("Internal error", { status: 500 });
   }
 }

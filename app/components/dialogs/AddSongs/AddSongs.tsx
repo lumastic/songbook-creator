@@ -15,8 +15,9 @@ import type { loader as SetlistLoader } from "~/routes/__app/setlists/$id/index"
 
 export function AddSongs() {
   const setlistData = useRouteData<UseDataFunctionReturn<typeof SetlistLoader>>(
-    "routes/setlists/$id/index"
+    "routes/__app/setlists/$id/index"
   );
+
   const { Form, action } = useModalFetcher(
     `/setlists/${setlistData?.setlist.id}/update-songs`
   );
