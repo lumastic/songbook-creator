@@ -18,8 +18,6 @@ export async function loader({ params, request }: LoaderArgs) {
 
   const song = await getSong({ id: +params.id });
 
-  console.log(song);
-
   if (!song) throw new Response("Not Found", { status: 404 });
 
   if (song.authorId !== user.id)
