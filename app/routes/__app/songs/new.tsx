@@ -3,10 +3,10 @@ import { createSong } from "~/db/song.db";
 import { currentAuthedUser } from "~/utils/auth.server";
 
 export async function action({ request }: LoaderArgs) {
-  const su = await currentAuthedUser(request);
-
+  const user = await currentAuthedUser(request);
+  if (!user) return redirect("/");
   const newSong = await createSong({
-    authorId: su.id,
+    authorId: user.id,
   });
   return redirect(`/song/${newSong.id}/edit`);
 }

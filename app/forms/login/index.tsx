@@ -1,13 +1,16 @@
 import { Form } from "@remix-run/react";
+import { Button } from "~/components/Button";
 
 /**
  * Common log in button handling form
  * @returns
  */
-export default function LogInButton() {
+export function LoginButton() {
   return (
     <Form action="/auth/auth0" method="post">
-      <button>Login</button>
+      <Button variant="secondary" size="xl">
+        Login
+      </Button>
     </Form>
   );
 }

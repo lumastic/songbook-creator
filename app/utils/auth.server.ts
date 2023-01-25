@@ -52,9 +52,7 @@ export const currentAuthedUser = async (request: Request) => {
     return await __DANGER__DEV__FAKEDAUTH__();
   }
 
-  return await authenticator.isAuthenticated(request, {
-    failureRedirect: "/login",
-  });
+  return await authenticator.isAuthenticated(request);
 };
 
 const __DANGER__DEV__FAKEDAUTH__ = async () => {

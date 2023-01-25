@@ -1,7 +1,7 @@
 import type { ISong } from "@/types/song";
 import type { ActionArgs, LoaderArgs } from "@remix-run/node";
-import { Link, useFetcher } from "@remix-run/react";
-import { typedjson, useTypedLoaderData } from "remix-typedjson";
+import { useFetcher } from "@remix-run/react";
+import { redirect, typedjson, useTypedLoaderData } from "remix-typedjson";
 import { ClientOnly } from "remix-utils";
 import { Button } from "~/components/Button";
 import { getSong, updateSong } from "~/db/song.db";
@@ -13,13 +13,14 @@ import { currentAuthedUser } from "~/utils/auth.server";
 export async function loader({ params, request }: LoaderArgs) {
   if (!params.id) throw new Response("Not Found", { status: 404 });
 
-  const su = await currentAuthedUser(request);
+  const user = await currentAuthedUser(request);
+  if (!user) return redirect("/");
 
   const song = await getSong({ id: +params.id });
 
   if (!song) throw new Response("Not Found", { status: 404 });
 
-  if (song.authorId !== su?.id)
+  if (song.authorId !== user.id)
     throw new Response("Not Authorized", { status: 401 });
 
   return typedjson({ song });
