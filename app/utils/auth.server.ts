@@ -1,8 +1,8 @@
-import { Authenticator } from 'remix-auth';
-import { Auth0Strategy, Auth0StrategyOptions } from 'remix-auth-auth0';
-import { prisma } from '~/db/db.server';
+import { Authenticator } from "remix-auth";
+import { Auth0Strategy, Auth0StrategyOptions } from "remix-auth-auth0";
+import { prisma } from "~/db/db.server";
 
-import { sessionStorage } from '~/services/session.server';
+import { sessionStorage } from "~/services/session.server";
 
 const config: Auth0StrategyOptions = {
   callbackURL: `${process.env.AUTH0_BASEURL}/auth/auth0/callback`,
@@ -33,7 +33,7 @@ let auth0Strategy = new Auth0Strategy(
         email: email,
         name: profile.displayName,
         oAuthId: profile.id,
-        oAuthProvider: 'Auth0',
+        oAuthProvider: "Auth0",
       },
     });
 
@@ -49,18 +49,18 @@ authenticator.use(auth0Strategy);
  * @returns
  */
 export const currentAuthedUser = async (request: Request) => {
-  if (process.env.NODE_ENV === 'development' && process.env.SKIPAUTH_USERID) {
+  if (process.env.NODE_ENV === "development" && process.env.SKIPAUTH_USERID) {
     return await __DANGER__DEV__FAKEDAUTH__();
   }
 
   return await authenticator.isAuthenticated(request, {
-    failureRedirect: '/login',
+    failureRedirect: "/login",
   });
 };
 
 const __DANGER__DEV__FAKEDAUTH__ = async () => {
   console.warn(
-    'currently running in local dev mode and skipping auth0 authorization.'
+    "currently running in local dev mode and skipping auth0 authorization."
   );
   return (await prisma.user.findUniqueOrThrow({
     where: { id: process.env.SKIPAUTH_USERID },
@@ -73,9 +73,9 @@ const __DANGER__DEV__FAKEDAUTH__ = async () => {
  * @returns
  */
 export const processAuthentication = async (request: Request) => {
-  if (process.env.NODE_ENV === 'development' && process.env.SKIPAUTH_USERID) {
+  if (process.env.NODE_ENV === "development" && process.env.SKIPAUTH_USERID) {
     return await __DANGER__DEV__FAKEDAUTH__();
   }
 
-  return authenticator.authenticate('auth0', request);
+  return authenticator.authenticate("auth0", request);
 };
