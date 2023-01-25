@@ -10,7 +10,7 @@ export const NavBar: React.FC<Props> = () => {
         <div className="flex-1">PubJam</div>
         <div className="space-x-6">
           <NavLink
-            to={"/song"}
+            to={"/songs"}
             className={({ isActive }) => `${isActive && "underline font-bold"}`}
           >
             Songs

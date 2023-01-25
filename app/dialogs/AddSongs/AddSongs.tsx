@@ -11,7 +11,7 @@ import { Search } from "~/components/Search";
 import { useModalFetcher } from "~/lib/remix-modals";
 import { useModal } from "~/lib/remix-modals/useModal";
 import { useSearch } from "~/lib/useSearch";
-import type { loader as SetlistLoader } from "~/routes/setlists/$id/index";
+import type { loader as SetlistLoader } from "~/routes/__app/setlists/$id/index";
 
 export function AddSongs() {
   const setlistData = useRouteData<UseDataFunctionReturn<typeof SetlistLoader>>(
@@ -25,7 +25,7 @@ export function AddSongs() {
   const [songs, setSongs] = useState<Song[]>([]);
 
   useEffect(() => {
-    loadSongs("/song?index");
+    loadSongs("/songs?index");
   }, [loadSongs]);
 
   useEffect(() => {

@@ -11,7 +11,7 @@ export default function Index() {
       </Form>
       <Login />
 
-      <Form method="post" action="/song/new">
+      <Form method="post" action="/songs/new">
         <button>New Song</button>
       </Form>
 

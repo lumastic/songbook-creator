@@ -4,7 +4,7 @@ import { Dialog } from "~/components/Dialog";
 import { SetlistForm } from "~/forms/setlist";
 import { useModalFetcher } from "~/lib/remix-modals";
 import { useModal } from "~/lib/remix-modals/useModal";
-import type { loader as SetlistLoader } from "~/routes/setlists/$id/index";
+import type { loader as SetlistLoader } from "~/routes/__app/setlists/$id/index";
 
 export function EditSetlist() {
   const data = useRouteData<UseDataFunctionReturn<typeof SetlistLoader>>(

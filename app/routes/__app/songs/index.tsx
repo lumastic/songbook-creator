@@ -20,7 +20,7 @@ export default function SongsIndex() {
     <div className="space-y-4 max-w-xl mx-auto">
       <div className="flex items-center">
         <h1 className="text-3xl flex-1">Songs</h1>
-        <Form method="post" action="/song/new">
+        <Form method="post" action="/songs/new">
           <Button type="submit" className="inline-flex items-center">
             <span className="mr-2">
               <PlusIcon width={"1em"} />
@@ -36,7 +36,7 @@ export default function SongsIndex() {
             <h2 className="text-2xl font-bold mb-4">
               Add a song and start jamming!
             </h2>
-            <Form method="post" action="/song/new">
+            <Form method="post" action="/songs/new">
               <Button type="submit" className="inline-flex items-center">
                 <span className="mr-2">
                   <PlusIcon width={"1em"} />
@@ -48,7 +48,7 @@ export default function SongsIndex() {
         )}
         {results.map((song) => (
           <Link
-            to={`/song/${song.id}`}
+            to={`/songs/${song.id}`}
             key={song.id}
             className="block bg-stone-100 px-7 py-5 rounded-md shadow-md hover:shadow-xl hover:bg-white transition-all"
           >

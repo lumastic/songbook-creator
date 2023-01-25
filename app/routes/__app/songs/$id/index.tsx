@@ -25,7 +25,7 @@ export default function () {
       <div className="flex items-center">
         <div className="flex-1">
           <Button.Link
-            to="/song"
+            to="/songs"
             className="inline-flex items-center text-sm"
             variant="text"
             size="sm"
