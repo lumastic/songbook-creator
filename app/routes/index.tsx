@@ -1,7 +1,7 @@
 import type { LoaderArgs } from "@remix-run/node";
 import { redirect } from "remix-typedjson";
-import { LoginButton } from "~/forms/login";
-import { SignupButton } from "~/forms/signup";
+import { LoginButton } from "forms/login";
+import { SignupButton } from "forms/signup";
 import { currentAuthedUser } from "~/utils/auth.server";
 
 export const loader = async ({ request }: LoaderArgs) => {

@@ -1,6 +1,6 @@
 import { NavLink } from "@remix-run/react";
 import React from "react";
-import { LogoutButton } from "~/forms/logout";
+import { LogoutButton } from "../forms/logout";
 
 type Props = {};
 

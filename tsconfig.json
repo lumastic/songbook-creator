@@ -16,7 +16,10 @@
     "paths": {
       "~/*": ["./app/*"],
       "@/*": ["./*"],
-      "lib/*": ["app/lib/*"]
+      "lib/*": ["app/lib/*"],
+      "components/*": ["app/components/*"],
+      "forms/*": ["app/components/forms/*"],
+      "dialogs/*": ["app/components/dialogs/*"]
     },
     "skipLibCheck": true,
     "noEmit": true,

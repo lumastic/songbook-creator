@@ -1,8 +1,8 @@
 import { Outlet } from "@remix-run/react";
 import { NavBar } from "~/components/NavBar";
-import { AddSongs } from "~/dialogs/AddSongs/AddSongs";
-import { EditSetlist } from "~/dialogs/EditSetlist/EditSetlist";
-import { NewSetlist } from "~/dialogs/NewSetlist/NewSetlist";
+import { AddSongs } from "~/components/dialogs/AddSongs/AddSongs";
+import { EditSetlist } from "~/components/dialogs/EditSetlist/EditSetlist";
+import { NewSetlist } from "~/components/dialogs/NewSetlist/NewSetlist";
 import { ModalRoute, ModalRouter } from "~/lib/remix-modals";
 
 export default function App() {

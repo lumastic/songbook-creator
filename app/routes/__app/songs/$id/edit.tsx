@@ -5,7 +5,7 @@ import { redirect, typedjson, useTypedLoaderData } from "remix-typedjson";
 import { ClientOnly } from "remix-utils";
 import { Button } from "~/components/Button";
 import { getSong, updateSong } from "~/db/song.db";
-import { SongForm } from "~/forms/song";
+import { SongForm } from "forms/song";
 import { formDataToJson } from "~/helpers/formDataToJson";
 import { useAutoSave } from "~/lib/useAutoSave";
 import { currentAuthedUser } from "~/utils/auth.server";
