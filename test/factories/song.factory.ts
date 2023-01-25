@@ -1,11 +1,15 @@
-import type { IMarking, ISong, IStanza } from "@/types/song";
+import type { IMarking, IStanza } from "@/types/song";
+import type { Song } from "@prisma/client";
 import uniqid from "uniqid";
 
-const defaultSong = (): ISong => ({
-  id: uniqid(),
+const defaultSong = (): Song => ({
+  id: 1234,
   title: "Helplessness Blue",
   attribution: "Feet Foxes",
-  stanzas: [
+  published: true,
+  authorId: 1234,
+  setlistId: null,
+  stanzas: JSON.stringify([
     {
       id: uniqid(),
       type: "verse",
@@ -57,14 +61,14 @@ const defaultSong = (): ISong => ({
         },
       ],
     },
-  ],
+  ]),
   createdAt: new Date(),
   updatedAt: new Date(),
 });
 
-export function createMockSong(p?: Partial<ISong>): ISong {
+export function createMockSong(p?: Partial<Song>): Song {
   if (!p) return defaultSong();
-  return { ...defaultSong(), ...p } as ISong;
+  return { ...defaultSong(), ...p } as Song;
 }
 
 export function createMockMarking(p: Partial<IMarking>): IMarking {

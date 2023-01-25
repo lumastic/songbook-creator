@@ -126,7 +126,7 @@ export default function ViewSetlist() {
         {setlist.songs.map((song, index) => {
           function removeSong() {
             submit(
-              { "add-remove-song": "0", "song-id": song.id },
+              { "add-remove-song": "0", "song-id": song.id.toString() },
               {
                 action: `/setlists/${setlist.id}/update-songs`,
                 method: "post",

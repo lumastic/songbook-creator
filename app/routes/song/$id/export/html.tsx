@@ -6,7 +6,7 @@ import { makeMarkingsIndentsSpaces } from "~/helpers/makeMarkingIndentsSpaces";
 
 export async function loader({ params }: LoaderArgs) {
   if (!params.id) throw new Response("Not Found", { status: 404 });
-  const song = await getSong({ id: params.id });
+  const song = await getSong({ id: +params.id });
   if (!song) throw new Response("Not Found", { status: 404 });
 
   return typedjson({ song });

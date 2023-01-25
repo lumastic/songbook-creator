@@ -1,5 +1,6 @@
 import { Authenticator } from "remix-auth";
-import { Auth0Strategy, Auth0StrategyOptions } from "remix-auth-auth0";
+import type { Auth0StrategyOptions } from "remix-auth-auth0";
+import { Auth0Strategy } from "remix-auth-auth0";
 import { prisma } from "~/db/db.server";
 
 import { sessionStorage } from "~/services/session.server";
@@ -22,24 +23,22 @@ type SessionUser = {
 // strategies will return and will be stored in the session
 export const authenticator = new Authenticator<SessionUser>(sessionStorage);
 
-let auth0Strategy = new Auth0Strategy(
-  config,
-  async ({ accessToken, refreshToken, extraParams, profile }) => {
-    const email = profile.emails[0].value;
-    const lookupUsr = await prisma.user.upsert({
-      where: { email },
-      update: {},
-      create: {
-        email: email,
-        name: profile.displayName,
-        oAuthId: profile.id,
-        oAuthProvider: "Auth0",
-      },
-    });
+let auth0Strategy = new Auth0Strategy(config, async ({ profile }) => {
+  const emails = profile.emails;
+  const email = emails && emails[0].value;
+  const lookupUsr = await prisma.user.upsert({
+    where: { email },
+    update: {},
+    create: {
+      email: email || "",
+      name: profile.displayName,
+      oAuthId: profile.id,
+      oAuthProvider: "Auth0",
+    },
+  });
 
-    return { id: lookupUsr.id, name: lookupUsr.name } as SessionUser;
-  }
-);
+  return { id: lookupUsr.id, name: lookupUsr.name } as SessionUser;
+});
 
 authenticator.use(auth0Strategy);
 

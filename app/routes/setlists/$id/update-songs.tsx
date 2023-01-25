@@ -18,11 +18,11 @@ export async function action({ request, params }: ActionArgs) {
     const setlist = addOrRemove
       ? await addSongsToSetlist({
           id: setlistId,
-          songs: [songId],
+          songs: [+songId],
         })
       : await removeSongsFromSetlist({
           id: setlistId,
-          songs: [songId],
+          songs: [+songId],
         });
     return typedjson({ setlist });
   } catch (e) {
