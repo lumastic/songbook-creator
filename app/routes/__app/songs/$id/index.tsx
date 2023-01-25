@@ -52,7 +52,7 @@ export default function () {
         </div>
         <div>
           <Button.Link
-            to={`/song/${song.id}/edit`}
+            to={`/songs/${song.id}/edit`}
             size="md"
             variant="outlined"
             className="inline-flex items-center text-sm"

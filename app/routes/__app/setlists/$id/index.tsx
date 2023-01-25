@@ -193,7 +193,7 @@ const SetlistSong: React.FC<{
                   <Menu.Item>
                     {({ active }) => (
                       <Link
-                        to={`/song/${song.id}/edit`}
+                        to={`/songs/${song.id}/edit`}
                         className={`${
                           active && "bg-stone-200"
                         } group flex w-full items-center rounded-md px-2 py-2 text-sm`}

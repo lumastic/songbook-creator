@@ -62,7 +62,7 @@ export default function EditSong() {
         </div>
         <div>
           <Button.Link
-            to={`/song/${song.id}`}
+            to={`/songs/${song.id}`}
             size="md"
             variant="outlined"
             className="inline-flex items-center text-sm"

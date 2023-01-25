@@ -8,7 +8,7 @@ export async function action({ request }: LoaderArgs) {
   const newSong = await createSong({
     authorId: user.id,
   });
-  return redirect(`/song/${newSong.id}/edit`);
+  return redirect(`/songs/${newSong.id}/edit`);
 }
 
 export default function () {
