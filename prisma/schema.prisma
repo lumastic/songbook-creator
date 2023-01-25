@@ -39,12 +39,31 @@ model Song {
   author      User       @relation(fields: [authorId], references: [id])
   authorId    Int
   categories  Category[] //# @relation(references: [id])
+  Setlist     Setlist?   @relation(fields: [setlistId], references: [id])
+  setlistId   String?
 }
 
 model Category {
   id    Int    @id @default(autoincrement())
   name  String
   songs Song[] //@relation(references: [id])
+
+  setlists Setlist[]
+}
+
+model Setlist {
+  id          String   @id @default(uuid())
+  name        String   @default("")
+  description String   @default("")
+  // Json type not supported in SQLite
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  qrcode String @default("")
+
+  songs      Song[]
+  Category   Category? @relation(fields: [categoryId], references: [id])
+  categoryId Int?
 }
 
 // enum Role {

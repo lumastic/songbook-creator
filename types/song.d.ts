@@ -1,34 +1,9 @@
-import { Song } from "@prisma/client";
-
-export type INote =
-  | "C"
-  | "C♯"
-  | "C♭"
-  | "D"
-  | "D♯"
-  | "D♭"
-  | "E"
-  | "E♯"
-  | "E♭"
-  | "F"
-  | "F♯"
-  | "F♭"
-  | "G"
-  | "G♯"
-  | "G♭"
-  | "A"
-  | "A♯"
-  | "A♭"
-  | "B"
-  | "B♯"
-  | "B♭";
+import type { Song } from "@prisma/client";
 
 export interface IMarking {
   id: string;
-  type: "chord" | "measure_break" | "repeat";
   indent: number;
-  primary_mark?: INote | "/" | "-";
-  secondary_mark?: INote | "/" | "-";
+  mark?: string;
 }
 
 export interface ILine {

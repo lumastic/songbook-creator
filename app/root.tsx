@@ -9,6 +9,11 @@ import {
 } from "@remix-run/react";
 import tailwindStyles from "./styles/tailwind.css";
 import globalStyles from "./styles/globals.css";
+import { NavBar } from "./components/NavBar";
+import { ModalRoute, ModalRouter } from "./lib/remix-modals";
+import { NewSetlist } from "./dialogs/NewSetlist/NewSetlist";
+import { EditSetlist } from "./dialogs/EditSetlist/EditSetlist";
+import { AddSongs } from "./dialogs/AddSongs/AddSongs";
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
@@ -24,10 +29,18 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <Outlet />
+        <NavBar />
+        <main className="bg-stone-300 min-h-screen py-4 px-2 md:px-0">
+          <Outlet />
+        </main>
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
+        <ModalRouter>
+          <ModalRoute path="new-setlist" component={<NewSetlist />} />
+          <ModalRoute path="edit-setlist" component={<EditSetlist />} />
+          <ModalRoute path="add-songs" component={<AddSongs />} />
+        </ModalRouter>
       </body>
     </html>
   );

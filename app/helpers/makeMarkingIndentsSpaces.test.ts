@@ -3,11 +3,11 @@ import {
   createMockChordMark,
   createMockRepeatMark,
 } from "@/test/factories/song.factory";
-import { IMarking } from "@/types/song";
+import type { IMarking } from "@/types/song";
 import { makeMarkingsIndentsSpaces } from "./makeMarkingIndentsSpaces";
 
 const inputMarks1 = [
-  createMockChordMark({ primary_mark: "E", indent: 0 }),
+  createMockChordMark({ mark: "E", indent: 0 }),
   createMockBreakMark({ indent: 7 }),
   createMockRepeatMark({ indent: 13 }),
   createMockBreakMark({ indent: 20 }),

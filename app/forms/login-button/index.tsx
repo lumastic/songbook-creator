@@ -1,4 +1,4 @@
-import { Form } from '@remix-run/react';
+import { Form } from "@remix-run/react";
 
 /**
  * Common log in button handling form
