@@ -28,13 +28,13 @@ export async function getSongs() {
   return await prisma.song.findMany();
 }
 
-export async function createSong(
-  data?: Pick<Song, "title" | "attribution" | "stanzas">
-) {
+export async function createSong({ authorId }: Pick<Song, "authorId">) {
   return await prisma.song.create({
     data: {
-      ...data,
-      stanzas: data?.stanzas || JSON.stringify(defaultStanzas),
+      title: "",
+      attribution: "",
+      stanzas: JSON.stringify(defaultStanzas),
+      authorId,
     },
   });
 }
@@ -46,5 +46,5 @@ export async function updateSong({
   id: Song["id"];
   data: Pick<Song, "title" | "attribution" | "stanzas">;
 }) {
-  return await prisma.song.update({ where: { id }, data });
+  return await prisma.song.update({ where: { id: +id }, data });
 }

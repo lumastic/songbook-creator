@@ -8,14 +8,20 @@ import { getSong, updateSong } from "~/db/song.db";
 import { SongForm } from "~/forms/song";
 import { formDataToJson } from "~/helpers/formDataToJson";
 import { useAutoSave } from "~/lib/useAutoSave";
+import { currentAuthedUser } from "~/utils/auth.server";
 
-export async function loader({ params }: LoaderArgs) {
+export async function loader({ params, request }: LoaderArgs) {
   if (!params.id) throw new Response("Not Found", { status: 404 });
 
-  const song = await getSong({ id: params.id });
+  const su = await currentAuthedUser(request);
+
+  const song = await getSong({ id: +params.id });
 
   if (!song) throw new Response("Not Found", { status: 404 });
-  // console.log(JSON.stringify(newSong));
+
+  if (song.authorId !== su?.id)
+    throw new Response("Not Authorized", { status: 401 });
+
   return typedjson({ song });
 }
 
