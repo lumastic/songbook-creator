@@ -1,13 +1,17 @@
 import { PlusIcon } from "@heroicons/react/24/solid";
 import type { Song } from "@prisma/client";
+import type { LoaderArgs } from "@remix-run/node";
 import { Form, Link } from "@remix-run/react";
 import { typedjson, useTypedLoaderData } from "remix-typedjson";
 import { Button } from "~/components/Button";
 import { Search } from "~/components/Search";
 import { getSongs } from "~/db/song.db";
 import { useSearch } from "~/lib/useSearch";
+import { requireAuthentication } from "~/utils/auth.server";
 
-export async function loader() {
+export async function loader({ request }: LoaderArgs) {
+  const user = await requireAuthentication(request);
+  console.log(user);
   return typedjson({ songs: await getSongs() });
 }
 

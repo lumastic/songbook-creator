@@ -1,6 +1,9 @@
+import { User } from "@prisma/client";
+import { AppData } from "@remix-run/node";
 import { Authenticator } from "remix-auth";
 import type { Auth0StrategyOptions } from "remix-auth-auth0";
 import { Auth0Strategy } from "remix-auth-auth0";
+import { redirect } from "remix-typedjson";
 import { prisma } from "~/db/db.server";
 
 import { sessionStorage } from "~/services/session.server";
@@ -75,4 +78,12 @@ export const processAuthentication = async (request: Request) => {
   }
 
   return authenticator.authenticate("auth0", request);
+};
+
+export const requireAuthentication = async (request: Request) => {
+  const currentUser = await currentAuthedUser(request);
+  if (!currentUser) throw redirect("/logout");
+  const user = await prisma.user.findFirst({ where: { id: currentUser.id } });
+  if (!user) throw redirect("/logout");
+  return user;
 };

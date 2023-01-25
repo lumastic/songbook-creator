@@ -1,5 +1,5 @@
 import { Dialog } from "~/components/Dialog";
-import { SetlistForm } from "~/forms/setlist";
+import { SetlistForm } from "forms/setlist";
 import { useModalFetcher } from "~/lib/remix-modals";
 import { useModal } from "~/lib/remix-modals/useModal";
 
