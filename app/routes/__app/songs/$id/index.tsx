@@ -4,7 +4,7 @@ import { typedjson, useTypedLoaderData } from "remix-typedjson";
 import { Button } from "~/components/Button";
 import { Stanza } from "~/components/Stanza";
 import { getSong } from "~/db/song.db";
-import { formatRunTime } from "~/helpers/formatTime";
+import { formatRunTime } from "~/helpers/formatRunTime";
 
 export async function loader({ params }: LoaderArgs) {
   if (!params.id) throw new Response("Not Found", { status: 404 });
