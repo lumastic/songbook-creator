@@ -23,7 +23,7 @@ export async function getSetlists() {
   });
 }
 
-export async function getMySetlists(userId: number) {
+export async function getSetlistsByUserId(userId: number) {
   return await prisma.setlist.findMany({
     where: { authorId: userId },
     include: {

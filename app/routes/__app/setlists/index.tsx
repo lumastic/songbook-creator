@@ -6,12 +6,12 @@ import { Button } from "~/components/Button";
 import { Search } from "~/components/Search";
 import { useSearch } from "~/lib/useSearch";
 import { requireAuthentication } from "~/utils/auth.server";
-import { getMySetlists } from "~/db/setlist.db";
+import { getSetlistsByUserId } from "~/db/setlist.db";
 
 export async function loader({ request }: LoaderArgs) {
   const user = await requireAuthentication(request);
 
-  const setlists = await getMySetlists(user.id);
+  const setlists = await getSetlistsByUserId(user.id);
   return typedjson({
     setlists,
   });
