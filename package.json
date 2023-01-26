@@ -10,6 +10,7 @@
     "db:deploy": "npx prisma migrate deploy",
     "db:push": "npx prisma db push",
     "db:reset": "rm -r prisma/data.db && npm run db:push",
+    "db:hard-refresh": "rm -r prisma/data.db && npm run db:push && npm run db:seed",
     "db:seed": "npx prisma db seed",
     "db:studio": "npx prisma studio -p 7777 --browser none",
     "dev": "concurrently \"npm run dev:css\" \"remix dev\"",
