@@ -60,6 +60,26 @@ const SongForm = forwardRef<
           </div>
         ))}
       </div>
+      <label>
+        <h2>Additional Information</h2>
+        <label>
+          Runtime in seconds
+          <Input
+            name="runtime"
+            defaultValue={song.runtime}
+            type="number"
+            title="RunTime (seconds)"
+            aria-label="RunTime in seconds"
+            className="text-xl w-full bg-inherit py-1 outline-none hover:cursor-text resize-none"
+          />
+        </label>
+        <Textarea
+          name="notes"
+          placeholder="Notes"
+          defaultValue={song.notes}
+          className="text-xl w-full bg-inherit py-1 outline-none hover:cursor-text resize-none"
+        />
+      </label>
       {/* <button
           type="submit"
           className="bg-stone-200 px-5 py-2 rounded-md text-stone-800 mt-4"

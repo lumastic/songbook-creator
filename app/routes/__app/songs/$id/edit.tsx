@@ -94,11 +94,8 @@ export async function action({ request }: ActionArgs) {
   const formDataAsJson = formDataToJson(
     await request.formData()
   ) as unknown as ISong;
-  const id = formDataAsJson.id;
-  const title = formDataAsJson.title;
-  const attribution = formDataAsJson.attribution;
+  const { notes, runtime, title, attribution, id } = formDataAsJson;
   const stanzas = JSON.stringify(formDataAsJson.stanzas);
-
   try {
     const updatedSong = await updateSong({
       id,
@@ -106,6 +103,8 @@ export async function action({ request }: ActionArgs) {
         title,
         attribution,
         stanzas,
+        notes,
+        runtime: +runtime,
       },
     });
     return typedjson({ ...updatedSong });
