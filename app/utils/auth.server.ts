@@ -63,7 +63,7 @@ const __DANGER__DEV__FAKEDAUTH__ = async () => {
     "currently running in local dev mode and skipping auth0 authorization."
   );
   return (await prisma.user.findUniqueOrThrow({
-    where: { id: process.env.SKIPAUTH_USERID },
+    where: { id: +process.env.SKIPAUTH_USERID },
   })) as SessionUser;
 };
 
