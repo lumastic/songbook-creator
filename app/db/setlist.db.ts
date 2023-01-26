@@ -23,8 +23,21 @@ export async function getSetlists() {
   });
 }
 
+export async function getMySetlists(userId: number) {
+  return await prisma.setlist.findMany({
+    where: { authorId: userId },
+    include: {
+      songs: {
+        select: {
+          id: true,
+        },
+      },
+    },
+  });
+}
+
 export async function createSetlist(
-  data?: Pick<Setlist, "name" | "description">
+  data?: Pick<Setlist, "name" | "description" | "authorId">
 ) {
   return await prisma.setlist.create({
     data: { ...data },
