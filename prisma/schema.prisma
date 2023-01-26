@@ -11,14 +11,15 @@ datasource db {
 }
 
 model User {
-  id            Int      @id @default(autoincrement())
-  email         String   @unique
+  id            Int       @id @default(autoincrement())
+  email         String    @unique
   name          String?
   // role          Role     @default(USER)
   songs         Song[]
   profile       Profile?
   oAuthProvider String?
   oAuthId       String?
+  setlists      Setlist[]
 }
 
 model Profile {
@@ -38,32 +39,31 @@ model Song {
   published   Boolean    @default(false)
   author      User       @relation(fields: [authorId], references: [id])
   authorId    Int
+  // time in seconds for the length of song
+  runtime     Int        @default(185) // bonus points if you know the reference
   categories  Category[] //# @relation(references: [id])
-  Setlist     Setlist?   @relation(fields: [setlistId], references: [id])
-  setlistId   String?
+  setlists    Setlist[] // @relation(fields: [setlistId], references: [id])
 }
 
 model Category {
   id    Int    @id @default(autoincrement())
   name  String
-  songs Song[] //@relation(references: [id])
+  songs Song[] // @relation(references: [id])
 
   setlists Setlist[]
 }
 
 model Setlist {
-  id          String   @id @default(uuid())
-  name        String   @default("")
-  description String   @default("")
-  // Json type not supported in SQLite
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  qrcode String @default("")
-
-  songs      Song[]
-  Category   Category? @relation(fields: [categoryId], references: [id])
-  categoryId Int?
+  id          String     @id @default(uuid())
+  name        String     @default("")
+  description String     @default("")
+  author      User       @relation(fields: [authorId], references: [id])
+  authorId    Int
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  qrcode      String     @default("")
+  songs       Song[]
+  categories  Category[]
 }
 
 // enum Role {
