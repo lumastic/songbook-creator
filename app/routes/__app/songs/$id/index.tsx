@@ -4,6 +4,7 @@ import { typedjson, useTypedLoaderData } from "remix-typedjson";
 import { Button } from "~/components/Button";
 import { Stanza } from "~/components/Stanza";
 import { getSong } from "~/db/song.db";
+import { formatRunTime } from "~/helpers/formatTime";
 
 export async function loader({ params }: LoaderArgs) {
   if (!params.id) throw new Response("Not Found", { status: 404 });
@@ -87,11 +88,26 @@ export default function () {
             <p className="text-xl w-full bg-inherit py-1 outline-none hover:cursor-text resize-none text-stone-500">
               {song.attribution}
             </p>
+            <p className="text-xl w-full bg-inherit py-1 outline-none hover:cursor-text resize-none text-stone-500">
+              Run Time: {formatRunTime(song.runtime)}
+            </p>
           </div>
           <div className="space-y-7">
             {song.stanzas.map((stanza) => (
               <Stanza stanza={stanza} key={stanza.id} />
             ))}
+          </div>
+          <div>
+            <h2>Notes</h2>
+            <p className="text-xl w-full bg-inherit py-1 outline-none hover:cursor-text resize-none text-stone-500">
+              {song.notes}
+            </p>
+            {/* <h2>Public domain status</h2>
+            <p className="text-xl w-full bg-inherit py-1 outline-none hover:cursor-text resize-none text-stone-500">
+              {song.claimedPublicDomain
+                ? "This song is considered in the public domain"
+                : "This song is not part of the public domain. Contact the writer, label, composer for use rights."}
+            </p> */}
           </div>
         </div>
       </div>
