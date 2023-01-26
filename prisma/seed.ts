@@ -1,4 +1,7 @@
 import { PrismaClient } from "@prisma/client";
+
+import { createMockSong } from "@/test/factories/song.factory";
+
 const prisma = new PrismaClient();
 async function main() {
   const keith = await prisma.user.upsert({
@@ -35,17 +38,11 @@ async function main() {
   await prisma.category.create({
     data: { name: "Really makes you go hummmmm." },
   });
-
+  const mockedSong = createMockSong();
   await prisma.song.create({
     data: {
+      ...mockedSong,
       id: 1,
-      createdAt: "2023-01-26T12:41:28.070Z",
-      updatedAt: "2023-01-26T12:41:56.718Z",
-      title: "test",
-      attribution: "te",
-      stanzas:
-        '[{"type":"verse","id":"hocze1qhqldd33p4n","lines":[{"id":"hocze1qhqldd33p4o","lyrics":"te","notes":""},{"id":"ldd33sdr","lyrics":"test","notes":""}]}]',
-      published: false,
       authorId: 3,
     },
   });
