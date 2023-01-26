@@ -30,19 +30,21 @@ model Profile {
 }
 
 model Song {
-  id          Int        @id @default(autoincrement())
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
-  title       String
-  attribution String     @default("")
-  stanzas     String
-  published   Boolean    @default(false)
-  author      User       @relation(fields: [authorId], references: [id])
-  authorId    Int
+  id                  Int        @id @default(autoincrement())
+  createdAt           DateTime   @default(now())
+  updatedAt           DateTime   @updatedAt
+  title               String
+  attribution         String     @default("")
+  stanzas             String
+  published           Boolean    @default(false)
+  author              User       @relation(fields: [authorId], references: [id])
+  authorId            Int
   // time in seconds for the length of song
-  runtime     Int        @default(185) // bonus points if you know the reference
-  categories  Category[] //# @relation(references: [id])
-  setlists    Setlist[] // @relation(fields: [setlistId], references: [id])
+  runtime             Int        @default(185) // bonus points if you know the reference
+  notes               String     @default("")
+  claimedPublicDomain Boolean    @default(false)
+  categories          Category[] //# @relation(references: [id])
+  setlists            Setlist[] // @relation(fields: [setlistId], references: [id])
 }
 
 model Category {
