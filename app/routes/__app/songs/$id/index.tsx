@@ -19,7 +19,7 @@ export async function loader({ params }: LoaderArgs) {
 
 export default function () {
   const { song } = useTypedLoaderData<typeof loader>();
-  console.log(song.stanzas);
+
   return (
     <div className="max-w-xl mx-auto space-y-2">
       <div className="flex items-center">

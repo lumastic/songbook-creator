@@ -24,8 +24,13 @@ export async function getSong({ id }: Pick<Song, "id">) {
   });
 }
 
-export async function getSongs() {
-  return await prisma.song.findMany();
+/**
+ * Gets the songs of the currently logged in user
+ * @param userId
+ * @returns
+ */
+export async function getUserSongs(userId: number) {
+  return await prisma.song.findMany({ where: { authorId: userId } });
 }
 
 export async function createSong({ authorId }: Pick<Song, "authorId">) {
