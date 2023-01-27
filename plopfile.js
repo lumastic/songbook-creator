@@ -10,4 +10,5 @@ module.exports = function (
     }
   });
   plop.setGenerator("route", require("./generators/route"));
+  plop.setGenerator("component", require("./generators/component"));
 };

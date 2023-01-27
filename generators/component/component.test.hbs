@@ -1,0 +1,8 @@
+import { render, screen } from "@testing-library/react";
+import { {{pascalCase name}} } from "./{{pascalCase name}}";
+
+test("Should render", () => {
+  render(<{{pascalCase name}} />);
+
+  expect(screen.getByTestId("{{kebabCase name}}")).toBeInTheDocument();
+});
