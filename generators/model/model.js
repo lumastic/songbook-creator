@@ -1,7 +1,7 @@
 // Remixed 😉 from https://github.com/bradgarropy/plop-generator-remix-route/blob/master/src/route.ts
 
 module.exports = {
-  description: "💿 Remix route",
+  description: "DB model",
   prompts: [
     {
       type: "input",
