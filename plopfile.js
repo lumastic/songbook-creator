@@ -12,6 +12,11 @@ module.exports = async function (
   await plop.load("@dlytle/remix-generators", {
     routeFolderPath: "app/routes/__app",
   });
-  plop.setGenerator("component", require("./generators/component"));
+  await plop.load("@dlytle/react-component-generator", {
+    componentFolderPath: "app/components",
+  });
   plop.setGenerator("model", require("./generators/model"));
 };
+
+// "We don't have ot worry about auth if we have a Gatway"? - what does that mean
+//
