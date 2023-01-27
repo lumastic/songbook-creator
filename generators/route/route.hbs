@@ -64,17 +64,11 @@ export const action = async ({request, params}: ActionArgs) => {
 {{/includes}}
 
 {{#includes features "component"}}
-const {{pascalCase name}}Route: FC = () => {
-    {{#includes features "loader"}}
+const RouteComponent: FC = () => {
+    {{#includes ../features "loader"}}
       const data = useTypedLoaderData<typeof loader>();
     {{/includes}}
-    return (
-      <div className="space-y-4 max-w-xl mx-auto">
-        <h2>
-          {{pascalCase name}}Route
-        </h2>
-      </div>
-    )
+    return (<pre>{JSON.stringify(data)}</pre>)
 }
 {{/includes}}
 
@@ -83,17 +77,19 @@ export const CatchBoundary = () => {
     const caught = useCatch()
     const params = useParams()
 
+    console.log({ caught, params })
+
     return <p>Something went wrong.</p>
 }
 {{/includes}}
 
 {{#includes features "error"}}
 export const ErrorBoundary: ErrorBoundaryComponent = ({error}) => {
-    console.log(error)
 
     const params = useParams()
+    console.log({error, params})
     return <p>Something went wrong.</p>
 }
 {{/includes}}
 
-export default {{pascalCase name}}Route
+export default RouteComponent
