@@ -11,4 +11,5 @@ module.exports = function (
   });
   plop.setGenerator("route", require("./generators/route"));
   plop.setGenerator("component", require("./generators/component"));
+  plop.setGenerator("model", require("./generators/model"));
 };

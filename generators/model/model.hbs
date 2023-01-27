@@ -1,0 +1,11 @@
+model {{pascalCase name}} {
+  {{#includes attributes "id"}}
+  id          Int        @id @default(autoincrement())
+  {{/includes}}
+  {{#includes attributes "createdAt"}}
+  createdAt   DateTime   @default(now())
+  {{/includes}}
+  {{#includes attributes "updatedAt"}}
+  updatedAt   DateTime   @updatedAt
+  {{/includes}}
+}
