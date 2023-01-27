@@ -1,4 +1,4 @@
-module.exports = function (
+module.exports = async function (
   /** @type {import('plop').NodePlopAPI} */
   plop
 ) {
@@ -9,7 +9,9 @@ module.exports = function (
       return options.inverse(this);
     }
   });
-  plop.setGenerator("route", require("./generators/route"));
+  await plop.load("@dlytle/remix-generators", {
+    routeFolderPath: "app/routes/__app",
+  });
   plop.setGenerator("component", require("./generators/component"));
   plop.setGenerator("model", require("./generators/model"));
 };
