@@ -5,7 +5,7 @@ module.exports = {
   prompts: [
     {
       type: "input",
-      name: "name",
+      name: "path",
       message: "Route path (file extension will be added automatically)",
     },
     {
@@ -54,7 +54,7 @@ module.exports = {
   actions: [
     {
       type: "add",
-      path: "app/routes/{{name}}.tsx",
+      path: "app/routes/{{path}}.tsx",
       templateFile: "./generators/route/route.hbs",
     },
   ],
