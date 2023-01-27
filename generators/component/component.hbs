@@ -1,0 +1,27 @@
+import React from "react";
+{{#includes features "forwardref"}}
+import { forwardRef } from "react";
+{{/includes}}
+{{#includes features "withchildren"}}
+import type { PropsWithChildren } from "react";
+{{/includes}}
+
+interface Props {{#includes features "withchildren"}}extends PropsWithChildren{{/includes}} {};
+
+const {{pascalCase name}}: React.FC<Props> = {{#includes features "forwardref"}}forwardRef<HTMLDivElement, Props>({{/includes}}({ {{#includes features "withchildren"}}children, {{/includes}}...props }, {{#includes features "forwardref"}}ref{{/includes}}) => {
+  return (
+    <div data-testid="{{kebabCase name}}" {{#includes features "forwardref"}}ref={ref}{{/includes}}>
+        {{ pascalCase name }}
+        {{#includes features "withchildren"}}
+        {children}
+        {{/includes}}
+    </div>
+  );
+}{{#includes features "forwardref"}}){{/includes}};
+
+{{#includes features "forwardref"}}
+{{ pascalCase ../name }}.displayName = "{{ pascalCase ../name }}"
+{{/includes}}
+
+export { {{ pascalCase name }} }
+
