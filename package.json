@@ -60,6 +60,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.2",
+    "@dlytle/react-component-generator": "^1.0.0",
     "@dlytle/remix-generators": "^1.0.1",
     "@ladle/react": "^2.4.5",
     "@remix-run/dev": "^1.7.6",
