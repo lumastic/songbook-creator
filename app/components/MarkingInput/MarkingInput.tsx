@@ -47,6 +47,7 @@ export const MarkingInput: React.FC<Props> = ({ marking, deleteMark }) => {
       style={{
         left: `${indent}ch`,
       }}
+      data-testid="markinginput"
     >
       <div className="relative">
         <Button

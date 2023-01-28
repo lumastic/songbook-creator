@@ -7,7 +7,7 @@ type Props = {
 
 export const Stanza: React.FC<Props> = ({ stanza }) => {
   return (
-    <div className="space-y-1">
+    <div className="space-y-1" data-testid="stanza">
       <p className="font-bold uppercase w-auto text-sm">{stanza.type}</p>
       <div className="space-y-3">
         {stanza.lines.map((line) => {
