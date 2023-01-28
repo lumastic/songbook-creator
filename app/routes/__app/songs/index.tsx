@@ -5,13 +5,13 @@ import { Form, Link } from "@remix-run/react";
 import { typedjson, useTypedLoaderData } from "remix-typedjson";
 import { Button } from "~/components/Button";
 import { Search } from "~/components/Search";
-import { getUserSongs } from "~/db/song.db";
+import { getSongsByUserId } from "~/db/song.db";
 import { useSearch } from "~/lib/useSearch";
 import { requireAuthentication } from "~/utils/auth.server";
 
 export async function loader({ request }: LoaderArgs) {
   const user = await requireAuthentication(request);
-  return typedjson({ songs: await getUserSongs(user.id) });
+  return typedjson({ songs: await getSongsByUserId(user.id) });
 }
 
 export default function SongsIndex() {

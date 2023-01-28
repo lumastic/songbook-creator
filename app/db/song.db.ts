@@ -25,11 +25,11 @@ export async function getSong({ id }: Pick<Song, "id">) {
 }
 
 /**
- * Gets the songs of the currently logged in user
+ * Gets the songs of the specified userid
  * @param userId
  * @returns
  */
-export async function getUserSongs(userId: number) {
+export async function getSongsByUserId(userId: number) {
   return await prisma.song.findMany({ where: { authorId: userId } });
 }
 
