@@ -1,4 +1,7 @@
 import { PrismaClient } from "@prisma/client";
+
+import { createMockSong } from "@/test/factories/song.factory";
+
 const prisma = new PrismaClient();
 async function main() {
   const keith = await prisma.user.upsert({
@@ -25,6 +28,25 @@ async function main() {
       name: "Keith Full Auth Flow",
     },
   });
+  await prisma.category.create({ data: { name: "Sea Shanties" } });
+  await prisma.category.create({ data: { name: "New American Americana" } });
+  await prisma.category.create({ data: { name: "Folk" } });
+  await prisma.category.create({ data: { name: "Protest" } });
+  await prisma.category.create({
+    data: { name: "Really makes you go hmmmmm." },
+  });
+  await prisma.category.create({
+    data: { name: "Really makes you go hummmmm." },
+  });
+  const mockedSong = createMockSong();
+  await prisma.song.create({
+    data: {
+      ...mockedSong,
+      id: 1,
+      authorId: 3,
+    },
+  });
+  // await prisma.category.upsert
   console.log({ keith, drew, keithFullAuth });
 }
 main()

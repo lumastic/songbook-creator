@@ -1,13 +1,17 @@
 import type { Setlist } from "@prisma/client";
 import { Link } from "@remix-run/react";
+import type { LoaderArgs } from "@remix-run/node";
 import { typedjson, useTypedLoaderData } from "remix-typedjson";
 import { Button } from "~/components/Button";
 import { Search } from "~/components/Search";
-import { getSetlists } from "~/db/setlist.db";
 import { useSearch } from "~/lib/useSearch";
+import { requireAuthentication } from "~/utils/auth.server";
+import { getSetlistsByUserId } from "~/db/setlist.db";
 
-export async function loader() {
-  const setlists = await getSetlists();
+export async function loader({ request }: LoaderArgs) {
+  const user = await requireAuthentication(request);
+
+  const setlists = await getSetlistsByUserId(user.id);
   return typedjson({
     setlists,
   });

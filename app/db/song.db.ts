@@ -49,7 +49,7 @@ export async function updateSong({
   data,
 }: {
   id: Song["id"];
-  data: Pick<Song, "title" | "attribution" | "stanzas">;
+  data: Pick<Song, "title" | "attribution" | "stanzas" | "runtime" | "notes">;
 }) {
   return await prisma.song.update({ where: { id: +id }, data });
 }
