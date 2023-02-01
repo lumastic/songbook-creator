@@ -1,5 +1,6 @@
 import { Listbox } from "@headlessui/react";
-import { InputHTMLAttributes, useEffect } from "react";
+import type { InputHTMLAttributes} from "react";
+import { useEffect } from "react";
 import React, { useState } from "react";
 import { Input } from "../Input";
 

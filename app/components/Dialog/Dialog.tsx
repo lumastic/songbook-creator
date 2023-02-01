@@ -6,8 +6,8 @@ import { Button } from "../Button";
 type Props = {
   title: string;
   description?: string;
-  isOpen: boolean;
-  onClose: () => void;
+  isOpen?: boolean;
+  onClose?: () => void;
 };
 
 export const Dialog: React.FC<PropsWithChildren<Props>> = ({
@@ -15,7 +15,7 @@ export const Dialog: React.FC<PropsWithChildren<Props>> = ({
   title,
   description,
   isOpen,
-  onClose,
+  onClose = () => {},
 }) => {
   return (
     <HeadlessDialog

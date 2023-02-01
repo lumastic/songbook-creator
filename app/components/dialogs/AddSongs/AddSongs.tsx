@@ -1,5 +1,5 @@
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/solid";
-import { Song } from "@prisma/client";
+import type { Song } from "@prisma/client";
 import { useFetcher } from "@remix-run/react";
 import { useEffect, useState } from "react";
 import type { UseDataFunctionReturn } from "remix-typedjson/dist/remix";

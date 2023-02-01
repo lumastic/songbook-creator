@@ -7,7 +7,7 @@ import { Textarea } from "~/components/Textarea";
 
 const SetlistForm = forwardRef<
   HTMLFormElement,
-  { setlist?: Setlist; form?: typeof Form; close: () => void; action?: string }
+  { setlist?: Setlist; form?: typeof Form; close?: () => void; action?: string }
 >(({ setlist, form, close, action }, ref) => {
   const FormComponent = form || Form;
   return (

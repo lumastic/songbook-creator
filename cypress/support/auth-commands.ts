@@ -1,4 +1,4 @@
-import { User } from "@prisma/client";
+import type { User } from "@prisma/client";
 
 export function login() {
   cy.factory({ name: "authUser", type: "User" }).then((user: User) => {

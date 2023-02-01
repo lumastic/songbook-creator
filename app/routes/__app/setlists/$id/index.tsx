@@ -1,4 +1,4 @@
-import { IStanza } from "@/types/song";
+import type { IStanza } from "@/types/song";
 import { Disclosure, Menu } from "@headlessui/react";
 import {
   EllipsisVerticalIcon,
@@ -6,7 +6,7 @@ import {
   TrashIcon,
 } from "@heroicons/react/24/outline";
 import { PlayIcon } from "@heroicons/react/24/solid";
-import { Song } from "@prisma/client";
+import type { Song } from "@prisma/client";
 import type { LoaderArgs } from "@remix-run/node";
 import { Link, useFetcher } from "@remix-run/react";
 import { typedjson, useTypedLoaderData } from "remix-typedjson";
