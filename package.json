@@ -22,7 +22,7 @@
     "g:model": "plop model && npm run format -- --loglevel silent && npm run db:push",
     "lint": "eslint --cache --cache-location ./node_modules/.cache/eslint .",
     "new:component": "cd scripts && ./new_component.sh",
-    "start": "cross-env NODE_ENV=production netlify dev",
+    "start": "remix-serve build",
     "test:unit": "dotenv -e .env.test -- vitest --dir ./app",
     "test:unit:ci": "npm run test:unit -- --run",
     "test:integration": "dotenv -e .env.test -- vitest --no-threads --dir ./test/routes",
