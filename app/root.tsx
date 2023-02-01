@@ -7,13 +7,9 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
-import tailwindStyles from "./styles/tailwind.css";
 import globalStyles from "./styles/globals.css";
-import { NavBar } from "./components/NavBar";
-import { ModalRoute, ModalRouter } from "./lib/remix-modals";
-import { NewSetlist } from "./dialogs/NewSetlist/NewSetlist";
-import { EditSetlist } from "./dialogs/EditSetlist/EditSetlist";
-import { AddSongs } from "./dialogs/AddSongs/AddSongs";
+import tailwindStyles from "./styles/tailwind.css";
+import { withSentry } from "@sentry/remix";
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
@@ -21,7 +17,7 @@ export const meta: MetaFunction = () => ({
   viewport: "width=device-width,initial-scale=1",
 });
 
-export default function App() {
+function App() {
   return (
     <html lang="en">
       <head>
@@ -29,18 +25,10 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <NavBar />
-        <main className="bg-stone-300 min-h-screen py-4 px-2 md:px-0">
-          <Outlet />
-        </main>
+        <Outlet />
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
-        <ModalRouter>
-          <ModalRoute path="new-setlist" component={<NewSetlist />} />
-          <ModalRoute path="edit-setlist" component={<EditSetlist />} />
-          <ModalRoute path="add-songs" component={<AddSongs />} />
-        </ModalRouter>
       </body>
     </html>
   );
@@ -52,3 +40,5 @@ export function links() {
     { rel: "stylesheet", href: globalStyles },
   ];
 }
+
+export default withSentry(App);

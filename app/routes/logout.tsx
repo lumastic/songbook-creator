@@ -3,7 +3,8 @@ import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 
 import { destroySession, getSession } from "~/services/session.server";
-export let loader: LoaderFunction = () => redirect("/login");
+
+export let loader: LoaderFunction = () => redirect("/");
 
 const logoutURL = new URL(
   `https://${process.env.AUTH0_ISSUERBASEURL}/v2/logout`
