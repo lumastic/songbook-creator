@@ -5,3 +5,9 @@
 /.cache
 /public/build
 /build
+/prisma/data.db
+/prisma/data.db-journal
+Dockerfile
+scripts
+generators
+cypress

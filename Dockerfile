@@ -63,4 +63,5 @@ COPY --from=build /app/prisma /app/prisma
 ADD . .
 
 RUN chmod +x start.sh
-ENTRYPOINT [ "./start.sh" ]
+EXPOSE 8080
+CMD [ "./start.sh" ]
