@@ -5,7 +5,7 @@ import { hydrateRoot } from "react-dom/client";
 import * as Sentry from "@sentry/remix";
 
 Sentry.init({
-  dsn: process.env.SENTRY_DSN,
+  dsn: "",
   tracesSampleRate: 1,
   integrations: [
     new Sentry.BrowserTracing({
