@@ -1,37 +1,37 @@
 # base node image
 FROM node:18-bullseye-slim as base
 
-# set for base and all layer that inherit from it
-ENV NODE_ENV production
-
-# Install openssl for Prisma
+# Install openssl and sqlite3 for Prisma
 RUN apt-get update && apt-get install -y openssl sqlite3
 
 # Install all node_modules, including dev dependencies
 FROM base as deps
 
-WORKDIR /songbook-creator
+RUN mkdir /app/
+WORKDIR /app/
 
-ADD package.json .npmrc ./
-RUN npm install --production=false
+ADD package.json .npmrc package-lock.json ./
+RUN npm install
 
 # Setup production node_modules
 FROM base as production-deps
 
-WORKDIR /songbook-creator
+RUN mkdir /app/
+WORKDIR /app/
 
-COPY --from=deps /songbook-creator/node_modules /songbook-creator/node_modules
-ADD package.json .npmrc ./
-RUN npm prune --production
+COPY --from=deps /app/node_modules /app/node_modules
+ADD package.json .npmrc package-lock.json /app/
+RUN npm prune --omit=dev
 
 # Build the app
 FROM base as build
 
-WORKDIR /songbook-creator
+RUN mkdir /app/
+WORKDIR /app/
 
-COPY --from=deps /songbook-creator/node_modules /songbook-creator/node_modules
+COPY --from=deps /app/node_modules /app/node_modules
 
-ADD prisma .
+ADD prisma /app/prisma
 RUN npx prisma generate
 
 ADD . .
@@ -47,15 +47,20 @@ ENV NODE_ENV="production"
 # add shortcut for connecting to database CLI
 RUN echo "#!/bin/sh\nset -x\nsqlite3 \$DATABASE_URL" > /usr/local/bin/database-cli && chmod +x /usr/local/bin/database-cli
 
-WORKDIR /songbook-creator
+RUN mkdir /app/
+WORKDIR /app/
 
-COPY --from=production-deps /songbook-creator/node_modules /songbook-creator/node_modules
-COPY --from=build /songbook-creator/node_modules/.prisma /songbook-creator/node_modules/.prisma
+COPY --from=production-deps /app/node_modules /app/node_modules
 
-COPY --from=build /songbook-creator/build /songbook-creator/build
-COPY --from=build /songbook-creator/public /songbook-creator/public
-COPY --from=build /songbook-creator/package.json /songbook-creator/package.json
-COPY --from=build /songbook-creator/start.sh /songbook-creator/start.sh
-COPY --from=build /songbook-creator/prisma /songbook-creator/prisma
+COPY --from=build /app/node_modules/.prisma /app/node_modules/.prisma
 
+COPY --from=build /app/build /app/build
+COPY --from=build /app/public /app/public
+COPY --from=build /app/package.json /app/package.json
+COPY --from=build /app/start.sh /app/start.sh
+COPY --from=build /app/prisma /app/prisma
+
+ADD . .
+
+RUN chmod +x start.sh
 ENTRYPOINT [ "./start.sh" ]
