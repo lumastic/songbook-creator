@@ -1,22 +1,22 @@
-import { RemixBrowser, useLocation, useMatches } from "@remix-run/react";
-import { startTransition, StrictMode, useEffect } from "react";
+import { RemixBrowser } from "@remix-run/react";
+import { startTransition, StrictMode } from "react";
 import { hydrateRoot } from "react-dom/client";
 
-import * as Sentry from "@sentry/remix";
+// import * as Sentry from "@sentry/remix";
 
-Sentry.init({
-  dsn: "",
-  tracesSampleRate: 1,
-  integrations: [
-    new Sentry.BrowserTracing({
-      routingInstrumentation: Sentry.remixRouterInstrumentation(
-        useEffect,
-        useLocation,
-        useMatches
-      ),
-    }),
-  ],
-});
+// Sentry.init({
+//   dsn: "",
+//   tracesSampleRate: 1,
+//   integrations: [
+//     new Sentry.BrowserTracing({
+//       routingInstrumentation: Sentry.remixRouterInstrumentation(
+//         useEffect,
+//         useLocation,
+//         useMatches
+//       ),
+//     }),
+//   ],
+// });
 
 function hydrate() {
   startTransition(() => {
