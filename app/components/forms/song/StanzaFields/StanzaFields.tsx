@@ -43,7 +43,7 @@ export const StanzaFields: React.FC<{
 
   return (
     <>
-      <div className="group/stanza py-2 border-y-2 focus-within:border-stone-200 hover:border-stone-200 border-transparent transition-all">
+      <div className="group/stanza py-2 border-y-2 focus-within:border-neutral-200 hover:border-neutral-200 border-transparent transition-all">
         <div className="flex">
           <div className="flex-1">
             <Select
@@ -60,7 +60,7 @@ export const StanzaFields: React.FC<{
           <div>
             <button
               type="button"
-              className="hover:bg-stone-200 rounded-sm text-stone-600 text-sm p-2 group-hover/stanza:opacity-100 opacity-0 transition-colors whitespace-nowrap inline-flex items-center"
+              className="hover:bg-neutral-200 rounded-sm text-neutral-600 text-sm p-2 group-hover/stanza:opacity-100 opacity-0 transition-colors whitespace-nowrap inline-flex items-center"
               onClick={confirmAndDelete}
             >
               <span className="mr-1">
@@ -84,7 +84,7 @@ export const StanzaFields: React.FC<{
               type="button"
               aria-label="Add Line"
               onClick={insertLine(index)}
-              className="block bg-stone-200 text-stone-600 opacity-0 hover:opacity-100 transition-all w-full rounded-sm py-1 h-2 hover:h-6 font-mono text-sm leading-none"
+              className="block bg-neutral-200 text-neutral-600 opacity-0 hover:opacity-100 transition-all w-full rounded-sm py-1 h-2 hover:h-6 font-mono text-sm leading-none"
             >
               + Add Line
             </button>
@@ -95,7 +95,7 @@ export const StanzaFields: React.FC<{
             type="button"
             aria-label="Add Line"
             onClick={insertLine(0)}
-            className="block bg-stone-200 text-stone-600 opacity-0 hover:opacity-100 transition-all w-full rounded-sm py-1 h-2 hover:h-6 font-mono text-sm leading-none"
+            className="block bg-neutral-200 text-neutral-600 opacity-0 hover:opacity-100 transition-all w-full rounded-sm py-1 h-2 hover:h-6 font-mono text-sm leading-none"
           >
             + Add Line
           </button>
@@ -105,7 +105,7 @@ export const StanzaFields: React.FC<{
         type="button"
         aria-label="Add Line"
         onClick={insertStanza}
-        className="block bg-stone-200 text-stone-600 opacity-0 hover:opacity-100 transition-all w-full rounded-sm py-1 h-2 hover:h-6 font-mono text-sm leading-none"
+        className="block bg-neutral-200 text-neutral-600 opacity-0 hover:opacity-100 transition-all w-full rounded-sm py-1 h-2 hover:h-6 font-mono text-sm leading-none"
       >
         + New Stanza
       </button>

@@ -26,7 +26,7 @@ export default function () {
         <div className="flex-1">
           <Button.Link
             to="/songs"
-            className="inline-flex items-center text-sm"
+            className="inline-flex items-center text-sm  opacity-70"
             variant="text"
             size="sm"
           >
@@ -54,7 +54,7 @@ export default function () {
           <Button.Link
             to={`/songs/${song.id}/edit`}
             size="md"
-            variant="outlined"
+            variant="secondary"
             className="inline-flex items-center text-sm"
           >
             <span className="mr-2">
@@ -78,13 +78,13 @@ export default function () {
           </Button.Link>
         </div>
       </div>
-      <div className="bg-stone-50  rounded-lg shadow-lg relative">
+      <div className="bg-neutral-50  rounded-lg shadow-lg relative">
         <div className="px-10 py-8">
           <div className="mb-4">
             <h1 className="text-4xl w-full bg-inherit py-1 outline-none hover:cursor-text resize-none">
               {song.title}
             </h1>
-            <p className="text-xl w-full bg-inherit py-1 outline-none hover:cursor-text resize-none text-stone-500">
+            <p className="text-xl w-full bg-inherit py-1 outline-none hover:cursor-text resize-none text-neutral-500">
               {song.attribution}
             </p>
           </div>

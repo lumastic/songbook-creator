@@ -36,7 +36,7 @@ export default function EditSong() {
         <div className="flex-1">
           <Button.Link
             to="/songs"
-            className="inline-flex items-center text-sm"
+            className="inline-flex items-center text-sm opacity-70"
             variant="text"
             size="sm"
           >
@@ -64,7 +64,7 @@ export default function EditSong() {
           <Button.Link
             to={`/songs/${song.id}`}
             size="md"
-            variant="outlined"
+            variant="secondary"
             className="inline-flex items-center text-sm"
           >
             <span className="mr-2">
@@ -74,10 +74,10 @@ export default function EditSong() {
           </Button.Link>
         </div>
       </div>
-      <div className="bg-stone-50  rounded-lg shadow-lg relative">
+      <div className="bg-neutral-50  rounded-lg shadow-lg relative">
         <ClientOnly>
           {() => (
-            <div className="absolute top-4 right-4 text-xs text-stone-400">
+            <div className="absolute top-4 right-4 text-xs text-neutral-400">
               {hasUnsavedChanges ? "Saving..." : "Saved"}
             </div>
           )}

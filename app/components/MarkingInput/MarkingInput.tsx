@@ -67,7 +67,7 @@ export const MarkingInput: React.FC<Props> = ({ marking, deleteMark }) => {
           style={{
             width: `${mark.length || 1}ch`,
           }}
-          className="font-mono rounded-sm !bg-stone-200 w-auto"
+          className="font-mono rounded-sm !bg-neutral-200 w-auto"
         />
         <Button
           variant="text"

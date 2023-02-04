@@ -87,7 +87,7 @@ export const LineFields: React.FC<Props> = ({
             style={styles.popper}
             {...attributes.popper}
           >
-            <Menu.Button className="bg-stone-200 h-full rounded-sm text-stone-600 text-sm px-0.5">
+            <Menu.Button className="bg-neutral-200 h-full rounded-sm text-neutral-600 text-sm px-0.5">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -111,7 +111,7 @@ export const LineFields: React.FC<Props> = ({
                 <button
                   type="button"
                   className={`${
-                    active ? "bg-stone-200" : "text-stone-900"
+                    active ? "bg-neutral-200" : "text-neutral-900"
                   } group flex w-full items-center rounded-md px-4 py-3`}
                   onClick={() => setShowNotes((x) => !x)}
                 >
@@ -153,7 +153,7 @@ export const LineFields: React.FC<Props> = ({
               <button
                 key={index}
                 onClick={insertMark(index)}
-                className="bg-stone-200 text-stone-500 opacity-0 transition-opacity active:opacity-60 hover:opacity-100 focus:opacity-100 font-mono rounded-sm"
+                className="bg-neutral-200 text-neutral-500 opacity-0 transition-opacity active:opacity-60 hover:opacity-100 focus:opacity-100 font-mono rounded-sm"
               >
                 +
               </button>

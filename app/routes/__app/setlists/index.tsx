@@ -1,5 +1,6 @@
+import { PlusIcon } from "@heroicons/react/24/solid";
 import type { Setlist } from "@prisma/client";
-import { Link } from "@remix-run/react";
+import { Form, Link } from "@remix-run/react";
 import { typedjson, useTypedLoaderData } from "remix-typedjson";
 import { Button } from "~/components/Button";
 import { Search } from "~/components/Search";
@@ -49,11 +50,26 @@ export default function SetlistsIndex() {
       </div>
       <Search onSearch={onSearch} />
       <div className="space-y-2">
+        {!setlists.length && (
+          <div className="border-2 border-primary-500 rounded-md p-8">
+            <h2 className="text-2xl font-medium mb-4 text-primary-700">
+              Easily share a group of songs with friends and bandmates.
+            </h2>
+            <Form method="post" action="/setlists/new">
+              <Button type="submit" className="inline-flex items-center">
+                <span className="mr-2">
+                  <PlusIcon width={"1em"} />
+                </span>
+                Create A Setlist
+              </Button>
+            </Form>
+          </div>
+        )}
         {results.map((setlist) => (
           <Link
             to={`/setlists/${setlist.id}`}
             key={setlist.id}
-            className="bg-stone-100 px-7 py-5 rounded-md shadow-md hover:shadow-xl hover:bg-white transition-all flex items-start"
+            className="bg-neutralal-100 px-7 py-5 rounded-md shadow-md hover:shadow-xl hover:bg-white transition-all flex items-start"
           >
             <div className="mr-2">
               <span
@@ -66,10 +82,10 @@ export default function SetlistsIndex() {
                 {setlist.name ||
                   `Untitled ${setlist.createdAt.toLocaleString()}`}
               </h2>
-              <p className="text-sm text-stone-500 mb-2">
+              <p className="text-sm text-neutralal-500 mb-2">
                 {setlist.description}
               </p>
-              <p className="text-xs text-stone-500">
+              <p className="text-xs text-neutralal-500">
                 {setlist.songs.length} Songs
               </p>
             </div>

@@ -60,7 +60,7 @@ export default function ViewSetlist() {
           </Button.Link>
         </div>
       </div>
-      <div className="bg-stone-50  rounded-lg shadow-lg p-8 flex relative">
+      <div className="bg-neutral-50  rounded-lg shadow-lg p-8 flex relative">
         <Button.Link
           to={`/setlists/${setlist.id}?modal=edit-setlist`}
           className="absolute top-2 right-4 text-xs flex items-center"
@@ -92,7 +92,9 @@ export default function ViewSetlist() {
         <div className="flex-1">
           <h1 className="text-4xl">{setlist.name}</h1>
           <p className="mb-2">{setlist.description}</p>
-          <p className="text-stone-500 text-xs">{setlist.songs.length} Songs</p>
+          <p className="text-neutral-500 text-xs">
+            {setlist.songs.length} Songs
+          </p>
         </div>
       </div>
       <div className="flex">
@@ -160,16 +162,16 @@ const SetlistSong: React.FC<{
         <div className="shadow-md transition-all relative">
           <div
             className={`bg-white sticky top-0 bg-inherit w-full outline-none  ${
-              open && "border-b border-stone-300"
+              open && "border-b border-neutral-300"
             } ${open ? "rounded-t-md" : "rounded-md"} flex items-center`}
             style={{ zIndex: order }}
           >
             <Disclosure.Button
               className={"flex-1 pl-4 py-5 flex items-center group"}
             >
-              <div className="mr-3 p-2 group-hover:bg-stone-200 transition-all rounded-full">
+              <div className="mr-3 p-2 group-hover:bg-neutral-200 transition-all rounded-full">
                 <PlayIcon
-                  className={`${open && "rotate-90"} text-stone-600`}
+                  className={`${open && "rotate-90"} text-neutral-600`}
                   width="1em"
                 />
               </div>
@@ -177,7 +179,7 @@ const SetlistSong: React.FC<{
                 <h2 className="text-lg">
                   {song.title || `Untitled ${song.createdAt.toLocaleString()}`}
                 </h2>
-                <p className="text-xs font-bold text-stone-500 uppercase">
+                <p className="text-xs font-bold text-neutral-500 uppercase">
                   {song.attribution || "Unknown Artist"}
                 </p>
               </div>
@@ -195,7 +197,7 @@ const SetlistSong: React.FC<{
                       <Link
                         to={`/songs/${song.id}/edit`}
                         className={`${
-                          active && "bg-stone-200"
+                          active && "bg-neutral-200"
                         } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                       >
                         <PencilIcon

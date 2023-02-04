@@ -19,7 +19,7 @@ const SetlistForm = forwardRef<
       className="space-y-3"
     >
       <div className="space-y-1">
-        <label className="uppercase text-xs font-medium text-stone-400">
+        <label className="uppercase text-xs font-medium text-neutral-400">
           Name
         </label>
         <Input
@@ -27,18 +27,18 @@ const SetlistForm = forwardRef<
           defaultValue={setlist?.name}
           placeholder="Rapunzels 10/9/23"
           autoFocus
-          className="border border-stone-200 px-4 py-3 rounded-md focus:border-stone-400"
+          className="border border-neutral-200 px-4 py-3 rounded-md focus:border-neutral-400"
         />
       </div>
       <div className="space-y-1">
-        <label className="uppercase text-xs font-medium text-stone-400">
+        <label className="uppercase text-xs font-medium text-neutral-400">
           Description <span className="font-normal">(optional)</span>
         </label>
         <Textarea
           name="description"
           defaultValue={setlist?.description}
           placeholder="An all sea shanty show in honor of Lief Erickson Day."
-          className="border border-stone-200 px-4 py-3 rounded-md focus:border-stone-400"
+          className="border border-neutral-200 px-4 py-3 rounded-md focus:border-neutral-400"
         />
       </div>
       <div>

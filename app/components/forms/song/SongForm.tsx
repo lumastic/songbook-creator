@@ -62,7 +62,7 @@ const SongForm = forwardRef<
       </div>
       {/* <button
           type="submit"
-          className="bg-stone-200 px-5 py-2 rounded-md text-stone-800 mt-4"
+          className="bg-neutral-200 px-5 py-2 rounded-md text-neutral-800 mt-4"
         >
           Save
         </button> */}

@@ -68,23 +68,23 @@ function classNames({
 }): string {
   // Base classes
   let buttonStyles = `${
-    icon ? "rounded-full" : "rounded-md"
+    icon ? "rounded-full" : "rounded-md font-medium"
   } transition-all box-border`;
   // Set classes for different variants
   let variantStyles = "";
   switch (variant) {
     case "primary":
-      variantStyles = "text-white bg-stone-600 hover:opacity-80";
+      variantStyles = "text-white bg-primary-600 hover:opacity-80";
       break;
     case "secondary":
-      variantStyles = "text-stone-700 bg-stone-200 hover:opacity-80";
+      variantStyles = "text-neutral-800 bg-neutral-300 hover:opacity-80";
       break;
     case "outlined":
       variantStyles =
-        "bg-inherit text-stone-800 border-stone-400 border hover:bg-stone-200";
+        "bg-inherit text-primary-500 border-primary-500 border hover:bg-primary-100";
       break;
     case "text":
-      variantStyles = "hover:bg-stone-200 text-stone-700";
+      variantStyles = "hover:bg-neutral-200 text-neutral-700";
       break;
   }
   buttonStyles = append(buttonStyles, variantStyles);

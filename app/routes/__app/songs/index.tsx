@@ -35,8 +35,8 @@ export default function SongsIndex() {
       <Search onSearch={onSearch} />
       <div className="space-y-2">
         {!songs.length && (
-          <div className="border border-stone-500 rounded-md p-8">
-            <h2 className="text-2xl font-bold mb-4">
+          <div className="border-2 border-primary-500 rounded-md p-8">
+            <h2 className="text-2xl font-medium mb-4 text-primary-700">
               Add a song and start jamming!
             </h2>
             <Form method="post" action="/songs/new">
@@ -53,12 +53,12 @@ export default function SongsIndex() {
           <Link
             to={`/songs/${song.id}`}
             key={song.id}
-            className="block bg-stone-100 px-7 py-5 rounded-md shadow-md hover:shadow-xl hover:bg-white transition-all"
+            className="block bg-white px-7 py-5 rounded-md shadow-md hover:shadow-xl hover:bg-white transition-all"
           >
             <h2 className="text-lg">
               {song.title || `Untitled ${song.createdAt.toLocaleString()}`}
             </h2>
-            <p className="text-xs font-bold text-stone-500 uppercase">
+            <p className="text-xs font-bold text-neutral-500 uppercase">
               {song.attribution || "Unknown Artist"}
             </p>
           </Link>

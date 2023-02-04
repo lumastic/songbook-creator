@@ -4,7 +4,9 @@ import { Button } from "~/components/Button";
 export const LogoutButton = () => {
   return (
     <Form action="/logout" method="post">
-      <Button variant="text">Logout</Button>
+      <Button variant="text" size="sm" className="opacity-50 uppercase text-xs">
+        Logout
+      </Button>
     </Form>
   );
 };
