@@ -55,21 +55,23 @@ export default function SetlistsIndex() {
             <h2 className="mb-4 text-2xl font-medium text-neutral-700">
               Easily share a group of songs with friends and bandmates.
             </h2>
-            <Form method="post" action="/setlists/new">
-              <Button type="submit" className="inline-flex items-center">
-                <span className="mr-2">
-                  <PlusIcon width={"1em"} />
-                </span>
-                Create A Setlist
-              </Button>
-            </Form>
+
+            <Button.Link
+              to={"?modal=new-setlist"}
+              className="inline-flex items-center"
+            >
+              <span className="mr-2">
+                <PlusIcon width={"1em"} />
+              </span>
+              Create A Setlist
+            </Button.Link>
           </div>
         )}
         {results.map((setlist) => (
           <Link
             to={`/setlists/${setlist.id}`}
             key={setlist.id}
-            className="bg-neutralal-100 flex items-start rounded-md px-7 py-5 shadow-md transition-all hover:bg-white hover:shadow-xl"
+            className="flex items-start rounded-md bg-white px-7 py-5 shadow-md transition-all  hover:shadow-xl"
           >
             <div className="mr-2">
               <span
