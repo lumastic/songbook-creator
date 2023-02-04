@@ -1,4 +1,4 @@
-import { PlusIcon } from "@heroicons/react/24/solid";
+import { MusicalNoteIcon, PlusIcon } from "@heroicons/react/24/solid";
 import type { Song } from "@prisma/client";
 import type { LoaderArgs } from "@remix-run/node";
 import { Form, Link } from "@remix-run/react";
@@ -22,7 +22,12 @@ export default function SongsIndex() {
   return (
     <div className="mx-auto max-w-xl space-y-4">
       <div className="flex items-center">
-        <h1 className="flex-1 text-3xl">Songs</h1>
+        <h1 className="flex flex-1 items-center text-3xl">
+          <span className="mr-2 inline-block">
+            <MusicalNoteIcon width={"1em"} />
+          </span>{" "}
+          Songs
+        </h1>
         <Form method="post" action="/songs/new">
           <Button type="submit" className="inline-flex items-center">
             <span className="mr-2">

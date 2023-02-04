@@ -1,4 +1,4 @@
-import { PlusIcon } from "@heroicons/react/24/solid";
+import { PlusIcon, QueueListIcon } from "@heroicons/react/24/solid";
 import type { Setlist } from "@prisma/client";
 import { Form, Link } from "@remix-run/react";
 import { typedjson, useTypedLoaderData } from "remix-typedjson";
@@ -22,7 +22,12 @@ export default function SetlistsIndex() {
   return (
     <div className="mx-auto max-w-xl space-y-4">
       <div className="flex items-center">
-        <h1 className="flex-1 text-3xl">Setlists</h1>
+        <h1 className="flex flex-1 items-center text-3xl">
+          <span className="mr-2 inline-block">
+            <QueueListIcon width={"1em"} />
+          </span>{" "}
+          Setlists
+        </h1>
 
         <Button.Link
           to={"?modal=new-setlist"}
