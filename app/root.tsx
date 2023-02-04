@@ -13,7 +13,7 @@ import { withSentry } from "@sentry/remix";
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
-  title: "New Remix App",
+  title: "TuneBinder",
   viewport: "width=device-width,initial-scale=1",
 });
 
