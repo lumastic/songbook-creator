@@ -1,3 +1,6 @@
 {
-  "tailwindCSS.classAttributes": ["class", "className", ".*Styles"]
+  "tailwindCSS.classAttributes": ["class", "className", ".*Styles"],
+  "yaml.schemas": {
+    "https://json.schemastore.org/github-workflow.json": "file:///Users/drew/Sites/songbook-creator/.github/workflows/deploy.yml"
+  }
 }

@@ -1,4 +1,5 @@
-import { ActionFunction, LoaderFunction, redirect } from "@remix-run/node";
+import type { ActionFunction, LoaderFunction} from "@remix-run/node";
+import { redirect } from "@remix-run/node";
 
 import { processAuthentication } from "~/utils/auth.server";
 

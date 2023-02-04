@@ -47,13 +47,14 @@ export const MarkingInput: React.FC<Props> = ({ marking, deleteMark }) => {
       style={{
         left: `${indent}ch`,
       }}
+      data-testid="markinginput"
     >
       <div className="relative">
         <Button
           variant="text"
           icon
           size="sm"
-          className="absolute -left-8 -top-0.5 hidden group-focus-within/marking:block"
+          className="absolute -left-9 -top-0.5 hidden group-focus-within/marking:block"
           onClick={moveLeft}
         >
           <ChevronLeftIcon width={"1em"} />
@@ -66,13 +67,13 @@ export const MarkingInput: React.FC<Props> = ({ marking, deleteMark }) => {
           style={{
             width: `${mark.length || 1}ch`,
           }}
-          className="font-mono rounded-sm !bg-stone-200 w-auto"
+          className="font-mono rounded-sm !bg-neutral-200 w-auto"
         />
         <Button
           variant="text"
           icon
           size="sm"
-          className="absolute -right-8 -top-0.5 hidden group-focus-within/marking:block"
+          className="absolute -right-9 -top-0.5 hidden group-focus-within/marking:block"
           onClick={moveRight}
         >
           <ChevronRightIcon width={"1em"} />

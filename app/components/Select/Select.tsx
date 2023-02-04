@@ -1,5 +1,6 @@
 import { Listbox } from "@headlessui/react";
-import { InputHTMLAttributes, useEffect } from "react";
+import type { InputHTMLAttributes } from "react";
+import { useEffect } from "react";
 import React, { useState } from "react";
 import { Input } from "../Input";
 
@@ -47,7 +48,7 @@ export function Select({
         <div className="relative">
           <Listbox.Button
             className={[
-              "relative w-full cursor-default rounded-sm bg-inherit py-2 pr-10 text-left focus:outline-none focus-visible:ring-1 focus-visible:ring-stone-300 focus-visible:ring-offset-2 focus-visible:ring-offset-stone-300 sm:text-sm",
+              "relative w-full cursor-default rounded-sm bg-inherit py-2 pr-10 text-left focus:outline-none focus-visible:ring-1 focus-visible:ring-neutral-300 focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-300 sm:text-sm",
               className,
             ].join(" ")}
           >
@@ -80,7 +81,7 @@ export function Select({
                 key={option.value}
                 className={({ active }) =>
                   `relative cursor-default select-none py-2 pl-10 pr-4 ${
-                    active ? "bg-stone-100 text-stone-900" : "text-gray-900"
+                    active ? "bg-neutral-100 text-neutral-900" : "text-gray-900"
                   }`
                 }
                 value={option}
@@ -95,7 +96,7 @@ export function Select({
                       {option.name}
                     </span>
                     {selected ? (
-                      <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-stone-600 text-sm">
+                      <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-neutral-600 text-sm">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"

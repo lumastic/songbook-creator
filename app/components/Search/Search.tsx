@@ -7,15 +7,18 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
 
 export const Search: React.FC<Props> = ({ onSearch, ...props }) => {
   return (
-    <div className="border-stone-400 border rounded-md px-3 py-2 flex items-center focus-within:border-stone-800 flex-row-reverse transition-colors">
+    <div
+      className="border-neutral-400 border rounded-md px-3 py-2 flex items-center focus-within:border-neutral-800 flex-row-reverse transition-colors"
+      data-testid="search"
+    >
       <input
         type={"search"}
-        className="peer bg-inherit placeholder-stone-500 w-full outline-none"
+        className="peer bg-inherit placeholder-neutral-500 w-full outline-none"
         placeholder="Search"
         onChange={onSearch}
         {...props}
       />
-      <div className="pr-3 text-stone-500 peer-focus:text-stone-700 transition-colors">
+      <div className="pr-3 text-neutral-500 peer-focus:text-neutral-700 transition-colors">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

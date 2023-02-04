@@ -1,21 +1,23 @@
-import { Form } from "@remix-run/react";
-import Login from "~/forms/login-button";
-import LogOut from "~/forms/logout-button";
+import type { LoaderArgs } from "@remix-run/node";
+import { LoginButton } from "forms/login";
+import { SignupButton } from "forms/signup";
+import { redirect } from "remix-typedjson";
+import { currentAuthedUser } from "~/utils/auth.server";
 
-export default function Index() {
+export const loader = async ({ request }: LoaderArgs) => {
+  const currentUser = await currentAuthedUser(request);
+  if (currentUser) return redirect("/songs");
+  return true;
+};
+
+export default function Landing() {
   return (
-    <div>
-      <h1>Hello</h1>
-      <Form action="/auth/auth0?screen_hint=signup" method="post">
-        <button>Register with Auth0</button>
-      </Form>
-      <Login />
-
-      <Form method="post" action="/song/new">
-        <button>New Song</button>
-      </Form>
-
-      <LogOut />
+    <div className="h-screen flex items-center flex-col justify-center bg-neutral-300">
+      <h1 className="text-center text-3xl mb-4">👋 Welcome to TuneBinder</h1>
+      <div className="flex flex-col md:flex-row md:space-y-0 space-y-3 items-center justify-center md:space-x-3">
+        <SignupButton />
+        <LoginButton />
+      </div>
     </div>
   );
 }

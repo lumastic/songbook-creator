@@ -1,4 +1,4 @@
-import { FactoryNames } from "@/test/factories";
+import type { FactoryNames } from "@/test/factories";
 
 export function data(name: string): any {
   return cy.get(`@${name}`);
