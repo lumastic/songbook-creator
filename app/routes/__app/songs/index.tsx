@@ -20,9 +20,9 @@ export default function SongsIndex() {
     keys: ["title", "attribution"],
   });
   return (
-    <div className="space-y-4 max-w-xl mx-auto">
+    <div className="mx-auto max-w-xl space-y-4">
       <div className="flex items-center">
-        <h1 className="text-3xl flex-1">Songs</h1>
+        <h1 className="flex-1 text-3xl">Songs</h1>
         <Form method="post" action="/songs/new">
           <Button type="submit" className="inline-flex items-center">
             <span className="mr-2">
@@ -35,8 +35,8 @@ export default function SongsIndex() {
       <Search onSearch={onSearch} />
       <div className="space-y-2">
         {!songs.length && (
-          <div className="border-2 border-primary-500 rounded-md p-8">
-            <h2 className="text-2xl font-medium mb-4 text-primary-700">
+          <div className=" rounded-md bg-white p-8 shadow-md">
+            <h2 className="mb-4 text-2xl font-medium text-neutral-700">
               Add a song and start jamming!
             </h2>
             <Form method="post" action="/songs/new">
@@ -53,12 +53,12 @@ export default function SongsIndex() {
           <Link
             to={`/songs/${song.id}`}
             key={song.id}
-            className="block bg-white px-7 py-5 rounded-md shadow-md hover:shadow-xl hover:bg-white transition-all"
+            className="block rounded-md bg-white px-7 py-5 shadow-md transition-all hover:bg-white hover:shadow-xl"
           >
             <h2 className="text-lg">
               {song.title || `Untitled ${song.createdAt.toLocaleString()}`}
             </h2>
-            <p className="text-xs font-bold text-neutral-500 uppercase">
+            <p className="text-xs font-bold uppercase text-neutral-500">
               {song.attribution || "Unknown Artist"}
             </p>
           </Link>

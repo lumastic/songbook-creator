@@ -43,7 +43,7 @@ export const StanzaFields: React.FC<{
 
   return (
     <>
-      <div className="group/stanza py-2 border-y-2 focus-within:border-neutral-200 hover:border-neutral-200 border-transparent transition-all">
+      <div className="group/stanza border-y-2 border-transparent py-2 transition-all focus-within:border-neutral-200 hover:border-neutral-200">
         <div className="flex">
           <div className="flex-1">
             <Select
@@ -53,20 +53,20 @@ export const StanzaFields: React.FC<{
                 { name: "Bridge", value: "bridge" },
               ]}
               name="type"
-              className="font-bold uppercase w-auto"
+              className="w-auto font-bold uppercase"
               defaultValue={stanza.type}
             />
           </div>
           <div>
             <button
               type="button"
-              className="hover:bg-neutral-200 rounded-sm text-neutral-600 text-sm p-2 group-hover/stanza:opacity-100 opacity-0 transition-colors whitespace-nowrap inline-flex items-center"
+              className="inline-flex items-center whitespace-nowrap rounded-sm p-2 text-sm text-neutral-600 opacity-0 transition-colors hover:bg-neutral-200 group-hover/stanza:opacity-100"
               onClick={confirmAndDelete}
             >
               <span className="mr-1">
                 <TrashIcon width={"1em"} />
               </span>
-              <span className="uppercase text-xs">Delete</span>
+              <span className="text-xs uppercase">Delete</span>
             </button>
           </div>
         </div>
@@ -84,7 +84,7 @@ export const StanzaFields: React.FC<{
               type="button"
               aria-label="Add Line"
               onClick={insertLine(index)}
-              className="block bg-neutral-200 text-neutral-600 opacity-0 hover:opacity-100 transition-all w-full rounded-sm py-1 h-2 hover:h-6 font-mono text-sm leading-none"
+              className="block h-2 w-full rounded-sm bg-neutral-200 py-1 font-mono text-sm leading-none text-neutral-600 opacity-0 transition-all hover:h-6 hover:opacity-100"
             >
               + Add Line
             </button>
@@ -95,7 +95,7 @@ export const StanzaFields: React.FC<{
             type="button"
             aria-label="Add Line"
             onClick={insertLine(0)}
-            className="block bg-neutral-200 text-neutral-600 opacity-0 hover:opacity-100 transition-all w-full rounded-sm py-1 h-2 hover:h-6 font-mono text-sm leading-none"
+            className="block h-2 w-full rounded-sm bg-neutral-200 py-1 font-mono text-sm leading-none text-neutral-600 opacity-0 transition-all hover:h-6 hover:opacity-100"
           >
             + Add Line
           </button>
@@ -105,7 +105,7 @@ export const StanzaFields: React.FC<{
         type="button"
         aria-label="Add Line"
         onClick={insertStanza}
-        className="block bg-neutral-200 text-neutral-600 opacity-0 hover:opacity-100 transition-all w-full rounded-sm py-1 h-2 hover:h-6 font-mono text-sm leading-none"
+        className="block h-2 w-full rounded-sm bg-neutral-200 py-1 font-mono text-sm leading-none text-neutral-600 opacity-0 transition-all hover:h-6 hover:opacity-100"
       >
         + New Stanza
       </button>

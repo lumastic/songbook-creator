@@ -30,7 +30,7 @@ export const Textarea: React.FC<InputHTMLAttributes<HTMLTextAreaElement>> =
         wrap={"soft"}
         className={[
           !props.hidden && "block",
-          "w-full bg-inherit focus:outline-none resize-none overflow-hidden placeholder-neutral-400",
+          "w-full resize-none overflow-hidden bg-inherit placeholder-neutral-400 focus:outline-none",
           className,
         ].join(" ")}
       />

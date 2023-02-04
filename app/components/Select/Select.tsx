@@ -75,7 +75,7 @@ export function Select({
               </>
             )}
           </Listbox.Button>
-          <Listbox.Options className="absolute z-30 bg-inherit mt-1 max-h-60 overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm w-full">
+          <Listbox.Options className="absolute z-30 mt-1 max-h-60 w-full overflow-auto rounded-md bg-inherit bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
             {options.map((option) => (
               <Listbox.Option
                 key={option.value}
@@ -96,7 +96,7 @@ export function Select({
                       {option.name}
                     </span>
                     {selected ? (
-                      <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-neutral-600 text-sm">
+                      <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-sm text-neutral-600">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"

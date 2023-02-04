@@ -30,7 +30,7 @@ export default function ViewSetlist() {
   const { setlist } = useTypedLoaderData<typeof loader>();
   const { submit } = useFetcher();
   return (
-    <div className="space-y-4 max-w-xl mx-auto">
+    <div className="mx-auto max-w-xl space-y-4">
       <div className="flex items-center">
         <div className="flex-1">
           <Button.Link
@@ -60,10 +60,10 @@ export default function ViewSetlist() {
           </Button.Link>
         </div>
       </div>
-      <div className="bg-neutral-50  rounded-lg shadow-lg p-8 flex relative">
+      <div className="relative  flex rounded-lg bg-neutral-50 p-8 shadow-lg">
         <Button.Link
           to={`/setlists/${setlist.id}?modal=edit-setlist`}
-          className="absolute top-2 right-4 text-xs flex items-center"
+          className="absolute top-2 right-4 flex items-center text-xs"
           size="sm"
           variant="outlined"
         >
@@ -86,19 +86,19 @@ export default function ViewSetlist() {
           </span>
           Edit Details
         </Button.Link>
-        <div className="text-9xl mr-4">
+        <div className="mr-4 text-9xl">
           <span dangerouslySetInnerHTML={{ __html: setlist.qrcode }}></span>
         </div>
         <div className="flex-1">
           <h1 className="text-4xl">{setlist.name}</h1>
           <p className="mb-2">{setlist.description}</p>
-          <p className="text-neutral-500 text-xs">
+          <p className="text-xs text-neutral-500">
             {setlist.songs.length} Songs
           </p>
         </div>
       </div>
       <div className="flex">
-        <h2 className="text-2xl flex-1">Songs</h2>
+        <h2 className="flex-1 text-2xl">Songs</h2>
         <Button.Link
           to="?modal=add-songs"
           variant="secondary"
@@ -159,17 +159,17 @@ const SetlistSong: React.FC<{
   return (
     <Disclosure key={song.id}>
       {({ open }) => (
-        <div className="shadow-md transition-all relative">
+        <div className="relative shadow-md transition-all">
           <div
-            className={`bg-white sticky top-0 bg-inherit w-full outline-none  ${
+            className={`sticky top-0 w-full bg-white bg-inherit outline-none  ${
               open && "border-b border-neutral-300"
             } ${open ? "rounded-t-md" : "rounded-md"} flex items-center`}
             style={{ zIndex: order }}
           >
             <Disclosure.Button
-              className={"flex-1 pl-4 py-5 flex items-center group"}
+              className={"group flex flex-1 items-center py-5 pl-4"}
             >
-              <div className="mr-3 p-2 group-hover:bg-neutral-200 transition-all rounded-full">
+              <div className="mr-3 rounded-full p-2 transition-all group-hover:bg-neutral-200">
                 <PlayIcon
                   className={`${open && "rotate-90"} text-neutral-600`}
                   width="1em"
@@ -179,18 +179,18 @@ const SetlistSong: React.FC<{
                 <h2 className="text-lg">
                   {song.title || `Untitled ${song.createdAt.toLocaleString()}`}
                 </h2>
-                <p className="text-xs font-bold text-neutral-500 uppercase">
+                <p className="text-xs font-bold uppercase text-neutral-500">
                   {song.attribution || "Unknown Artist"}
                 </p>
               </div>
             </Disclosure.Button>
-            <Menu as="div" className="relative inline-block text-left pr-3">
+            <Menu as="div" className="relative inline-block pr-3 text-left">
               <Menu.Button as="div">
                 <Button icon variant="text" size="sm" type="button">
                   <EllipsisVerticalIcon width={"1.25em"} />
                 </Button>
               </Menu.Button>
-              <Menu.Items className="absolute right-2 top-0 w-44 divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-20">
+              <Menu.Items className="divide-gray-100 absolute right-2 top-0 z-20 w-44 divide-y rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                 <div className="px-1 py-1 ">
                   <Menu.Item>
                     {({ active }) => (
@@ -233,7 +233,7 @@ const SetlistSong: React.FC<{
 
           <Disclosure.Panel
             as="div"
-            className={"px-7 py-5 bg-white rounded-b-md"}
+            className={"rounded-b-md bg-white px-7 py-5"}
           >
             <div className="space-y-7">
               {stanzas.map((stanza) => (

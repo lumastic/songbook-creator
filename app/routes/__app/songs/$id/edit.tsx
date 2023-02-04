@@ -31,7 +31,7 @@ export default function EditSong() {
   const fetcher = useFetcher();
   const { formRef, hasUnsavedChanges } = useAutoSave(fetcher.submit);
   return (
-    <div className="max-w-xl mx-auto space-y-2">
+    <div className="mx-auto max-w-xl space-y-2">
       <div className="flex items-center">
         <div className="flex-1">
           <Button.Link
@@ -74,7 +74,7 @@ export default function EditSong() {
           </Button.Link>
         </div>
       </div>
-      <div className="bg-neutral-50  rounded-lg shadow-lg relative">
+      <div className="relative  rounded-lg bg-neutral-50 shadow-lg">
         <ClientOnly>
           {() => (
             <div className="absolute top-4 right-4 text-xs text-neutral-400">

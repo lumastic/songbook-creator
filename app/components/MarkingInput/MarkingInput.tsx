@@ -43,7 +43,7 @@ export const MarkingInput: React.FC<Props> = ({ marking, deleteMark }) => {
 
   return (
     <div
-      className="absolute z-10 group/marking font-mono"
+      className="group/marking absolute z-10 font-mono"
       style={{
         left: `${indent}ch`,
       }}
@@ -67,7 +67,7 @@ export const MarkingInput: React.FC<Props> = ({ marking, deleteMark }) => {
           style={{
             width: `${mark.length || 1}ch`,
           }}
-          className="font-mono rounded-sm !bg-neutral-200 w-auto"
+          className="w-auto rounded-sm !bg-neutral-200 font-mono"
         />
         <Button
           variant="text"

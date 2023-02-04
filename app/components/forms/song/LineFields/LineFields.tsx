@@ -82,12 +82,12 @@ export const LineFields: React.FC<Props> = ({
       <div className="group relative" ref={setReferenceElement}>
         <Menu>
           <div
-            className="opacity-0 h-full transition-opacity group-hover:opacity-100 z-20 flex items-center pr-5"
+            className="z-20 flex h-full items-center pr-5 opacity-0 transition-opacity group-hover:opacity-100"
             ref={setPopperElement}
             style={styles.popper}
             {...attributes.popper}
           >
-            <Menu.Button className="bg-neutral-200 h-full rounded-sm text-neutral-600 text-sm px-0.5">
+            <Menu.Button className="h-full rounded-sm bg-neutral-200 px-0.5 text-sm text-neutral-600">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -105,7 +105,7 @@ export const LineFields: React.FC<Props> = ({
               </svg>
             </Menu.Button>
           </div>
-          <Menu.Items className="absolute -translate-x-9 w-28 origin-top-left divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-10 sm:text-sm">
+          <Menu.Items className="divide-gray-100 absolute z-10 w-28 origin-top-left -translate-x-9 divide-y rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
             <Menu.Item>
               {({ active }) => (
                 <button
@@ -153,7 +153,7 @@ export const LineFields: React.FC<Props> = ({
               <button
                 key={index}
                 onClick={insertMark(index)}
-                className="bg-neutral-200 text-neutral-500 opacity-0 transition-opacity active:opacity-60 hover:opacity-100 focus:opacity-100 font-mono rounded-sm"
+                className="rounded-sm bg-neutral-200 font-mono text-neutral-500 opacity-0 transition-opacity hover:opacity-100 focus:opacity-100 active:opacity-60"
               >
                 +
               </button>
@@ -170,7 +170,7 @@ export const LineFields: React.FC<Props> = ({
         <Input
           name="notes"
           placeholder="Stylistic notes"
-          className="opacity-75 text-sm"
+          className="text-sm opacity-75"
           hidden={!showNotes}
           defaultValue={line.notes}
           onKeyDown={newLineOnEnterKey}

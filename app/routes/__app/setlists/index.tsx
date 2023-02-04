@@ -20,9 +20,9 @@ export default function SetlistsIndex() {
     keys: ["name", "venue"],
   });
   return (
-    <div className="space-y-4 max-w-xl mx-auto">
+    <div className="mx-auto max-w-xl space-y-4">
       <div className="flex items-center">
-        <h1 className="text-3xl flex-1">Setlists</h1>
+        <h1 className="flex-1 text-3xl">Setlists</h1>
 
         <Button.Link
           to={"?modal=new-setlist"}
@@ -51,8 +51,8 @@ export default function SetlistsIndex() {
       <Search onSearch={onSearch} />
       <div className="space-y-2">
         {!setlists.length && (
-          <div className="border-2 border-primary-500 rounded-md p-8">
-            <h2 className="text-2xl font-medium mb-4 text-primary-700">
+          <div className=" rounded-md bg-white p-8 shadow-md">
+            <h2 className="mb-4 text-2xl font-medium text-neutral-700">
               Easily share a group of songs with friends and bandmates.
             </h2>
             <Form method="post" action="/setlists/new">
@@ -69,7 +69,7 @@ export default function SetlistsIndex() {
           <Link
             to={`/setlists/${setlist.id}`}
             key={setlist.id}
-            className="bg-neutralal-100 px-7 py-5 rounded-md shadow-md hover:shadow-xl hover:bg-white transition-all flex items-start"
+            className="bg-neutralal-100 flex items-start rounded-md px-7 py-5 shadow-md transition-all hover:bg-white hover:shadow-xl"
           >
             <div className="mr-2">
               <span
@@ -82,10 +82,10 @@ export default function SetlistsIndex() {
                 {setlist.name ||
                   `Untitled ${setlist.createdAt.toLocaleString()}`}
               </h2>
-              <p className="text-sm text-neutralal-500 mb-2">
+              <p className="text-neutralal-500 mb-2 text-sm">
                 {setlist.description}
               </p>
-              <p className="text-xs text-neutralal-500">
+              <p className="text-neutralal-500 text-xs">
                 {setlist.songs.length} Songs
               </p>
             </div>

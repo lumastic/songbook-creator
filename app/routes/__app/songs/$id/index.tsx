@@ -21,7 +21,7 @@ export default function () {
   const { song } = useTypedLoaderData<typeof loader>();
 
   return (
-    <div className="max-w-xl mx-auto space-y-2">
+    <div className="mx-auto max-w-xl space-y-2">
       <div className="flex items-center">
         <div className="flex-1">
           <Button.Link
@@ -78,13 +78,13 @@ export default function () {
           </Button.Link>
         </div>
       </div>
-      <div className="bg-neutral-50  rounded-lg shadow-lg relative">
+      <div className="relative  rounded-lg bg-neutral-50 shadow-lg">
         <div className="px-10 py-8">
           <div className="mb-4">
-            <h1 className="text-4xl w-full bg-inherit py-1 outline-none hover:cursor-text resize-none">
+            <h1 className="w-full resize-none bg-inherit py-1 text-4xl outline-none hover:cursor-text">
               {song.title}
             </h1>
-            <p className="text-xl w-full bg-inherit py-1 outline-none hover:cursor-text resize-none text-neutral-500">
+            <p className="w-full resize-none bg-inherit py-1 text-xl text-neutral-500 outline-none hover:cursor-text">
               {song.attribution}
             </p>
           </div>
