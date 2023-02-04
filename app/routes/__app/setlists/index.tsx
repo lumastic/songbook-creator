@@ -73,7 +73,7 @@ export default function SetlistsIndex() {
             key={setlist.id}
             className="flex items-start rounded-md bg-white px-7 py-5 shadow-md transition-all  hover:shadow-xl"
           >
-            <div className="mr-2">
+            <div className="mr-4">
               <span
                 className="text-7xl"
                 dangerouslySetInnerHTML={{ __html: setlist.qrcode }}

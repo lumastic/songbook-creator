@@ -45,15 +45,13 @@ export async function setQRCode(
         light: "#FFFFFF",
         dark: "#000000",
       },
+      margin: 0,
     }
   );
   qrcode = qrcode
     .replace("#000000", "currentColor")
     .replace("#FFFFFF", "none")
-    .replace(
-      'viewBox="0 0 45 45"',
-      "width='1em' height='1em' viewBox='2 2 41 41'"
-    );
+    .replace("<svg", "<svg width='1em' height='1em' ");
 
   return await prisma.setlist.update({
     where: {

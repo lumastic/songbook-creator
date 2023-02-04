@@ -74,7 +74,7 @@ export default function ViewSetlist() {
           </span>
           Edit Details
         </Button.Link>
-        <div className="mr-4 text-9xl">
+        <div className="mr-5 text-9xl">
           <span dangerouslySetInnerHTML={{ __html: setlist.qrcode }}></span>
         </div>
         <div className="flex-1">
