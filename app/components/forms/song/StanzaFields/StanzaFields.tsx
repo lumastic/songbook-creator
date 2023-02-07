@@ -19,8 +19,10 @@ export const StanzaFields: React.FC<{
   const namespace = useNamespace("");
 
   const insertLine = (index: number) => {
-    return () => {
-      insert(index + 1, createMockStanza({}).lines[0]);
+    return (lyrics?: string) => {
+      const lineToInsert = createMockStanza({}).lines[0];
+      lineToInsert.lyrics = lyrics || "";
+      insert(index + 1, lineToInsert);
       focus(`input[name="${namespace}lines[${index + 1}].lyrics"]`);
     };
   };
@@ -83,7 +85,7 @@ export const StanzaFields: React.FC<{
             <button
               type="button"
               aria-label="Add Line"
-              onClick={insertLine(index)}
+              onClick={() => insertLine(index)()}
               className="block h-2 w-full rounded-sm bg-neutral-200 py-1 font-mono text-sm leading-none text-neutral-600 opacity-0 transition-all hover:h-6 hover:opacity-100"
             >
               + Add Line
@@ -94,7 +96,7 @@ export const StanzaFields: React.FC<{
           <button
             type="button"
             aria-label="Add Line"
-            onClick={insertLine(0)}
+            onClick={() => insertLine(0)()}
             className="block h-2 w-full rounded-sm bg-neutral-200 py-1 font-mono text-sm leading-none text-neutral-600 opacity-0 transition-all hover:h-6 hover:opacity-100"
           >
             + Add Line
