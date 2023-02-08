@@ -35,6 +35,10 @@ export function useArray<T>(initialItems: T[]) {
     });
   };
 
+  const findIndex = (predicate: (value: T) => unknown) => {
+    return items.findIndex(predicate);
+  };
+
   const swap = (indexA: number, indexB: number) => {
     setItems((oldItems) => {
       const items = [...oldItems];
@@ -43,5 +47,5 @@ export function useArray<T>(initialItems: T[]) {
     });
   };
 
-  return { items, remove, push, replace, insert, swap };
+  return { items, remove, push, replace, insert, swap, findIndex };
 }
