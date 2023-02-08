@@ -26,9 +26,9 @@ export const NavBar: React.FC<Props> = () => {
             className={({ isActive }) =>
               `${
                 isActive
-                  ? "border-primary-500 font-medium text-primary-600"
-                  : "text-neutral-500 hover:text-primary-600 hover:opacity-80"
-              } border-b-2 border-transparent text-sm uppercase transition-all`
+                  ? " border-primary-500 font-medium text-primary-600"
+                  : "border-transparent text-neutral-500 hover:text-primary-600 hover:opacity-80"
+              } border-b-2  text-sm uppercase transition-all`
             }
           >
             Songs
@@ -38,9 +38,9 @@ export const NavBar: React.FC<Props> = () => {
             className={({ isActive }) =>
               `${
                 isActive
-                  ? "border-primary-500 font-medium text-primary-600"
-                  : "text-neutral-500 hover:text-primary-600 hover:opacity-80"
-              } border-b-2 border-transparent text-sm uppercase transition-all`
+                  ? " border-primary-500 font-medium text-primary-600"
+                  : "border-transparent text-neutral-500 hover:text-primary-600 hover:opacity-80"
+              } border-b-2 text-sm uppercase transition-all`
             }
           >
             Setlists
