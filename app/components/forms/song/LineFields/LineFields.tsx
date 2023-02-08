@@ -9,10 +9,12 @@ import { Fieldset, useNamespace } from "~/lib/fieldset";
 import { useArray } from "~/lib/useArray";
 import { useFocus } from "~/lib/useFocus";
 import uniqid from "uniqid";
+import { convertPlainTextToLines } from "~/helpers/convertPlainTextToLines";
 
 type Props = {
   line: ILine;
   insertLine?: (lyric?: string) => void;
+  updateLine?: (lyric: string) => void;
   deleteLine?: () => void;
 };
 
@@ -20,6 +22,7 @@ export const LineFields: React.FC<Props> = ({
   line,
   insertLine,
   deleteLine,
+  updateLine,
 }) => {
   const {
     items: markingsFieldArray,
@@ -73,7 +76,23 @@ export const LineFields: React.FC<Props> = ({
     }
   }
 
-  function onPasteLyrics(e: ClipboardEvent<HTMLInputElement>) {
+  async function onPasteLyrics(e: ClipboardEvent<HTMLInputElement>) {
+    const pastedText = e.clipboardData.getData("text/plain");
+    const target = e.target as HTMLInputElement;
+    // If input is blank and pasted text includes an end return
+    if (!target.value && pastedText.includes("\n")) {
+      // Prevent default paste
+      e.preventDefault();
+      const linesToAdd = convertPlainTextToLines(pastedText);
+      // Reverse the array for adding it to the lyrics linearly
+      linesToAdd.reverse();
+      if (updateLine) updateLine(linesToAdd.pop()?.lyrics || "");
+      // Insert the new lyrics in reverse order
+      linesToAdd.forEach((line) => {
+        if (insertLine) insertLine(line.lyrics);
+      });
+    }
+
     // Trigger handlePaste from StanzaContext
   }
 
@@ -116,7 +135,7 @@ export const LineFields: React.FC<Props> = ({
               </svg>
             </Menu.Button>
           </div>
-          <Menu.Items className="divide-gray-100 absolute z-10 w-28 origin-top-left -translate-x-9 divide-y rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+          <Menu.Items className="absolute z-20 w-28 origin-top-left -translate-x-9 divide-y divide-neutral-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
             <Menu.Item>
               {({ active }) => (
                 <button

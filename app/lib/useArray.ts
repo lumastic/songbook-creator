@@ -27,6 +27,14 @@ export function useArray<T>(initialItems: T[]) {
     });
   };
 
+  const update = (index: number, item: Partial<T>) => {
+    setItems((oldItems) => {
+      const items = [...oldItems];
+      items.splice(index, 1, { ...items[index], ...item });
+      return items;
+    });
+  };
+
   const push = (item: T) => {
     setItems((oldItems) => {
       const items = [...oldItems];
@@ -47,5 +55,5 @@ export function useArray<T>(initialItems: T[]) {
     });
   };
 
-  return { items, remove, push, replace, insert, swap, findIndex };
+  return { items, remove, push, replace, insert, swap, findIndex, update };
 }

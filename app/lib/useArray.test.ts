@@ -67,3 +67,18 @@ test("can findIndex", () => {
 
   expect(result.current.findIndex((value) => value.id === 3)).toBe(1);
 });
+
+test("can update object", () => {
+  const { result } = renderHook(() =>
+    useArray([
+      { id: 0, value: 0 },
+      { id: 1, value: 1 },
+    ])
+  );
+
+  act(() => {
+    result.current.update(1, { value: 2 });
+  });
+
+  expect(result.current.items[1]).toMatchObject({ id: 1, value: 2 });
+});

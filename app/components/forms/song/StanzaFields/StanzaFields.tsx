@@ -13,7 +13,7 @@ export const StanzaFields: React.FC<{
   insertStanza?: () => void;
   deleteStanza?: () => void;
 }> = ({ stanza, insertStanza, deleteStanza }) => {
-  const { items: lines, insert, remove } = useArray(stanza.lines);
+  const { items: lines, insert, remove, update } = useArray(stanza.lines);
 
   const focus = useFocus();
   const namespace = useNamespace("");
@@ -30,6 +30,12 @@ export const StanzaFields: React.FC<{
   const deleteLine = (index: number) => {
     return () => {
       remove(index);
+    };
+  };
+
+  const updateLine = (index: number) => {
+    return (lyrics: string) => {
+      update(index, { lyrics });
     };
   };
 
@@ -78,6 +84,7 @@ export const StanzaFields: React.FC<{
             <Fieldset.Headless namespace={`lines[${index}]`}>
               <LineFields
                 line={line}
+                updateLine={updateLine(index)}
                 deleteLine={deleteLine(index)}
                 insertLine={insertLine(index)}
               />
