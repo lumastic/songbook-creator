@@ -1,4 +1,4 @@
-import type { IMarking, IStanza } from "@/types/song";
+import type { ILine, IMarking, IStanza } from "@/types/song";
 import type { Song } from "@prisma/client";
 import uniqid from "uniqid";
 
@@ -99,14 +99,17 @@ export function createMockStanza(p: Partial<IStanza>): IStanza {
   return {
     id: uniqid(),
     type: "verse",
-    lines: [
-      {
-        id: uniqid(),
-        lyrics: "",
-        markings: [],
-        notes: "",
-      },
-    ],
+    lines: [createMockLine()],
+    ...p,
+  };
+}
+
+export function createMockLine(p?: Partial<ILine>): ILine {
+  return {
+    id: uniqid(),
+    lyrics: "",
+    markings: [],
+    notes: "",
     ...p,
   };
 }

@@ -12,9 +12,9 @@ export const loader = async ({ request }: LoaderArgs) => {
 
 export default function Landing() {
   return (
-    <div className="h-screen flex items-center flex-col justify-center bg-neutral-300">
-      <h1 className="text-center text-3xl mb-4">👋 Welcome to TuneBinder</h1>
-      <div className="flex flex-col md:flex-row md:space-y-0 space-y-3 items-center justify-center md:space-x-3">
+    <div className="flex h-screen flex-col items-center justify-center bg-neutral-300">
+      <h1 className="mb-4 text-center text-3xl">👋 Welcome to TuneBinder</h1>
+      <div className="flex flex-col items-center justify-center space-y-3 md:flex-row md:space-y-0 md:space-x-3">
         <SignupButton />
         <LoginButton />
       </div>

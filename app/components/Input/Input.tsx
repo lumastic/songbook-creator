@@ -8,7 +8,7 @@ export const Input: React.FC<InputHTMLAttributes<HTMLInputElement>> =
         data-testid="input"
         className={[
           !props.hidden && "block",
-          "w-full bg-inherit focus:outline-none placeholder-neutral-400",
+          "w-full bg-inherit placeholder-neutral-400 focus:outline-none",
           className,
         ].join(" ")}
         {...props}

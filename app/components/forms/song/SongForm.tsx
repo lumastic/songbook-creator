@@ -37,14 +37,14 @@ const SongForm = forwardRef<
       <Textarea
         name="title"
         defaultValue={song.title}
-        className="text-4xl w-full bg-inherit py-1 outline-none hover:cursor-text resize-none"
+        className="w-full resize-none bg-inherit py-1 text-4xl outline-none hover:cursor-text"
         placeholder="Title"
       />
       <Textarea
         name="attribution"
         placeholder="Attribution"
         defaultValue={song.attribution}
-        className="text-xl w-full bg-inherit py-1 outline-none hover:cursor-text resize-none"
+        className="w-full resize-none bg-inherit py-1 text-xl outline-none hover:cursor-text"
       />
       <Input name="id" hidden readOnly defaultValue={song.id} />
       <div>

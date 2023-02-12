@@ -12,6 +12,8 @@ node_modules
 /prisma/data.db-journal
 /postgres-data
 
+tailwind.css
+
 .DS_Store
 coverage
 build

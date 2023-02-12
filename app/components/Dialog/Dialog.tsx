@@ -25,17 +25,17 @@ export const Dialog: React.FC<PropsWithChildren<Props>> = ({
       data-testid="dialog"
     >
       <div className="fixed inset-0 bg-neutral-900 bg-opacity-25" />
-      <div className="fixed inset-0 overflow-y-auto min-h-screen md:min-h-min">
-        <div className="flex h-full justify-center pt-4 md:pb-4 md:px-4 text-center ">
-          <HeadlessDialog.Panel className="w-full h-full md:h-auto md:max-w-md transform overflow-hidden rounded-2xl bg-white p-8 text-left align-middle shadow-xl transition-all relative">
+      <div className="fixed inset-0 min-h-screen overflow-y-auto md:min-h-min">
+        <div className="flex h-full justify-center pt-4 text-center md:px-4 md:pb-4 ">
+          <HeadlessDialog.Panel className="relative h-full w-full transform overflow-hidden rounded-2xl bg-white p-8 text-left align-middle shadow-xl transition-all md:h-auto md:max-w-md">
             <Button
-              className="rounded-full absolute top-2 right-2 w-8 h-8 px-0 py-0"
+              className="absolute top-2 right-2 h-8 w-8 rounded-full px-0 py-0"
               variant="secondary"
               size="lg"
               aria-label="Close dialog"
               onClick={onClose}
             >
-              <div className="relative w-8 h-8">
+              <div className="relative h-8 w-8">
                 <span className="absolute top-0 right-0 left-0 bottom-0 flex items-center justify-center">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

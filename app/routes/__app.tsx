@@ -9,7 +9,7 @@ export default function App() {
   return (
     <>
       <NavBar />
-      <main className="bg-neutral-200 min-h-screen py-4 px-2 md:px-0">
+      <main className="min-h-screen bg-neutral-200 py-4 px-2 md:px-0">
         <Outlet />
       </main>
       <ModalRouter>

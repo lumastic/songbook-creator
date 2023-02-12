@@ -46,7 +46,7 @@ export function AddSongs() {
           <div key={song.id} className="flex items-center">
             <div className="flex-1">
               <h3 className="text-xl">{song.title}</h3>
-              <p className="text-neutral-500 text-xs uppercase font-bold">
+              <p className="text-xs font-bold uppercase text-neutral-500">
                 {song.attribution}
               </p>
             </div>

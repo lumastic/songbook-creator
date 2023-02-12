@@ -8,19 +8,19 @@ type Props = {
 export const Stanza: React.FC<Props> = ({ stanza }) => {
   return (
     <div className="space-y-1" data-testid="stanza">
-      <p className="font-bold uppercase w-auto text-sm">{stanza.type}</p>
+      <p className="w-auto text-sm font-bold uppercase">{stanza.type}</p>
       <div className="space-y-3">
         {stanza.lines.map((line) => {
           return (
             <div key={line.id}>
-              <div className="font-mono relative">
-                <div className="opacity-0 cursor-default" aria-hidden>
+              <div className="relative font-mono">
+                <div className="cursor-default opacity-0" aria-hidden>
                   Hidden Spacer
                 </div>
                 {line.markings?.map((mark) => (
                   <div
                     key={mark.id}
-                    className="inline-block text-center bg-neutral-200 text-neutral-800 font-mono outline-none rounded-sm absolute top-0"
+                    className="absolute top-0 inline-block rounded-sm bg-neutral-200 text-center font-mono text-neutral-800 outline-none"
                     style={{ left: `${mark.indent}ch` }}
                   >
                     {mark.mark}

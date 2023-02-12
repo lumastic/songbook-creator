@@ -1,7 +1,7 @@
 import type { Setlist } from "@prisma/client";
 import type { ActionArgs } from "@remix-run/node";
 import { redirect } from "remix-typedjson";
-import { updateSetlist } from "~/db/setlist.db";
+import { setQRCode, updateSetlist } from "~/db/setlist.db";
 import { formDataToJson } from "~/helpers/formDataToJson";
 
 export async function action({ request, params }: ActionArgs) {
@@ -21,6 +21,7 @@ export async function action({ request, params }: ActionArgs) {
         description,
       },
     });
+    await setQRCode(updatedSetlist, request);
     return redirect(`/setlists/${updatedSetlist.id}`);
   } catch (e) {
     throw new Response("Internal error", { status: 500 });

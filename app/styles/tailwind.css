@@ -639,6 +639,10 @@ video {
   z-index: 20;
 }
 
+.m-0 {
+  margin: 0px;
+}
+
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -684,6 +688,10 @@ video {
   margin-right: 0.75rem;
 }
 
+.mr-5 {
+  margin-right: 1.25rem;
+}
+
 .box-border {
   box-sizing: border-box;
 }
@@ -694,6 +702,10 @@ video {
 
 .inline-block {
   display: inline-block;
+}
+
+.inline {
+  display: inline;
 }
 
 .flex {
@@ -822,6 +834,10 @@ video {
 
 .items-center {
   align-items: center;
+}
+
+.items-baseline {
+  align-items: baseline;
 }
 
 .justify-end {
