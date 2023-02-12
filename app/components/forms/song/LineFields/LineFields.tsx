@@ -1,6 +1,6 @@
 import type { ILine, IMarking } from "@/types/song";
 import { Menu } from "@headlessui/react";
-import type { KeyboardEvent } from "react";
+import type { ClipboardEvent, KeyboardEvent } from "react";
 import { useState } from "react";
 import { usePopper } from "react-popper";
 import { Input } from "~/components/Input";
@@ -9,10 +9,12 @@ import { Fieldset, useNamespace } from "~/lib/fieldset";
 import { useArray } from "~/lib/useArray";
 import { useFocus } from "~/lib/useFocus";
 import uniqid from "uniqid";
+import { convertPlainTextToLines } from "~/helpers/convertPlainTextToLines";
 
 type Props = {
   line: ILine;
-  insertLine?: () => void;
+  insertLine?: (lyric?: string) => void;
+  updateLine?: (lyric: string) => void;
   deleteLine?: () => void;
 };
 
@@ -20,6 +22,7 @@ export const LineFields: React.FC<Props> = ({
   line,
   insertLine,
   deleteLine,
+  updateLine,
 }) => {
   const {
     items: markingsFieldArray,
@@ -44,28 +47,56 @@ export const LineFields: React.FC<Props> = ({
     placement: "left",
   });
 
-  const insertMark = (index: number) => {
+  function insertMark(index: number) {
     return () => {
       const length = markingsFieldArray.length;
       push({ indent: index, id: uniqid(), mark: "" } as IMarking);
       focus(`input[name="${namespace}markings[${length}].mark"]`);
     };
-  };
+  }
 
-  const removeMark = (index: number) => {
+  function removeMark(index: number) {
     return () => {
       remove(index);
     };
-  };
+  }
 
-  const newLineOnEnterKey = (e: KeyboardEvent<HTMLInputElement>) => {
+  function newLineOnEnterKey(e: KeyboardEvent<HTMLInputElement>) {
     if (e.key === "Enter") {
       e.preventDefault();
-      if (insertLine) insertLine();
+      const target = e.target as HTMLInputElement;
+      // Get text after the current cursor position
+      const afterCursorText = target.value.slice(
+        target.selectionStart ?? undefined
+      );
+      // Remove the text after the cursor from current lyrics input
+      target.value = target.value.slice(0, target.selectionStart ?? undefined);
+      // Insert line with text after the cursor
+      if (insertLine) insertLine(afterCursorText);
     }
-  };
+  }
 
-  const confirmAndDelete = () => {
+  async function onPasteLyrics(e: ClipboardEvent<HTMLInputElement>) {
+    const pastedText = e.clipboardData.getData("text/plain");
+    const target = e.target as HTMLInputElement;
+    // If input is blank and pasted text includes an end return
+    if (!target.value && pastedText.includes("\n")) {
+      // Prevent default paste
+      e.preventDefault();
+      const linesToAdd = convertPlainTextToLines(pastedText);
+      // Reverse the array for adding it to the lyrics linearly
+      linesToAdd.reverse();
+      if (updateLine) updateLine(linesToAdd.pop()?.lyrics || "");
+      // Insert the new lyrics in reverse order
+      linesToAdd.forEach((line) => {
+        if (insertLine) insertLine(line.lyrics);
+      });
+    }
+
+    // Trigger handlePaste from StanzaContext
+  }
+
+  function confirmAndDelete() {
     if (
       confirm(
         "Are you sure you want to delete this line?\nYou can't undo this action."
@@ -73,12 +104,11 @@ export const LineFields: React.FC<Props> = ({
     ) {
       if (deleteLine) deleteLine();
     }
-  };
+  }
 
   return (
     <div className="w-full whitespace-nowrap" data-testid="line-fields">
       <Input name="id" hidden readOnly defaultValue={line.id} />
-
       <div className="group relative" ref={setReferenceElement}>
         <Menu>
           <div
@@ -105,7 +135,7 @@ export const LineFields: React.FC<Props> = ({
               </svg>
             </Menu.Button>
           </div>
-          <Menu.Items className="divide-gray-100 absolute z-10 w-28 origin-top-left -translate-x-9 divide-y rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+          <Menu.Items className="absolute z-20 w-28 origin-top-left -translate-x-9 divide-y divide-neutral-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
             <Menu.Item>
               {({ active }) => (
                 <button
@@ -166,6 +196,7 @@ export const LineFields: React.FC<Props> = ({
           className="font-mono"
           defaultValue={line.lyrics}
           onKeyDown={newLineOnEnterKey}
+          onPaste={onPasteLyrics}
         />
         <Input
           name="notes"

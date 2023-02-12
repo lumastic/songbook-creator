@@ -13,14 +13,16 @@ export const StanzaFields: React.FC<{
   insertStanza?: () => void;
   deleteStanza?: () => void;
 }> = ({ stanza, insertStanza, deleteStanza }) => {
-  const { items: lines, insert, remove } = useArray(stanza.lines);
+  const { items: lines, insert, remove, update } = useArray(stanza.lines);
 
   const focus = useFocus();
   const namespace = useNamespace("");
 
   const insertLine = (index: number) => {
-    return () => {
-      insert(index + 1, createMockStanza({}).lines[0]);
+    return (lyrics?: string) => {
+      const lineToInsert = createMockStanza({}).lines[0];
+      lineToInsert.lyrics = lyrics || "";
+      insert(index + 1, lineToInsert);
       focus(`input[name="${namespace}lines[${index + 1}].lyrics"]`);
     };
   };
@@ -28,6 +30,12 @@ export const StanzaFields: React.FC<{
   const deleteLine = (index: number) => {
     return () => {
       remove(index);
+    };
+  };
+
+  const updateLine = (index: number) => {
+    return (lyrics: string) => {
+      update(index, { lyrics });
     };
   };
 
@@ -76,6 +84,7 @@ export const StanzaFields: React.FC<{
             <Fieldset.Headless namespace={`lines[${index}]`}>
               <LineFields
                 line={line}
+                updateLine={updateLine(index)}
                 deleteLine={deleteLine(index)}
                 insertLine={insertLine(index)}
               />
@@ -83,7 +92,7 @@ export const StanzaFields: React.FC<{
             <button
               type="button"
               aria-label="Add Line"
-              onClick={insertLine(index)}
+              onClick={() => insertLine(index)()}
               className="block h-2 w-full rounded-sm bg-neutral-200 py-1 font-mono text-sm leading-none text-neutral-600 opacity-0 transition-all hover:h-6 hover:opacity-100"
             >
               + Add Line
@@ -94,7 +103,7 @@ export const StanzaFields: React.FC<{
           <button
             type="button"
             aria-label="Add Line"
-            onClick={insertLine(0)}
+            onClick={() => insertLine(0)()}
             className="block h-2 w-full rounded-sm bg-neutral-200 py-1 font-mono text-sm leading-none text-neutral-600 opacity-0 transition-all hover:h-6 hover:opacity-100"
           >
             + Add Line
