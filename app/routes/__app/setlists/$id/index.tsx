@@ -15,21 +15,23 @@ import { typedjson, useTypedLoaderData } from "remix-typedjson";
 import { Button } from "~/components/Button";
 import { Stanza } from "~/components/Stanza";
 import { getSetlist } from "~/db/setlist.db";
+import { currentAuthedUser } from "~/utils/auth.server";
 
-export async function loader({ params }: LoaderArgs) {
+export async function loader({ params, request }: LoaderArgs) {
   if (!params.id) throw new Response("Not Found", { status: 404 });
-
+  const user = await currentAuthedUser(request);
   const setlist = await getSetlist({ id: params.id });
 
   if (!setlist) throw new Response("Not Found", { status: 404 });
 
   return typedjson({
     setlist,
+    isUserAuthor: user?.id === setlist.authorId,
   });
 }
 
 export default function ViewSetlist() {
-  const { setlist } = useTypedLoaderData<typeof loader>();
+  const { setlist, isUserAuthor } = useTypedLoaderData<typeof loader>();
   const { submit } = useFetcher();
   return (
     <div className="mx-auto max-w-xl space-y-4">
@@ -63,17 +65,19 @@ export default function ViewSetlist() {
         </div>
       </div>
       <div className="relative  flex rounded-lg bg-neutral-50 p-8 shadow-lg">
-        <Button.Link
-          to={`/setlists/${setlist.id}?modal=edit-setlist`}
-          className="absolute top-2 right-4 flex items-center text-xs"
-          size="sm"
-          variant="text"
-        >
-          <span className="mr-2">
-            <PencilSquareIcon width={"1em"} />
-          </span>
-          Edit Details
-        </Button.Link>
+        {isUserAuthor && (
+          <Button.Link
+            to={`/setlists/${setlist.id}?modal=edit-setlist`}
+            className="absolute top-2 right-4 flex items-center text-xs"
+            size="sm"
+            variant="text"
+          >
+            <span className="mr-2">
+              <PencilSquareIcon width={"1em"} />
+            </span>
+            Edit Details
+          </Button.Link>
+        )}
         <div className="mr-5 text-9xl">
           <span dangerouslySetInnerHTML={{ __html: setlist.qrcode }}></span>
         </div>
@@ -87,7 +91,7 @@ export default function ViewSetlist() {
       </div>
       <div className="flex">
         <h2 className="flex-1 text-2xl">Songs</h2>
-        {!!setlist.songs.length && (
+        {isUserAuthor && !!setlist.songs.length && (
           <Button.Link
             to="?modal=add-songs"
             variant="primary"
@@ -101,7 +105,7 @@ export default function ViewSetlist() {
         )}
       </div>
       <div className="space-y-4">
-        {!setlist.songs.length && (
+        {isUserAuthor && !setlist.songs.length && (
           <div className=" rounded-md bg-white p-8 shadow-md">
             <h2 className="mb-4 text-2xl font-medium text-neutral-700">
               Start adding songs to this setlist.
@@ -133,6 +137,7 @@ export default function ViewSetlist() {
               song={song}
               order={setlist.songs.length - index}
               removeSong={removeSong}
+              isEditable={isUserAuthor}
               key={song.id}
             />
           );
@@ -146,7 +151,8 @@ const SetlistSong: React.FC<{
   song: Song;
   order: number;
   removeSong: () => void;
-}> = ({ song, order, removeSong }) => {
+  isEditable: boolean;
+}> = ({ song, order, removeSong, isEditable }) => {
   const stanzas = JSON.parse(song.stanzas) as IStanza[];
 
   return (
@@ -177,51 +183,53 @@ const SetlistSong: React.FC<{
                 </p>
               </div>
             </Disclosure.Button>
-            <Menu as="div" className="relative inline-block pr-3 text-left">
-              <Menu.Button as="div">
-                <Button icon variant="text" size="sm" type="button">
-                  <EllipsisVerticalIcon width={"1.25em"} />
-                </Button>
-              </Menu.Button>
-              <Menu.Items className="divide-gray-100 absolute right-2 top-0 z-20 w-44 divide-y rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                <div className="px-1 py-1 ">
-                  <Menu.Item>
-                    {({ active }) => (
-                      <Link
-                        to={`/songs/${song.id}/edit`}
-                        className={`${
-                          active && "bg-neutral-200"
-                        } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                      >
-                        <PencilIcon
-                          className="mr-2 h-5 w-5"
-                          aria-hidden="true"
-                        />
-                        Edit Song
-                      </Link>
-                    )}
-                  </Menu.Item>
-                  <Menu.Item>
-                    {({ active }) => (
-                      <button
-                        name="add-or-remove"
-                        onClick={removeSong}
-                        value={0}
-                        className={`${
-                          active ? "bg-red-100 text-red-800" : "text-red-700"
-                        } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                      >
-                        <TrashIcon
-                          className="mr-2 h-5 w-5"
-                          aria-hidden="true"
-                        />
-                        Remove Song
-                      </button>
-                    )}
-                  </Menu.Item>
-                </div>
-              </Menu.Items>
-            </Menu>
+            {isEditable && (
+              <Menu as="div" className="relative inline-block pr-3 text-left">
+                <Menu.Button as="div">
+                  <Button icon variant="text" size="sm" type="button">
+                    <EllipsisVerticalIcon width={"1.25em"} />
+                  </Button>
+                </Menu.Button>
+                <Menu.Items className="divide-gray-100 absolute right-2 top-0 z-20 w-44 divide-y rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                  <div className="px-1 py-1 ">
+                    <Menu.Item>
+                      {({ active }) => (
+                        <Link
+                          to={`/songs/${song.id}/edit`}
+                          className={`${
+                            active && "bg-neutral-200"
+                          } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                        >
+                          <PencilIcon
+                            className="mr-2 h-5 w-5"
+                            aria-hidden="true"
+                          />
+                          Edit Song
+                        </Link>
+                      )}
+                    </Menu.Item>
+                    <Menu.Item>
+                      {({ active }) => (
+                        <button
+                          name="add-or-remove"
+                          onClick={removeSong}
+                          value={0}
+                          className={`${
+                            active ? "bg-red-100 text-red-800" : "text-red-700"
+                          } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                        >
+                          <TrashIcon
+                            className="mr-2 h-5 w-5"
+                            aria-hidden="true"
+                          />
+                          Remove Song
+                        </button>
+                      )}
+                    </Menu.Item>
+                  </div>
+                </Menu.Items>
+              </Menu>
+            )}
           </div>
 
           <Disclosure.Panel
