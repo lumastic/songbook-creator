@@ -1,10 +1,10 @@
 import type { LoaderArgs } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { createSong } from "~/db/song.db";
-import { currentAuthedUser } from "~/utils/auth.server";
+import { requireAuthentication } from "~/utils/auth.server";
 
 export async function action({ request }: LoaderArgs) {
-  const user = await currentAuthedUser(request);
+  const user = await requireAuthentication(request);
   if (!user) return redirect("/");
   const newSong = await createSong({
     authorId: user.id,
