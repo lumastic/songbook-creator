@@ -11,11 +11,12 @@ datasource db {
 }
 
 model User {
-  id            Int      @id @default(autoincrement())
-  email         String   @unique
+  id            Int       @id @default(autoincrement())
+  email         String    @unique
   name          String?
   // role          Role     @default(USER)
   songs         Song[]
+  setlists      Setlist[]
   profile       Profile?
   oAuthProvider String?
   oAuthId       String?
@@ -61,7 +62,11 @@ model Setlist {
 
   qrcode String @default("")
 
-  songs      Song[]
+  songs Song[]
+
+  author   User? @relation(fields: [authorId], references: [id])
+  authorId Int?
+
   Category   Category? @relation(fields: [categoryId], references: [id])
   categoryId Int?
 }
