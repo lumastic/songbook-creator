@@ -1,5 +1,3 @@
-import { User } from "@prisma/client";
-import { AppData } from "@remix-run/node";
 import { Authenticator } from "remix-auth";
 import type { Auth0StrategyOptions } from "remix-auth-auth0";
 import { Auth0Strategy } from "remix-auth-auth0";
