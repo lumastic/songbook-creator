@@ -3,8 +3,10 @@ import { redirect } from "@remix-run/node";
 import { typedjson } from "remix-typedjson";
 import { createSetlist, setQRCode } from "~/db/setlist.db";
 import { formDataToJson } from "~/helpers/formDataToJson";
+import { requireAuthentication } from "~/utils/auth.server";
 
 export async function action({ request }: ActionArgs) {
+  const user = await requireAuthentication(request);
   const formData = formDataToJson(await request.formData());
   if (!formData.name) return;
 
@@ -12,6 +14,7 @@ export async function action({ request }: ActionArgs) {
     const setlist = await createSetlist({
       name: formData.name as string,
       description: formData?.description as string,
+      authorId: user.id,
     });
     await setQRCode(setlist, request);
     return redirect(`/setlists`);
